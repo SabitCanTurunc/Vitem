@@ -1,0 +1,75 @@
+{
+  "node": {
+    "4014d8346df4141e020c5abe85c610e8f857589108": {
+      "workers": {
+        "app/admin/categories/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fsabitcanturunc%2FDocuments%2Fvitemdocs%2Fapi%2Factions%2FadminActions.ts%22%2C%5B%7B%22id%22%3A%224014d8346df4141e020c5abe85c610e8f857589108%22%2C%22exportedName%22%3A%22createHeroSlide%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%2C%7B%22id%22%3A%224059f29e7f28df865c8e1890ea68ad13e4f3b57af7%22%2C%22exportedName%22%3A%22createCategory%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%2C%7B%22id%22%3A%2240c399b3bf2a95e32b29182ef66c91ce7e3193392b%22%2C%22exportedName%22%3A%22createProduct%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%5D%5D%5D&__client_imported__=true!",
+          "async": true
+        },
+        "app/admin/products/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fsabitcanturunc%2FDocuments%2Fvitemdocs%2Fapi%2Factions%2FadminActions.ts%22%2C%5B%7B%22id%22%3A%224014d8346df4141e020c5abe85c610e8f857589108%22%2C%22exportedName%22%3A%22createHeroSlide%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%2C%7B%22id%22%3A%224059f29e7f28df865c8e1890ea68ad13e4f3b57af7%22%2C%22exportedName%22%3A%22createCategory%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%2C%7B%22id%22%3A%2240c399b3bf2a95e32b29182ef66c91ce7e3193392b%22%2C%22exportedName%22%3A%22createProduct%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%5D%5D%5D&__client_imported__=true!",
+          "async": true
+        },
+        "app/admin/hero/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fsabitcanturunc%2FDocuments%2Fvitemdocs%2Fapi%2Factions%2FadminActions.ts%22%2C%5B%7B%22id%22%3A%224014d8346df4141e020c5abe85c610e8f857589108%22%2C%22exportedName%22%3A%22createHeroSlide%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%2C%7B%22id%22%3A%224059f29e7f28df865c8e1890ea68ad13e4f3b57af7%22%2C%22exportedName%22%3A%22createCategory%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%2C%7B%22id%22%3A%2240c399b3bf2a95e32b29182ef66c91ce7e3193392b%22%2C%22exportedName%22%3A%22createProduct%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%5D%5D%5D&__client_imported__=true!",
+          "async": true
+        }
+      },
+      "layer": {
+        "app/admin/categories/page": "action-browser",
+        "app/admin/products/page": "action-browser",
+        "app/admin/hero/page": "action-browser"
+      },
+      "filename": "../api/actions/adminActions.ts",
+      "exportedName": "createHeroSlide"
+    },
+    "4059f29e7f28df865c8e1890ea68ad13e4f3b57af7": {
+      "workers": {
+        "app/admin/categories/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fsabitcanturunc%2FDocuments%2Fvitemdocs%2Fapi%2Factions%2FadminActions.ts%22%2C%5B%7B%22id%22%3A%224014d8346df4141e020c5abe85c610e8f857589108%22%2C%22exportedName%22%3A%22createHeroSlide%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%2C%7B%22id%22%3A%224059f29e7f28df865c8e1890ea68ad13e4f3b57af7%22%2C%22exportedName%22%3A%22createCategory%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%2C%7B%22id%22%3A%2240c399b3bf2a95e32b29182ef66c91ce7e3193392b%22%2C%22exportedName%22%3A%22createProduct%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%5D%5D%5D&__client_imported__=true!",
+          "async": true
+        },
+        "app/admin/products/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fsabitcanturunc%2FDocuments%2Fvitemdocs%2Fapi%2Factions%2FadminActions.ts%22%2C%5B%7B%22id%22%3A%224014d8346df4141e020c5abe85c610e8f857589108%22%2C%22exportedName%22%3A%22createHeroSlide%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%2C%7B%22id%22%3A%224059f29e7f28df865c8e1890ea68ad13e4f3b57af7%22%2C%22exportedName%22%3A%22createCategory%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%2C%7B%22id%22%3A%2240c399b3bf2a95e32b29182ef66c91ce7e3193392b%22%2C%22exportedName%22%3A%22createProduct%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%5D%5D%5D&__client_imported__=true!",
+          "async": true
+        },
+        "app/admin/hero/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fsabitcanturunc%2FDocuments%2Fvitemdocs%2Fapi%2Factions%2FadminActions.ts%22%2C%5B%7B%22id%22%3A%224014d8346df4141e020c5abe85c610e8f857589108%22%2C%22exportedName%22%3A%22createHeroSlide%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%2C%7B%22id%22%3A%224059f29e7f28df865c8e1890ea68ad13e4f3b57af7%22%2C%22exportedName%22%3A%22createCategory%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%2C%7B%22id%22%3A%2240c399b3bf2a95e32b29182ef66c91ce7e3193392b%22%2C%22exportedName%22%3A%22createProduct%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%5D%5D%5D&__client_imported__=true!",
+          "async": true
+        }
+      },
+      "layer": {
+        "app/admin/categories/page": "action-browser",
+        "app/admin/products/page": "action-browser",
+        "app/admin/hero/page": "action-browser"
+      },
+      "filename": "../api/actions/adminActions.ts",
+      "exportedName": "createCategory"
+    },
+    "40c399b3bf2a95e32b29182ef66c91ce7e3193392b": {
+      "workers": {
+        "app/admin/categories/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fsabitcanturunc%2FDocuments%2Fvitemdocs%2Fapi%2Factions%2FadminActions.ts%22%2C%5B%7B%22id%22%3A%224014d8346df4141e020c5abe85c610e8f857589108%22%2C%22exportedName%22%3A%22createHeroSlide%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%2C%7B%22id%22%3A%224059f29e7f28df865c8e1890ea68ad13e4f3b57af7%22%2C%22exportedName%22%3A%22createCategory%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%2C%7B%22id%22%3A%2240c399b3bf2a95e32b29182ef66c91ce7e3193392b%22%2C%22exportedName%22%3A%22createProduct%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%5D%5D%5D&__client_imported__=true!",
+          "async": true
+        },
+        "app/admin/products/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fsabitcanturunc%2FDocuments%2Fvitemdocs%2Fapi%2Factions%2FadminActions.ts%22%2C%5B%7B%22id%22%3A%224014d8346df4141e020c5abe85c610e8f857589108%22%2C%22exportedName%22%3A%22createHeroSlide%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%2C%7B%22id%22%3A%224059f29e7f28df865c8e1890ea68ad13e4f3b57af7%22%2C%22exportedName%22%3A%22createCategory%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%2C%7B%22id%22%3A%2240c399b3bf2a95e32b29182ef66c91ce7e3193392b%22%2C%22exportedName%22%3A%22createProduct%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%5D%5D%5D&__client_imported__=true!",
+          "async": true
+        },
+        "app/admin/hero/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fsabitcanturunc%2FDocuments%2Fvitemdocs%2Fapi%2Factions%2FadminActions.ts%22%2C%5B%7B%22id%22%3A%224014d8346df4141e020c5abe85c610e8f857589108%22%2C%22exportedName%22%3A%22createHeroSlide%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%2C%7B%22id%22%3A%224059f29e7f28df865c8e1890ea68ad13e4f3b57af7%22%2C%22exportedName%22%3A%22createCategory%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%2C%7B%22id%22%3A%2240c399b3bf2a95e32b29182ef66c91ce7e3193392b%22%2C%22exportedName%22%3A%22createProduct%22%2C%22filename%22%3A%22..%2Fapi%2Factions%2FadminActions.ts%22%7D%5D%5D%5D&__client_imported__=true!",
+          "async": true
+        }
+      },
+      "layer": {
+        "app/admin/categories/page": "action-browser",
+        "app/admin/products/page": "action-browser",
+        "app/admin/hero/page": "action-browser"
+      },
+      "filename": "../api/actions/adminActions.ts",
+      "exportedName": "createProduct"
+    }
+  },
+  "edge": {},
+  "encryptionKey": "LCGK/r/tnvJSRT6r7wXK/mhkUHpoGMIAZ2xAgVlNbK4="
+}

@@ -1,30 +1,45 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
 import { ChevronDown, ArrowRight } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
+import { Link } from "@/i18n/routing";
+import type { HeroSlide } from "@db/schema";
 
-export default function Hero({ slides }: { slides: any[] }) {
+export default function Hero({ slides }: { slides: HeroSlide[] }) {
+  const t = useTranslations("hero_fallback");
+  const locale = useLocale();
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const heroSlides = slides.length > 0 ? slides : [
+  const fallbackSlides = [
     {
-      id: 1,
-      title: "Crafted in Hatay. Designed for the World.",
-      subtitle: "Bespoke interiors that blend Anatolian heritage with contemporary luxury",
+      id: -1,
+      title: t("s1_title"),
+      subtitle: t("s1_subtitle"),
       imageUrl: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920&q=80",
-      linkText: "Explore Collection",
-      linkHref: "/collections/kitchens",
+      linkText: t("s1_link"),
+      linkHref: "/collections",
     },
     {
-      id: 2,
-      title: "Where Architecture Meets Living",
-      subtitle: "Premium kitchens, doors, and wardrobes crafted with meticulous attention",
+      id: -2,
+      title: t("s2_title"),
+      subtitle: t("s2_subtitle"),
       imageUrl: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80",
-      linkText: "Discover More",
+      linkText: t("s2_link"),
       linkHref: "/collections",
     },
   ];
+
+  const heroSlides = slides.length > 0
+    ? slides.map((s) => ({
+        id: s.id,
+        title: locale === "en" && s.titleEn ? s.titleEn : s.title,
+        subtitle: locale === "en" && s.subtitleEn ? s.subtitleEn : (s.subtitle ?? ""),
+        imageUrl: s.imageUrl,
+        linkText: locale === "en" && s.linkTextEn ? s.linkTextEn : (s.linkText ?? t("s1_link")),
+        linkHref: s.linkHref ?? "/collections",
+      }))
+    : fallbackSlides;
 
   useEffect(() => {
     if (heroSlides.length <= 1) return;
@@ -58,7 +73,6 @@ export default function Hero({ slides }: { slides: any[] }) {
             className="w-full h-full object-cover"
             loading="eager"
           />
-          {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/10 to-transparent" />
         </motion.div>
@@ -100,11 +114,11 @@ export default function Hero({ slides }: { slides: any[] }) {
               className="mt-6 sm:mt-8"
             >
               <Link
-                href={slide.linkHref ?? "/collections"}
+                href={slide.linkHref as any}
                 className="group inline-flex items-center gap-3 text-white text-sm tracking-[0.15em] uppercase font-medium hover:gap-4 transition-all duration-300"
               >
                 <span className="border-b border-white/60 pb-1 group-hover:border-white transition-colors">
-                  {slide.linkText ?? "Discover More"}
+                  {slide.linkText}
                 </span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
@@ -122,7 +136,7 @@ export default function Hero({ slides }: { slides: any[] }) {
                 className={`h-0.5 transition-all duration-500 ${
                   i === currentSlide ? "w-8 bg-white" : "w-4 bg-white/40 hover:bg-white/60"
                 }`}
-                aria-label={`Go to slide ${i + 1}`}
+                aria-label={`Slide ${i + 1}`}
               />
             ))}
           </div>

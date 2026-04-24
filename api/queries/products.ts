@@ -1,5 +1,5 @@
 import { getDb } from "./connection";
-import { categories, products, heroSlides } from "@db/schema";
+import { categories, products, heroSlides, campaigns } from "@db/schema";
 import { eq, asc } from "drizzle-orm";
 
 // Categories
@@ -61,4 +61,19 @@ export async function getActiveHeroSlides() {
     where: eq(heroSlides.isActive, true),
     orderBy: [asc(heroSlides.sortOrder)],
   });
+}
+
+// Campaigns
+export async function getActiveCampaigns(type?: "current" | "exhibition") {
+  const db = getDb();
+  if (type) {
+    return db.select().from(campaigns)
+      .where(eq(campaigns.type, type))
+      .orderBy(asc(campaigns.sortOrder));
+  }
+  return db.select().from(campaigns).orderBy(asc(campaigns.sortOrder));
+}
+
+export async function getCampaignBySlug(slug: string) {
+  return getDb().select().from(campaigns).where(eq(campaigns.slug, slug)).limit(1).then(r => r[0] ?? null);
 }

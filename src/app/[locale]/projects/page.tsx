@@ -1,15 +1,20 @@
 "use client";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
+import { ArrowRight } from "lucide-react";
 import Footer from "@/sections/Footer";
 
 const projects = [
-  { id: 1, name: "Villa Bosphorus", location: "Istanbul", year: "2025", imageUrl: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&q=80" },
-  { id: 2, name: "Aegean Retreat", location: "Bodrum", year: "2024", imageUrl: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80" },
-  { id: 3, name: "Urban Minimalist", location: "Ankara", year: "2024", imageUrl: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&q=80" },
-  { id: 4, name: "Heritage Estate", location: "Hatay", year: "2023", imageUrl: "https://images.unsplash.com/photo-1556910103-1c02745aae4f?w=1200&q=80" },
+  { id: 1, slug: "villa-bosphorus", name: "Villa Bosphorus", location: "İstanbul", year: "2025", category: "Mutfak & Yaşam Alanları", imageUrl: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&q=80" },
+  { id: 2, slug: "aegean-retreat", name: "Aegean Retreat", location: "Bodrum", year: "2024", category: "Mutfak & Banyo", imageUrl: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80" },
+  { id: 3, slug: "urban-minimalist", name: "Urban Minimalist", location: "Ankara", year: "2024", category: "Mutfak", imageUrl: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&q=80" },
+  { id: 4, slug: "heritage-estate", name: "Heritage Estate", location: "Hatay", year: "2023", category: "Mutfak & Banyo & Yaşam", imageUrl: "https://images.unsplash.com/photo-1556910103-1c02745aae4f?w=1200&q=80" },
 ];
 
 export default function Projects() {
+  const t = useTranslations("projects");
+
   return (
     <main>
       {/* Header */}
@@ -21,10 +26,10 @@ export default function Projects() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
             <span className="text-[11px] tracking-[0.25em] uppercase text-vitem-500 font-medium block mb-4">
-              Portfolio
+              {t("eyebrow")}
             </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-sans font-light text-vitem-900 tracking-tight">
-              Our Projects
+              {t("title")}
             </h1>
           </motion.div>
         </div>
@@ -43,21 +48,29 @@ export default function Projects() {
                 transition={{ duration: 0.8, delay: index % 2 === 0 ? 0 : 0.2 }}
                 className="group cursor-pointer"
               >
-                <div className="relative aspect-[4/3] overflow-hidden bg-vitem-200 mb-6">
-                  <img
-                    src={project.imageUrl}
-                    alt={project.name}
-                    className="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700" />
-                </div>
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="text-2xl font-sans font-light text-vitem-900 mb-1">{project.name}</h3>
-                    <p className="text-sm text-vitem-500 font-light">{project.location}</p>
+                <Link href={`/projects/${project.slug}` as any}>
+                  <div className="relative aspect-[4/3] overflow-hidden bg-vitem-200 mb-6">
+                    <img
+                      src={project.imageUrl}
+                      alt={project.name}
+                      className="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-700" />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <span className="flex items-center gap-2 bg-white text-vitem-900 text-xs uppercase tracking-widest px-5 py-3">
+                        {t("view_project")} <ArrowRight className="w-3.5 h-3.5" />
+                      </span>
+                    </div>
                   </div>
-                  <span className="text-xs tracking-widest text-vitem-400">{project.year}</span>
-                </div>
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="text-2xl font-sans font-light text-vitem-900 mb-1 group-hover:text-vitem-600 transition-colors">{project.name}</h3>
+                      <p className="text-sm text-vitem-500 font-light">{project.location}</p>
+                      <p className="text-xs text-vitem-400 font-light mt-1 tracking-wide">{project.category}</p>
+                    </div>
+                    <span className="text-xs tracking-widest text-vitem-400">{project.year}</span>
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </div>

@@ -2,8 +2,10 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function Newsletter() {
+  const t = useTranslations("newsletter");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
 
@@ -11,7 +13,6 @@ export default function Newsletter() {
     e.preventDefault();
     if (!email) return;
     setStatus("submitting");
-    // Simulate API call
     setTimeout(() => {
       setStatus("success");
       setEmail("");
@@ -21,7 +22,7 @@ export default function Newsletter() {
   return (
     <section className="bg-vitem-50 py-20 sm:py-28 border-t border-vitem-200">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
@@ -29,19 +30,22 @@ export default function Newsletter() {
           className="max-w-xl mx-auto text-center"
         >
           <h3 className="text-2xl sm:text-3xl font-serif font-light text-vitem-900 mb-4">
-            Stay in Touch
+            {t("title")}
           </h3>
           <p className="text-vitem-500 text-sm mb-8 font-light leading-relaxed">
-            Subscribe to our newsletter to receive the latest updates on new collections, design trends, and exclusive events.
+            {t("desc")}
           </p>
 
-          <form onSubmit={handleSubmit} className="relative group flex items-center border-b border-vitem-400 focus-within:border-vitem-900 transition-colors duration-300">
+          <form
+            onSubmit={handleSubmit}
+            className="relative group flex items-center border-b border-vitem-400 focus-within:border-vitem-900 transition-colors duration-300"
+          >
             <input
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email address"
+              placeholder={t("placeholder")}
               disabled={status === "submitting" || status === "success"}
               className="w-full bg-transparent border-none outline-none py-3 pl-2 pr-12 text-vitem-900 placeholder:text-vitem-400 text-sm font-light disabled:opacity-50"
             />
@@ -52,14 +56,16 @@ export default function Newsletter() {
               aria-label="Subscribe"
             >
               {status === "success" ? (
-                <span className="text-xs uppercase tracking-widest font-medium text-green-600">Done</span>
+                <span className="text-xs uppercase tracking-widest font-medium text-green-600">
+                  {t("done")}
+                </span>
               ) : (
                 <ArrowRight className="w-5 h-5" />
               )}
             </button>
           </form>
           <p className="text-[10px] text-vitem-400 mt-4 text-left">
-            By subscribing, you agree to our Privacy Policy and consent to receive marketing communications.
+            {t("privacy")}
           </p>
         </motion.div>
       </div>

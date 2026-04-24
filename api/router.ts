@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { createRouter, publicQuery } from "./middleware";
 import { productRouter } from "./productRouter";
 

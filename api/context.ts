@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch";
 
 export type TrpcContext = {

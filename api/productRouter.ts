@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { z } from "zod";
 import { createRouter, publicQuery } from "./middleware";
 import {

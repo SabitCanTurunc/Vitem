@@ -1,11 +1,174 @@
 {
   "nav": {
-    "collections": "Koleksiyonlar",
+    "collections": "Ürünler",
     "about": "Hakkımızda",
     "projects": "Projeler",
     "contact": "İletişim",
     "search": "Ara",
     "interior_design": "İç Mimari",
-    "hatay_turkey": "Hatay, Türkiye"
+    "hatay_turkey": "Hatay, Türkiye",
+    "farkimiz": "Farkımız",
+    "kampanyalar": "Kampanyalar",
+    "referanslar": "Referanslar",
+    "katalog": "E-Katalog",
+    "cat_mutfak": "Mutfak",
+    "cat_banyo": "Banyo",
+    "cat_ankastre": "Ankastre",
+    "cat_yasam": "Yaşam Alanları",
+    "guncel_kampanyalar": "Güncel Kampanyalar",
+    "teshir_urunleri": "Teşhir Ürünleri"
+  },
+  "about": {
+    "eyebrow": "Hakkımızda",
+    "title": "1997'den Bu Yana Eşsiz İç Mekanlar",
+    "story_title": "Hikayemiz",
+    "story_p1": "Vitem, 1997 yılında Hatay'da 350 m² atölyede 5 personel ile Cansu Kapı adıyla kuruldu. Bugün 3.500 m²'lik entegre üretim tesisi, modern showroomu ve 80 çalışanıyla güçlü bir marka haline gelmiştir.",
+    "story_p2": "Aile şirketi kimliğimizden aldığımız güç üretimimize yansıyarak toplam kaliteyi en üst seviyede tutmamızı sağladı. Her projede işine odaklı, detaycı ve kaliteden ödün vermeyen bir anlayışla çalışıyoruz.",
+    "philosophy_title": "Felsefemiz",
+    "philosophy_p1": "Yaşam alanınızın kim olduğunuzu yansıtması gerektiğine inanıyoruz — değerlerinizi, estetiğinizi, yaşam tarzınızı. Bu nedenle her projeye son derece kişisel bir yaklaşım benimseyerek, tasarıma başlamadan önce müşterilerimizle birlikte vizyonu şekillendiriyoruz.",
+    "philosophy_p2": "Sürdürülebilirlik ve kalite yaptığımız her şeyin özünde yer alır. Malzemelerimizi sorumlu bir şekilde temin ediyor, uzun ömürlülüğü güvence altına alan teknikler kullanıyor; nesiller boyu hem güzel hem de dayanıklı ürünler ortaya koyuyoruz.",
+    "stat_years": "Yıllık Deneyim",
+    "stat_projects": "Tamamlanan Proje",
+    "stat_team": "Uzman Ekip",
+    "stat_collections": "Temel Koleksiyon"
+  },
+  "contact": {
+    "eyebrow": "Bize Ulaşın",
+    "title": "İletişim",
+    "description": "Projeniz hakkında konuşmak isteriz. Danışmanlık, bilgi ve showroom ziyareti için ekibimizle iletişime geçin.",
+    "hq_title": "Genel Merkez & Fabrika",
+    "hours_title": "Çalışma Saatleri",
+    "weekdays": "Pzt - Cuma",
+    "saturday": "Cumartesi",
+    "sunday": "Pazar",
+    "closed": "Kapalı",
+    "form_title": "Talep Gönderin",
+    "label_name": "Ad Soyad",
+    "label_email": "E-Posta Adresi",
+    "label_phone": "Telefon (İsteğe Bağlı)",
+    "label_message": "Mesajınız",
+    "submit": "Talep Gönder",
+    "submitting": "Gönderiliyor...",
+    "success_title": "Mesajınız Alındı",
+    "success_desc": "İlginiz için teşekkür ederiz. Ekibimiz en kısa sürede sizinle iletişime geçecektir.",
+    "send_another": "Başka mesaj gönder",
+    "error": "Bir hata oluştu. Lütfen daha sonra tekrar deneyin."
+  },
+  "projects": {
+    "eyebrow": "Portföy",
+    "title": "Projelerimiz",
+    "view_project": "Projeyi Görüntüle"
+  },
+  "farkimiz": {
+    "eyebrow": "Neden Vitem?",
+    "title": "Farkımız",
+    "description": "Kalite, estetik ve işlevselliği bir araya getiren Vitem, sizi diğerlerinden ayıran yaşam alanları tasarlar.",
+    "quality_title": "Üstün Kalite",
+    "quality_desc": "Üretimde kullanılan her malzemenin kalite ve sağlamlığı gözetilerek, üstün teknolojili sistemlerle üretim yapılır.",
+    "design_title": "Özgün Tasarım",
+    "design_desc": "Her proje, mekanınıza terzi dikimi doğruluğunda örtüşen özgün bir tasarım anlayışıyla hayata geçirilir.",
+    "ergonomy_title": "Ergonomi",
+    "ergonomy_desc": "Tüm modeller sizi daha az yoran, istediğiniz bölüme kolayca ulaşabileceğiniz şekilde ergonomi odaklı tasarlanır.",
+    "tech_title": "İleri Teknoloji",
+    "tech_desc": "3.500 m²'lik üretim tesisimizde bilgisayar kontrollü kesim ve kenar bantlama makineleriyle hatasız üretim yapılır.",
+    "service_title": "Satış Sonrası Hizmet",
+    "service_desc": "Montaj sonrası teknik servis ile ürünlerinizin uzun yıllar sorunsuz kullanılmasını güvence altına alıyoruz.",
+    "experience_title": "20+ Yıl Deneyim",
+    "experience_desc": "1997'den bu yana 10.000'den fazla projeyi başarıyla tamamlayarak kazandığımız deneyimi her ürüne yansıtıyoruz."
+  },
+  "kampanyalar": {
+    "eyebrow": "Fırsatlar",
+    "title": "Kampanyalar",
+    "description": "Güncel kampanyalarımızı takip edin ve benzersiz fırsatlarımızdan yararlanın.",
+    "current_tab": "Güncel Kampanyalar",
+    "exhibition_tab": "Teşhir Ürünleri",
+    "no_campaigns": "Şu anda aktif kampanya bulunmamaktadır.",
+    "valid_until": "Son geçerlilik:",
+    "learn_more": "Detaylı Bilgi",
+    "exhibition_desc": "Teşhir ürünlerinde büyük indirim fırsatlarını kaçırmayın."
+  },
+  "referanslar": {
+    "eyebrow": "Müşteri Yorumları",
+    "title": "Referanslarımız",
+    "description": "Binlerce mutlu müşterimizin deneyimlerini keşfedin."
+  },
+  "katalog": {
+    "eyebrow": "Dijital Katalog",
+    "title": "E-Katalog",
+    "description": "Ürün kataloğumuzu dijital ortamda inceleyin veya bilgisayarınıza indirin.",
+    "download_btn": "PDF İndir",
+    "view_btn": "Görüntüle",
+    "request_btn": "Basılı Katalog Talep Et",
+    "request_desc": "Basılı kataloğumuzu ücretsiz olarak adresinize gönderelim."
+  },
+  "not_found": {
+    "title": "Sayfa Bulunamadı",
+    "description": "Aradığınız sayfa mevcut değil veya taşınmış olabilir.",
+    "back_home": "Ana Sayfaya Dön"
+  },
+  "footer": {
+    "tagline": "İç Mimari",
+    "brand_desc": "Hatay'ın ustalığıyla dünya için tasarlanan lüks mutfak, banyo ve yaşam alanı çözümleri.",
+    "collections_title": "Koleksiyonlar",
+    "col_kitchens": "Mutfak",
+    "col_bathrooms": "Banyo",
+    "col_wardrobes": "Gardırop",
+    "company_title": "Kurumsal",
+    "link_about": "Hakkımızda",
+    "link_projects": "Projeler",
+    "link_contact": "İletişim",
+    "link_farkimiz": "Farkımız",
+    "link_kampanyalar": "Kampanyalar",
+    "contact_title": "İletişim",
+    "rights": "Tüm hakları saklıdır."
+  },
+  "philosophy": {
+    "eyebrow": "Vitem Hakkında",
+    "title": "Anadolu Mirasının Çağdaş Tasarımla Buluştuğu Yer",
+    "p1": "Hatay'ın kalbinde kurulan Vitem, lüks iç mimari ve mobilya üretiminde yeni bir standart belirliyor. Yüzyıllık Anadolu ustalığını çağdaş tasarımla harmanlayarak hem zamansız hem de modern mekanlar yaratıyoruz.",
+    "p2": "Atölyemizden çıkan her ürün, premium malzeme seçiminden son el işçiliğine kadar titiz bir özenin izini taşır. Gerçek lüksün form ile işlevselliğin uyumunda yattığına inanıyoruz.",
+    "cta": "Hikayemiz"
+  },
+  "craftsmanship": {
+    "eyebrow": "Süreç",
+    "title": "Her Detayda Ustalık",
+    "desc": "Mükemmelliğe olan bağlılığımız, son ürün ortaya çıkmadan çok önce başlar. Yalnızca en kaliteli hammaddeleri seçiyor; Hatay'ın nesiller boyu aktarılan usta işçiliğini son teknoloji hassasiyetiyle birleştiriyoruz. Her eğri, bağlantı ve yüzey mutlak mükemmelliği sağlamak için titizlikle inceleniyor.",
+    "cta": "Fabrikamızı Keşfedin"
+  },
+  "magazine": {
+    "eyebrow": "Dergi",
+    "title": "Vitem Dergisi",
+    "cta": "Tüm Yazıları Görüntüle",
+    "a1_title": "En Kaliteli Ahşapları Seçmenin Sanatı",
+    "a1_category": "Malzemeler",
+    "a2_title": "Modern Mutfak Tasarımında Minimalizm",
+    "a2_category": "Trendler",
+    "a3_title": "Global Fuarlar: Vitem Milano'da",
+    "a3_category": "Etkinlikler"
+  },
+  "newsletter": {
+    "title": "İletişimde Kalın",
+    "desc": "Yeni koleksiyonlar, tasarım trendleri ve özel etkinlikler hakkında güncel kalmak için bültenimize abone olun.",
+    "placeholder": "E-posta adresinizi girin",
+    "done": "Tamam",
+    "privacy": "Abone olarak Gizlilik Politikamızı kabul etmiş ve pazarlama iletişimi almayı onaylamış olursunuz."
+  },
+  "featured_collections": {
+    "eyebrow": "Koleksiyonlar",
+    "title": "Koleksiyonlarımızı Keşfedin",
+    "discover": "Keşfet"
+  },
+  "featured_products": {
+    "eyebrow": "Öne Çıkanlar",
+    "title": "Özel Parçalar",
+    "view": "Detayları Gör"
+  },
+  "hero_fallback": {
+    "s1_title": "Hatay'da Üretildi. Dünya İçin Tasarlandı.",
+    "s1_subtitle": "Anadolu mirasını çağdaş lüksle harmanlayan özel iç mekan tasarımları",
+    "s1_link": "Koleksiyonu Keşfet",
+    "s2_title": "Mimarinin Yaşamla Buluştuğu Yer",
+    "s2_subtitle": "Titiz bir özenle üretilen premium mutfak, banyo ve gardırop sistemleri",
+    "s2_link": "Daha Fazlası"
   }
 }

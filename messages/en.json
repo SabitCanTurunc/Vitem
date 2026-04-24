@@ -1,11 +1,174 @@
 {
   "nav": {
-    "collections": "Collections",
+    "collections": "Products",
     "about": "About",
     "projects": "Projects",
     "contact": "Contact",
     "search": "Search",
     "interior_design": "Interior Design",
-    "hatay_turkey": "Hatay, Turkey"
+    "hatay_turkey": "Hatay, Turkey",
+    "farkimiz": "Our Edge",
+    "kampanyalar": "Campaigns",
+    "referanslar": "References",
+    "katalog": "E-Catalogue",
+    "cat_mutfak": "Kitchens",
+    "cat_banyo": "Bathrooms",
+    "cat_ankastre": "Built-in Appliances",
+    "cat_yasam": "Living Spaces",
+    "guncel_kampanyalar": "Current Campaigns",
+    "teshir_urunleri": "Exhibition Products"
+  },
+  "about": {
+    "eyebrow": "About Us",
+    "title": "Crafting Exceptional Interiors Since 1997",
+    "story_title": "Our Story",
+    "story_p1": "Vitem was founded in 1997 in Hatay as Cansu Kapı, starting with a 350 m² workshop and 5 employees. Today it has grown into a respected brand with a 3,500 m² integrated production facility, a modern showroom, and 80 dedicated employees.",
+    "story_p2": "The strength we derive from our family business identity is reflected in our production, enabling us to maintain total quality at the highest level. In every project, we work with a focused, detail-oriented approach that never compromises on quality.",
+    "philosophy_title": "Our Philosophy",
+    "philosophy_p1": "We believe that your living space should be a reflection of who you are — your values, your aesthetic, your way of life. That is why we take a deeply personal approach to every project, working closely with our clients to understand their vision before we begin crafting.",
+    "philosophy_p2": "Sustainability and quality are at the core of everything we do. We source our materials responsibly and employ techniques that ensure longevity, creating pieces that are not only beautiful but built to last for generations.",
+    "stat_years": "Years of Experience",
+    "stat_projects": "Projects Completed",
+    "stat_team": "Expert Team",
+    "stat_collections": "Core Collections"
+  },
+  "contact": {
+    "eyebrow": "Get in Touch",
+    "title": "Contact Us",
+    "description": "We would love to hear about your project. Reach out to our team for consultations, inquiries, or showroom visits.",
+    "hq_title": "Headquarters & Factory",
+    "hours_title": "Opening Hours",
+    "weekdays": "Mon - Fri",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "closed": "Closed",
+    "form_title": "Send an Inquiry",
+    "label_name": "Full Name",
+    "label_email": "Email Address",
+    "label_phone": "Phone (Optional)",
+    "label_message": "Your Message",
+    "submit": "Submit Inquiry",
+    "submitting": "Sending...",
+    "success_title": "Message Received",
+    "success_desc": "Thank you for your inquiry. A member of our team will contact you shortly.",
+    "send_another": "Send another message",
+    "error": "Something went wrong. Please try again later."
+  },
+  "projects": {
+    "eyebrow": "Portfolio",
+    "title": "Our Projects",
+    "view_project": "View Project"
+  },
+  "farkimiz": {
+    "eyebrow": "Why Vitem?",
+    "title": "Our Edge",
+    "description": "Vitem combines quality, aesthetics and functionality to design living spaces that set you apart.",
+    "quality_title": "Superior Quality",
+    "quality_desc": "Every material used in production is carefully selected for quality and durability, manufactured with advanced technological systems.",
+    "design_title": "Unique Design",
+    "design_desc": "Every project is brought to life with a bespoke design approach that fits your space with tailor-made precision.",
+    "ergonomy_title": "Ergonomics",
+    "ergonomy_desc": "All models are designed with an ergonomics-first mindset — less tiring to use, and every section easily accessible.",
+    "tech_title": "Advanced Technology",
+    "tech_desc": "Our 3,500 m² production facility uses computer-controlled cutting and edge banding machines for flawless production.",
+    "service_title": "After-Sales Service",
+    "service_desc": "Our post-installation technical service ensures your products can be used without issues for many years.",
+    "experience_title": "20+ Years Experience",
+    "experience_desc": "Since 1997, we have successfully completed over 10,000 projects, reflecting our accumulated experience in every product."
+  },
+  "kampanyalar": {
+    "eyebrow": "Special Offers",
+    "title": "Campaigns",
+    "description": "Follow our current campaigns and take advantage of our unique opportunities.",
+    "current_tab": "Current Campaigns",
+    "exhibition_tab": "Exhibition Products",
+    "no_campaigns": "No active campaigns at the moment.",
+    "valid_until": "Valid until:",
+    "learn_more": "Learn More",
+    "exhibition_desc": "Don't miss the great discount opportunities on exhibition products."
+  },
+  "referanslar": {
+    "eyebrow": "Client Reviews",
+    "title": "References",
+    "description": "Discover the experiences of thousands of our satisfied clients."
+  },
+  "katalog": {
+    "eyebrow": "Digital Catalogue",
+    "title": "E-Catalogue",
+    "description": "Browse our product catalogue digitally or download it to your computer.",
+    "download_btn": "Download PDF",
+    "view_btn": "View Online",
+    "request_btn": "Request Print Catalogue",
+    "request_desc": "Let us send you our printed catalogue free of charge to your address."
+  },
+  "not_found": {
+    "title": "Page Not Found",
+    "description": "The page you are looking for does not exist or may have been moved.",
+    "back_home": "Return to Home"
+  },
+  "footer": {
+    "tagline": "Interior Design",
+    "brand_desc": "Luxury kitchen, bathroom and living space solutions crafted in Hatay for the world.",
+    "collections_title": "Collections",
+    "col_kitchens": "Kitchens",
+    "col_bathrooms": "Bathrooms",
+    "col_wardrobes": "Wardrobes",
+    "company_title": "Company",
+    "link_about": "About",
+    "link_projects": "Projects",
+    "link_contact": "Contact",
+    "link_farkimiz": "Our Edge",
+    "link_kampanyalar": "Campaigns",
+    "contact_title": "Contact",
+    "rights": "All rights reserved."
+  },
+  "philosophy": {
+    "eyebrow": "About Vitem",
+    "title": "Where Anatolian Heritage Meets Contemporary Design",
+    "p1": "Founded in the heart of Hatay, Vitem represents a new standard in luxury interior design and furniture manufacturing. We blend centuries of Anatolian craftsmanship with cutting-edge contemporary design to create spaces that are both timeless and modern.",
+    "p2": "Every piece that leaves our workshop carries the imprint of meticulous attention to detail, from the selection of premium materials to the final hand-finished touches. We believe that true luxury lies in the harmony between form and function.",
+    "cta": "Our Story"
+  },
+  "craftsmanship": {
+    "eyebrow": "The Process",
+    "title": "Mastery in Every Detail",
+    "desc": "Our commitment to excellence begins long before the final piece is assembled. We source only the finest raw materials, blending cutting-edge precision technology with generations of artisanal expertise from Hatay. Every curve, joint, and surface is meticulously inspected to ensure absolute perfection.",
+    "cta": "Explore Our Factory"
+  },
+  "magazine": {
+    "eyebrow": "Journal",
+    "title": "The Vitem Magazine",
+    "cta": "View All Articles",
+    "a1_title": "The Art of Selecting Fine Woods",
+    "a1_category": "Materials",
+    "a2_title": "Minimalism in Modern Kitchen Design",
+    "a2_category": "Trends",
+    "a3_title": "Global Exhibitions: Vitem in Milan",
+    "a3_category": "Events"
+  },
+  "newsletter": {
+    "title": "Stay in Touch",
+    "desc": "Subscribe to our newsletter to receive the latest updates on new collections, design trends, and exclusive events.",
+    "placeholder": "Enter your email address",
+    "done": "Done",
+    "privacy": "By subscribing, you agree to our Privacy Policy and consent to receive marketing communications."
+  },
+  "featured_collections": {
+    "eyebrow": "Collections",
+    "title": "Discover Our Collections",
+    "discover": "Discover more"
+  },
+  "featured_products": {
+    "eyebrow": "Featured",
+    "title": "Signature Pieces",
+    "view": "View details"
+  },
+  "hero_fallback": {
+    "s1_title": "Crafted in Hatay. Designed for the World.",
+    "s1_subtitle": "Bespoke interiors that blend Anatolian heritage with contemporary luxury",
+    "s1_link": "Explore Collection",
+    "s2_title": "Where Architecture Meets Living",
+    "s2_subtitle": "Premium kitchens, bathrooms and wardrobes crafted with meticulous attention",
+    "s2_link": "Discover More"
   }
 }

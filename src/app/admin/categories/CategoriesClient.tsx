@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Edit, Trash2, X } from "lucide-react";
-import { createCategory } from "../../../../api/actions/adminActions";
+import { useRouter } from "next/navigation";
+import { Plus, Edit, Trash2, X, Languages, Loader2 } from "lucide-react";
+import { createCategory, deleteCategory, updateCategory } from "../../../../api/actions/adminActions";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Category {
@@ -10,55 +11,151 @@ interface Category {
   name: string;
   nameEn: string | null;
   slug: string;
+  description: string | null;
+  descriptionEn: string | null;
+  imageUrl: string | null;
+  sortOrder: number | null;
+}
+
+type ModalMode = "create" | "edit";
+
+async function autoTranslate(fields: { tr: string; enRef: string }[]): Promise<string[]> {
+  const results: string[] = [];
+  for (const f of fields) {
+    if (!f.tr?.trim()) { results.push(f.enRef); continue; }
+    try {
+      const res = await fetch("/api/translate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: f.tr, from: "tr", to: "en" }),
+      });
+      const data = await res.json();
+      results.push(data.translated || f.enRef);
+    } catch {
+      results.push(f.enRef);
+    }
+  }
+  return results;
 }
 
 export default function CategoriesClient({ initialCategories }: { initialCategories: Category[] }) {
+  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMode, setModalMode] = useState<ModalMode>("create");
+  const [editTarget, setEditTarget] = useState<Category | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isTranslating, setIsTranslating] = useState(false);
+  const [deletingId, setDeletingId] = useState<number | null>(null);
+
+  // form field states for translate
+  const [nameVal, setNameVal] = useState("");
+  const [nameEnVal, setNameEnVal] = useState("");
+  const [descVal, setDescVal] = useState("");
+  const [descEnVal, setDescEnVal] = useState("");
+
+  function openCreate() {
+    setModalMode("create");
+    setEditTarget(null);
+    setNameVal(""); setNameEnVal(""); setDescVal(""); setDescEnVal("");
+    setIsModalOpen(true);
+  }
+
+  function openEdit(cat: Category) {
+    setModalMode("edit");
+    setEditTarget(cat);
+    setNameVal(cat.name);
+    setNameEnVal(cat.nameEn ?? "");
+    setDescVal(cat.description ?? "");
+    setDescEnVal(cat.descriptionEn ?? "");
+    setIsModalOpen(true);
+  }
+
+  async function handleTranslate() {
+    setIsTranslating(true);
+    const [tName, tDesc] = await autoTranslate([
+      { tr: nameVal, enRef: nameEnVal },
+      { tr: descVal, enRef: descEnVal },
+    ]);
+    setNameEnVal(tName);
+    setDescEnVal(tDesc);
+    setIsTranslating(false);
+  }
 
   async function handleSubmit(formData: FormData) {
     setIsSubmitting(true);
-    const result = await createCategory(formData);
+    let result;
+    if (modalMode === "edit" && editTarget) {
+      result = await updateCategory(editTarget.id, formData);
+    } else {
+      result = await createCategory(formData);
+    }
     setIsSubmitting(false);
     if (result.success) {
       setIsModalOpen(false);
+      router.refresh();
     } else {
-      alert(result.error);
+      alert((result as any).error ?? "Hata oluştu.");
     }
+  }
+
+  async function handleDelete(id: number) {
+    if (!confirm("Bu kategoriyi silmek istediğinize emin misiniz?")) return;
+    setDeletingId(id);
+    await deleteCategory(id);
+    setDeletingId(null);
+    router.refresh();
   }
 
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-serif font-light">Manage Categories</h1>
-        <button 
-          onClick={() => setIsModalOpen(true)}
-          className="bg-vitem-900 text-white px-4 py-2 text-sm flex items-center gap-2 hover:bg-vitem-800 transition-colors rounded-md shadow-sm"
+        <div>
+          <h1 className="text-2xl font-serif font-light text-vitem-900">Kategoriler</h1>
+          <p className="text-sm text-vitem-500 mt-1">{initialCategories.length} kategori</p>
+        </div>
+        <button
+          onClick={openCreate}
+          className="bg-vitem-900 text-white px-5 py-2.5 text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-vitem-800 transition-colors"
         >
-          <Plus className="w-4 h-4" /> Add Category
+          <Plus className="w-3.5 h-3.5" /> Yeni Kategori
         </button>
       </div>
 
-      <div className="bg-white rounded-xl border border-vitem-200 overflow-hidden shadow-sm">
-        <table className="w-full text-left text-sm whitespace-nowrap">
+      <div className="bg-white border border-vitem-200 overflow-hidden">
+        <table className="w-full text-left text-sm">
           <thead className="bg-vitem-50 border-b border-vitem-200 text-vitem-500 uppercase tracking-wider text-xs">
             <tr>
-              <th className="px-6 py-4 font-medium">Name (TR)</th>
-              <th className="px-6 py-4 font-medium">Name (EN)</th>
-              <th className="px-6 py-4 font-medium text-right">Actions</th>
+              <th className="px-6 py-4 font-medium">Ad (TR)</th>
+              <th className="px-6 py-4 font-medium">Ad (EN)</th>
+              <th className="px-6 py-4 font-medium text-right">İşlemler</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-vitem-200">
+          <tbody className="divide-y divide-vitem-100">
             {initialCategories.length === 0 ? (
-               <tr><td colSpan={3} className="px-6 py-12 text-center text-vitem-500">No categories found. Create one.</td></tr>
+              <tr><td colSpan={3} className="px-6 py-12 text-center text-vitem-400 text-sm">Henüz kategori yok.</td></tr>
             ) : (
               initialCategories.map((cat) => (
                 <tr key={cat.id} className="hover:bg-vitem-50/50 transition-colors">
                   <td className="px-6 py-4 font-medium text-vitem-900">{cat.name}</td>
-                  <td className="px-6 py-4 text-vitem-600">{cat.nameEn || "—"}</td>
-                  <td className="px-6 py-4 text-right">
-                    <button className="p-1.5 text-vitem-400 hover:text-blue-600 transition-colors mr-2"><Edit className="w-4 h-4" /></button>
-                    <button className="p-1.5 text-vitem-400 hover:text-red-600 transition-colors"><Trash2 className="w-4 h-4" /></button>
+                  <td className="px-6 py-4 text-vitem-600">
+                    {cat.nameEn || <span className="text-amber-500 text-xs">⚠ Çeviri yok</span>}
+                  </td>
+                  <td className="px-6 py-4 text-right flex items-center justify-end gap-1">
+                    <button
+                      onClick={() => openEdit(cat)}
+                      className="p-2 text-vitem-400 hover:text-blue-600 transition-colors"
+                      title="Düzenle"
+                    >
+                      <Edit className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(cat.id)}
+                      disabled={deletingId === cat.id}
+                      className="p-2 text-vitem-400 hover:text-red-600 transition-colors disabled:opacity-40"
+                      title="Sil"
+                    >
+                      {deletingId === cat.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
+                    </button>
                   </td>
                 </tr>
               ))
@@ -71,73 +168,61 @@ export default function CategoriesClient({ initialCategories }: { initialCategor
       <AnimatePresence>
         {isModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+            <motion.div
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               onClick={() => setIsModalOpen(false)}
               className="absolute inset-0 bg-black/50 backdrop-blur-sm"
             />
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl overflow-hidden"
+              className="relative bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-xl"
             >
-              <div className="flex items-center justify-between p-6 border-b border-vitem-100">
-                <h2 className="text-xl font-serif font-light">New Category</h2>
-                <button onClick={() => setIsModalOpen(false)} className="text-vitem-400 hover:text-vitem-900 transition-colors p-1">
-                  <X className="w-5 h-5" />
-                </button>
+              {/* Modal Header */}
+              <div className="sticky top-0 bg-white z-10 flex items-center justify-between px-8 py-5 border-b border-vitem-100">
+                <h2 className="text-xl font-serif font-light text-vitem-900">
+                  {modalMode === "edit" ? "Kategori Düzenle" : "Yeni Kategori"}
+                </h2>
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={handleTranslate}
+                    disabled={isTranslating || !nameVal.trim()}
+                    className="flex items-center gap-1.5 text-xs text-blue-600 hover:text-blue-800 disabled:opacity-40 transition-colors border border-blue-200 px-3 py-1.5 hover:bg-blue-50"
+                    title="TR → EN otomatik çevir"
+                  >
+                    {isTranslating ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Languages className="w-3.5 h-3.5" />}
+                    TR → EN Çevir
+                  </button>
+                  <button onClick={() => setIsModalOpen(false)} className="text-vitem-400 hover:text-vitem-900 transition-colors p-1">
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
 
-              <form action={handleSubmit} className="p-8 space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-xs uppercase tracking-widest text-vitem-500">Name (Turkish)</label>
-                    <input required name="name" className="w-full bg-vitem-50 border border-vitem-200 rounded-md py-2.5 px-4 focus:ring-1 focus:ring-vitem-900 outline-none transition-all" placeholder="ör: Mutfaklar" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-xs uppercase tracking-widest text-vitem-500">Name (English)</label>
-                    <input name="nameEn" className="w-full bg-vitem-50 border border-vitem-200 rounded-md py-2.5 px-4 focus:ring-1 focus:ring-vitem-900 outline-none transition-all" placeholder="eg: Kitchens" />
-                  </div>
+              <form action={handleSubmit} className="px-8 py-6 space-y-6">
+                <div className="grid grid-cols-2 gap-6">
+                  <FormField label="Ad (TR) *" name="name" value={nameVal} onChange={setNameVal} required />
+                  <FormField label="Ad (EN)" name="nameEn" value={nameEnVal} onChange={setNameEnVal} />
+                </div>
+                <div className="grid grid-cols-2 gap-6">
+                  <TextareaFormField label="Açıklama (TR)" name="description" value={descVal} onChange={setDescVal} />
+                  <TextareaFormField label="Açıklama (EN)" name="descriptionEn" value={descEnVal} onChange={setDescEnVal} />
+                </div>
+                <div className="grid grid-cols-2 gap-6">
+                  <FormField label="Görsel URL" name="imageUrl" defaultValue={editTarget?.imageUrl ?? ""} />
+                  <FormField label="Sıra" name="sortOrder" type="number" defaultValue={String(editTarget?.sortOrder ?? 0)} />
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-widest text-vitem-500">Description (Turkish)</label>
-                  <textarea name="description" rows={3} className="w-full bg-vitem-50 border border-vitem-200 rounded-md py-2.5 px-4 focus:ring-1 focus:ring-vitem-900 outline-none transition-all resize-none" placeholder="Kategori detayı..." />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-widest text-vitem-500">Description (English)</label>
-                  <textarea name="descriptionEn" rows={3} className="w-full bg-vitem-50 border border-vitem-200 rounded-md py-2.5 px-4 focus:ring-1 focus:ring-vitem-900 outline-none transition-all resize-none" placeholder="Category details..." />
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-xs uppercase tracking-widest text-vitem-500">Image URL</label>
-                    <input name="imageUrl" className="w-full bg-vitem-50 border border-vitem-200 rounded-md py-2.5 px-4 focus:ring-1 focus:ring-vitem-900 outline-none transition-all" placeholder="Cloudinary or Unsplash link" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-xs uppercase tracking-widest text-vitem-500">Sort Order</label>
-                    <input type="number" defaultValue={0} name="sortOrder" className="w-full bg-vitem-50 border border-vitem-200 rounded-md py-2.5 px-4 focus:ring-1 focus:ring-vitem-900 outline-none transition-all" />
-                  </div>
-                </div>
-
-                <div className="pt-6 flex justify-end gap-3">
-                  <button 
-                    type="button" 
-                    onClick={() => setIsModalOpen(false)}
-                    className="px-6 py-2.5 text-sm text-vitem-600 hover:text-vitem-900 transition-colors"
-                  >
-                    Cancel
-                  </button>
-                  <button 
-                    type="submit" 
+                <div className="flex justify-end gap-3 pt-4 border-t border-vitem-100">
+                  <button type="button" onClick={() => setIsModalOpen(false)} className="px-5 py-2.5 text-sm text-vitem-500 hover:text-vitem-900 transition-colors">İptal</button>
+                  <button
+                    type="submit"
                     disabled={isSubmitting}
-                    className="bg-vitem-900 text-white px-8 py-2.5 text-sm rounded-md hover:bg-vitem-800 transition-colors disabled:opacity-50"
+                    className="bg-vitem-900 text-white px-7 py-2.5 text-xs uppercase tracking-widest hover:bg-vitem-800 transition-colors disabled:opacity-50"
                   >
-                    {isSubmitting ? "Saving..." : "Save Category"}
+                    {isSubmitting ? "Kaydediliyor..." : modalMode === "edit" ? "Güncelle" : "Kaydet"}
                   </button>
                 </div>
               </form>
@@ -145,6 +230,38 @@ export default function CategoriesClient({ initialCategories }: { initialCategor
           </div>
         )}
       </AnimatePresence>
+    </div>
+  );
+}
+
+function FormField({ label, name, required, type = "text", value, onChange, defaultValue }: {
+  label: string; name: string; required?: boolean; type?: string;
+  value?: string; onChange?: (v: string) => void; defaultValue?: string;
+}) {
+  return (
+    <div className="space-y-1.5">
+      <label className="text-xs uppercase tracking-widest text-vitem-500">{label}</label>
+      <input
+        type={type} name={name} required={required}
+        value={onChange ? value : undefined}
+        defaultValue={onChange ? undefined : defaultValue}
+        onChange={onChange ? (e) => onChange(e.target.value) : undefined}
+        className="w-full border-b border-vitem-200 py-2 text-sm text-vitem-900 focus:outline-none focus:border-vitem-900 transition-colors bg-transparent"
+      />
+    </div>
+  );
+}
+
+function TextareaFormField({ label, name, value, onChange }: {
+  label: string; name: string; value: string; onChange: (v: string) => void;
+}) {
+  return (
+    <div className="space-y-1.5">
+      <label className="text-xs uppercase tracking-widest text-vitem-500">{label}</label>
+      <textarea
+        name={name} rows={3} value={value} onChange={(e) => onChange(e.target.value)}
+        className="w-full border-b border-vitem-200 py-2 text-sm text-vitem-900 focus:outline-none focus:border-vitem-900 transition-colors bg-transparent resize-none"
+      />
     </div>
   );
 }

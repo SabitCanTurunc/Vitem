@@ -1,7 +1,11 @@
-import Link from "next/link";
-import { MapPin, Phone, Mail, Instagram, Linkedin } from "lucide-react";
+"use client";
+import { Instagram, Linkedin, MapPin, Phone, Mail } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 
 export default function Footer() {
+  const t = useTranslations("footer");
+
   return (
     <footer className="bg-vitem-950 text-vitem-300">
       {/* Main Footer */}
@@ -13,7 +17,7 @@ export default function Footer() {
               <span className="font-serif text-3xl text-white tracking-wide">Vitem</span>
             </Link>
             <p className="mt-4 text-sm text-vitem-400 leading-relaxed max-w-xs">
-              Premium interior design and furniture manufacturing, crafted with precision in Hatay, Turkey.
+              {t("brand_desc")}
             </p>
             <div className="flex gap-4 mt-6">
               <a
@@ -40,22 +44,22 @@ export default function Footer() {
           {/* Collections */}
           <div>
             <h4 className="text-xs tracking-[0.2em] uppercase text-white font-medium mb-5">
-              Collections
+              {t("collections_title")}
             </h4>
             <ul className="space-y-3">
               <li>
-                <Link href="/collections/kitchens" className="text-sm text-vitem-400 hover:text-white transition-colors">
-                  Kitchens
+                <Link href={"/collections/mutfak" as any} className="text-sm text-vitem-400 hover:text-white transition-colors">
+                  {t("col_kitchens")}
                 </Link>
               </li>
               <li>
-                <Link href="/collections/doors" className="text-sm text-vitem-400 hover:text-white transition-colors">
-                  Doors
+                <Link href={"/collections/banyo" as any} className="text-sm text-vitem-400 hover:text-white transition-colors">
+                  {t("col_bathrooms")}
                 </Link>
               </li>
               <li>
-                <Link href="/collections/wardrobes" className="text-sm text-vitem-400 hover:text-white transition-colors">
-                  Wardrobes
+                <Link href={"/collections/gardırop" as any} className="text-sm text-vitem-400 hover:text-white transition-colors">
+                  {t("col_wardrobes")}
                 </Link>
               </li>
             </ul>
@@ -64,22 +68,32 @@ export default function Footer() {
           {/* Company */}
           <div>
             <h4 className="text-xs tracking-[0.2em] uppercase text-white font-medium mb-5">
-              Company
+              {t("company_title")}
             </h4>
             <ul className="space-y-3">
               <li>
                 <Link href="/about" className="text-sm text-vitem-400 hover:text-white transition-colors">
-                  About
+                  {t("link_about")}
+                </Link>
+              </li>
+              <li>
+                <Link href={"/farkimiz" as any} className="text-sm text-vitem-400 hover:text-white transition-colors">
+                  {t("link_farkimiz")}
                 </Link>
               </li>
               <li>
                 <Link href="/projects" className="text-sm text-vitem-400 hover:text-white transition-colors">
-                  Projects
+                  {t("link_projects")}
+                </Link>
+              </li>
+              <li>
+                <Link href={"/kampanyalar" as any} className="text-sm text-vitem-400 hover:text-white transition-colors">
+                  {t("link_kampanyalar")}
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="text-sm text-vitem-400 hover:text-white transition-colors">
-                  Contact
+                  {t("link_contact")}
                 </Link>
               </li>
             </ul>
@@ -88,17 +102,17 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h4 className="text-xs tracking-[0.2em] uppercase text-white font-medium mb-5">
-              Contact
+              {t("contact_title")}
             </h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-2.5 text-sm text-vitem-400">
                 <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-                <span>Hatay, Turkey</span>
+                <span>Ürgen Paşa Mah. 75. Yıl Bulvarı<br />Antakya / Hatay</span>
               </li>
               <li className="flex items-center gap-2.5 text-sm text-vitem-400">
                 <Phone className="w-4 h-4 shrink-0" />
-                <a href="tel:+903261234567" className="hover:text-white transition-colors">
-                  +90 326 123 45 67
+                <a href="tel:+903262218801" className="hover:text-white transition-colors">
+                  +90 326 221 88 01
                 </a>
               </li>
               <li className="flex items-center gap-2.5 text-sm text-vitem-400">
@@ -116,7 +130,7 @@ export default function Footer() {
       <div className="border-t border-vitem-800">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-vitem-500">
-            &copy; {new Date().getFullYear()} Vitem. All rights reserved.
+            &copy; {new Date().getFullYear()} Vitem. {t("rights")}
           </p>
           <p className="text-xs text-vitem-500">
             vitem.com.tr

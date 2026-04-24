@@ -76,3 +76,55 @@ export const contactSubmissions = sqliteTable("contact_submissions", {
 
 export type ContactSubmission = typeof contactSubmissions.$inferSelect;
 export type InsertContactSubmission = typeof contactSubmissions.$inferInsert;
+
+// Campaigns
+export const campaigns = sqliteTable("campaigns", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  title: text("title").notNull(),
+  titleEn: text("title_en"),
+  slug: text("slug").notNull().unique().default(""),
+  description: text("description"),
+  descriptionEn: text("description_en"),
+  imageUrl: text("image_url"),
+  gallery: text("gallery"), // JSON array of image URLs
+  badge: text("badge"),
+  discount: text("discount"),
+  validUntil: text("valid_until"),
+  type: text("type").notNull().default("current"), // current | exhibition
+  branch: text("branch"), // Şube bilgisi
+  modelColor: text("model_color"), // Model/Renk
+  details: text("details"), // Detaylar
+  shippingInfo: text("shipping_info"), // Nakliye ve montaj
+  originalPrice: text("original_price"),
+  discountedPrice: text("discounted_price"),
+  isActive: integer("is_active", { mode: "boolean" }).default(true),
+  sortOrder: integer("sort_order").default(0),
+  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
+});
+
+export type Campaign = typeof campaigns.$inferSelect;
+export type InsertCampaign = typeof campaigns.$inferInsert;
+
+// Projects portfolio
+export const projects = sqliteTable("projects", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name").notNull(),
+  nameEn: text("name_en"),
+  slug: text("slug").notNull().unique(),
+  location: text("location").notNull(),
+  year: text("year").notNull(),
+  category: text("category"),
+  categoryEn: text("category_en"),
+  description: text("description"),
+  descriptionEn: text("description_en"),
+  scope: text("scope"), // JSON array of scope items
+  scopeEn: text("scope_en"), // JSON array
+  featuredImage: text("featured_image"),
+  gallery: text("gallery"), // JSON array of image URLs
+  sortOrder: integer("sort_order").default(0),
+  isActive: integer("is_active", { mode: "boolean" }).default(true),
+  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
+});
+
+export type Project = typeof projects.$inferSelect;
+export type InsertProject = typeof projects.$inferInsert;

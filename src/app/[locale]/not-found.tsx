@@ -1,8 +1,11 @@
-import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { Link } from "@/i18n/routing";
+import { getTranslations } from "next-intl/server";
 import Footer from "@/sections/Footer";
 
-export default function NotFound() {
+export default async function NotFound() {
+  const t = await getTranslations("not_found");
+
   return (
     <main className="min-h-screen flex flex-col">
       <section className="flex-1 flex items-center justify-center pt-32 pb-20 bg-white">
@@ -11,17 +14,17 @@ export default function NotFound() {
             404
           </h1>
           <h2 className="mt-4 text-2xl sm:text-3xl font-sans font-light text-vitem-900 tracking-tight">
-            Page Not Found
+            {t("title")}
           </h2>
           <p className="mt-4 text-vitem-600 max-w-md mx-auto">
-            The page you are looking for does not exist or has been moved.
+            {t("description")}
           </p>
           <Link
             href="/"
             className="inline-flex items-center gap-2 mt-8 px-8 py-4 bg-vitem-900 text-white text-sm tracking-[0.15em] uppercase font-medium hover:bg-vitem-800 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Home
+            {t("back_home")}
           </Link>
         </div>
       </section>

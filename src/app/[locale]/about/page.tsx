@@ -37,7 +37,7 @@ export default function About() {
             className="aspect-[21/9] overflow-hidden bg-vitem-100"
           >
             <img
-              src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&q=80"
+              src="/images/interior.jpg"
               alt="Vitem atölyesi"
               className="w-full h-full object-cover"
               loading="lazy"

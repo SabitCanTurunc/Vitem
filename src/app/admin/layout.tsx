@@ -4,6 +4,10 @@ import "../globals.css";
 
 export const metadata = {
   title: "Vitem Admin",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+  },
 };
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

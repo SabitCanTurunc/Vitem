@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { getDb } from "../../../../api/queries/connection";
 import { campaigns } from "@db/schema";
 import CampaignsClient from "./CampaignsClient";

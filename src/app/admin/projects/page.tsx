@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { getDb } from "../../../../api/queries/connection";
 import { projects } from "@db/schema";
 import ProjectsAdminClient from "./ProjectsAdminClient";

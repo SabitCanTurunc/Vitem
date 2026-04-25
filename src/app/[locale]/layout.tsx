@@ -8,6 +8,14 @@ import "../globals.css";
 export const metadata = {
   title: "Vitem - Lüks Mobilya ve Tasarım",
   description: "Hatay'ın ustalığıyla dünya için tasarlanan lüks mutfak, kapı ve gardırop sistemleri.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/icon.png",
+  },
 };
 
 export default async function RootLayout({

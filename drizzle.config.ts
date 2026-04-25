@@ -1,16 +1,19 @@
 import "dotenv/config";
 import { defineConfig } from "drizzle-kit";
 
-const connectionString = process.env.DATABASE_URL;
-if (!connectionString) {
-  throw new Error("DATABASE_URL is required to run drizzle commands");
+const url = process.env.TURSO_DATABASE_URL || process.env.DATABASE_URL;
+if (!url) {
+  throw new Error("TURSO_DATABASE_URL veya DATABASE_URL gereklidir");
 }
+
+const authToken = process.env.TURSO_AUTH_TOKEN;
 
 export default defineConfig({
   schema: "./db/schema.ts",
   out: "./db/migrations",
-  dialect: "sqlite",
+  dialect: "turso",
   dbCredentials: {
-    url: connectionString,
+    url,
+    authToken,
   },
 });

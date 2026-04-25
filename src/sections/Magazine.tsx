@@ -30,7 +30,7 @@ export default function Magazine() {
       title: t("a1_title"),
       date: "12 Ekim 2025",
       category: t("a1_category"),
-      imageUrl: "https://images.unsplash.com/photo-1620626011761-996317b8d101?w=800&q=80",
+      imageUrl: "/images/magazine-1.jpg",
       slug: "selecting-fine-woods",
     },
     {
@@ -38,7 +38,7 @@ export default function Magazine() {
       title: t("a2_title"),
       date: "28 Eylül 2025",
       category: t("a2_category"),
-      imageUrl: "https://images.unsplash.com/photo-1556910103-1c02745aae4f?w=800&q=80",
+      imageUrl: "/images/magazine-2.jpg",
       slug: "minimalism-kitchen-design",
     },
     {
@@ -46,7 +46,7 @@ export default function Magazine() {
       title: t("a3_title"),
       date: "15 Eylül 2025",
       category: t("a3_category"),
-      imageUrl: "https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?w=800&q=80",
+      imageUrl: "/images/magazine-3.jpg",
       slug: "vitem-in-milan",
     },
   ];
@@ -75,15 +75,15 @@ export default function Magazine() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            <a
-              href="/magazine"
-              className="group inline-flex items-center gap-3 text-vitem-900 text-xs tracking-[0.15em] uppercase font-medium hover:gap-4 transition-all duration-300"
-            >
-              <span className="border-b border-vitem-400 pb-1 group-hover:border-vitem-900 transition-colors">
-                {t("cta")}
-              </span>
-              <ArrowRight className="w-4 h-4" />
-            </a>
+          <Link
+            href="/magazine"
+            className="group inline-flex items-center gap-3 text-vitem-900 text-xs tracking-[0.15em] uppercase font-medium hover:gap-4 transition-all duration-300"
+          >
+            <span className="border-b border-vitem-400 pb-1 group-hover:border-vitem-900 transition-colors">
+              {t("cta")}
+            </span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
           </motion.div>
         </div>
 
@@ -97,7 +97,7 @@ export default function Magazine() {
         >
           {articles.map((article) => (
             <motion.article key={article.id} variants={itemVariants} className="group cursor-pointer">
-              <div className="block">
+              <Link href={`/magazine/${article.slug}` as any} className="block">
                 <div className="relative aspect-[4/3] overflow-hidden bg-vitem-100 mb-6">
                   <img
                     src={article.imageUrl}
@@ -114,7 +114,7 @@ export default function Magazine() {
                 <h3 className="text-xl sm:text-2xl font-serif font-light text-vitem-900 leading-snug group-hover:text-vitem-500 transition-colors duration-300">
                   {article.title}
                 </h3>
-              </div>
+              </Link>
             </motion.article>
           ))}
         </motion.div>

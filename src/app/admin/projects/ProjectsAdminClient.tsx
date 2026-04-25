@@ -1,38 +1,55 @@
 "use client";
 import { useState } from "react";
-import { Plus, Trash2, FolderOpen, MapPin, Calendar } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Plus, Trash2, Edit, FolderOpen, MapPin, Calendar, X, Loader2 } from "lucide-react";
 import { createProject, deleteProject } from "../../../../api/actions/adminActions";
+import { motion, AnimatePresence } from "framer-motion";
 import type { Project } from "@db/schema";
+import ImageUpload from "@/components/ImageUpload";
+import GalleryUpload from "@/components/GalleryUpload";
 
 export default function ProjectsAdminClient({ projects }: { projects: Project[] }) {
-  const [showForm, setShowForm] = useState(false);
-  const [formStatus, setFormStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [deletingId, setDeletingId] = useState<number | null>(null);
+  const [imageVal, setImageVal] = useState("");
+  const [galleryVal, setGalleryVal] = useState<string[]>([]);
+
+  function openCreate() {
+    setImageVal(""); setGalleryVal([]);
+    setIsModalOpen(true);
+  }
 
   async function handleCreate(formData: FormData) {
-    setFormStatus("saving");
+    setIsSubmitting(true);
     const result = await createProject(formData);
-    setFormStatus(result.success ? "saved" : "error");
+    setIsSubmitting(false);
     if (result.success) {
-      setShowForm(false);
-      setFormStatus("idle");
+      setIsModalOpen(false);
+      router.refresh();
+    } else {
+      alert("Hata oluştu.");
     }
   }
 
   async function handleDelete(id: number) {
     if (!confirm("Bu projeyi silmek istediğinize emin misiniz?")) return;
+    setDeletingId(id);
     await deleteProject(id);
+    setDeletingId(null);
+    router.refresh();
   }
 
   return (
     <div>
-      {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-2xl font-serif font-light text-vitem-900">Projeler</h1>
           <p className="text-sm text-vitem-500 mt-1">{projects.length} toplam proje</p>
         </div>
         <button
-          onClick={() => setShowForm(!showForm)}
+          onClick={openCreate}
           className="flex items-center gap-2 bg-vitem-900 text-white px-5 py-2.5 text-xs uppercase tracking-widest hover:bg-vitem-800 transition-colors"
         >
           <Plus className="w-3.5 h-3.5" />
@@ -40,56 +57,6 @@ export default function ProjectsAdminClient({ projects }: { projects: Project[] 
         </button>
       </div>
 
-      {/* Create Form */}
-      {showForm && (
-        <form
-          action={handleCreate}
-          className="bg-white border border-vitem-200 p-8 mb-8 space-y-6"
-        >
-          <h2 className="text-lg font-light text-vitem-900 border-b border-vitem-100 pb-4">Yeni Proje Ekle</h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <Field label="Proje Adı (TR)" name="name" required />
-            <Field label="Proje Adı (EN)" name="nameEn" />
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <Field label="Konum" name="location" required />
-            <Field label="Yıl" name="year" required />
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <Field label="Kategori (TR)" name="category" />
-            <Field label="Kategori (EN)" name="categoryEn" />
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <TextareaField label="Açıklama (TR)" name="description" />
-            <TextareaField label="Açıklama (EN)" name="descriptionEn" />
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <Field label="Öne Çıkan Görsel URL" name="featuredImage" />
-            <Field label="Sıra" name="sortOrder" type="number" />
-          </div>
-
-          <div className="flex items-center gap-4 pt-4 border-t border-vitem-100">
-            <button
-              type="submit"
-              disabled={formStatus === "saving"}
-              className="bg-vitem-900 text-white px-6 py-2.5 text-xs uppercase tracking-widest hover:bg-vitem-800 transition-colors disabled:opacity-50"
-            >
-              {formStatus === "saving" ? "Kaydediliyor..." : "Kaydet"}
-            </button>
-            <button
-              type="button"
-              onClick={() => setShowForm(false)}
-              className="text-xs uppercase tracking-widest text-vitem-500 hover:text-vitem-900 transition-colors"
-            >
-              İptal
-            </button>
-            {formStatus === "error" && <span className="text-red-500 text-xs">Hata oluştu.</span>}
-          </div>
-        </form>
-      )}
-
-      {/* Projects List */}
       {projects.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project) => (
@@ -112,25 +79,15 @@ export default function ProjectsAdminClient({ projects }: { projects: Project[] 
                   <h3 className="text-sm font-medium text-vitem-900 leading-tight">{project.name}</h3>
                   <button
                     onClick={() => handleDelete(project.id)}
-                    className="p-1.5 text-vitem-400 hover:text-red-600 transition-colors shrink-0"
-                    aria-label="Sil"
+                    disabled={deletingId === project.id}
+                    className="p-1.5 text-vitem-400 hover:text-red-600 transition-colors shrink-0 disabled:opacity-40"
                   >
-                    <Trash2 className="w-3.5 h-3.5" />
+                    {deletingId === project.id ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Trash2 className="w-3.5 h-3.5" />}
                   </button>
                 </div>
                 <div className="space-y-1 text-xs text-vitem-500">
-                  {project.location && (
-                    <div className="flex items-center gap-1.5">
-                      <MapPin className="w-3 h-3" />
-                      {project.location}
-                    </div>
-                  )}
-                  {project.year && (
-                    <div className="flex items-center gap-1.5">
-                      <Calendar className="w-3 h-3" />
-                      {project.year}
-                    </div>
-                  )}
+                  {project.location && <div className="flex items-center gap-1.5"><MapPin className="w-3 h-3" />{project.location}</div>}
+                  {project.year && <div className="flex items-center gap-1.5"><Calendar className="w-3 h-3" />{project.year}</div>}
                 </div>
                 {project.category && (
                   <span className="mt-3 inline-block text-[10px] uppercase tracking-widest border border-vitem-200 px-2 py-0.5 text-vitem-500">
@@ -142,48 +99,85 @@ export default function ProjectsAdminClient({ projects }: { projects: Project[] 
           ))}
         </div>
       ) : (
-        !showForm && (
-          <div className="text-center py-20 text-vitem-400">
-            <FolderOpen className="w-10 h-10 mx-auto mb-4 opacity-40" />
-            <p className="text-sm">Henüz proje eklenmedi.</p>
-          </div>
-        )
+        <div className="text-center py-20 text-vitem-400">
+          <FolderOpen className="w-10 h-10 mx-auto mb-4 opacity-40" />
+          <p className="text-sm">Henüz proje eklenmedi.</p>
+        </div>
       )}
+
+      <AnimatePresence>
+        {isModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsModalOpen(false)} className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-xl"
+            >
+              <div className="sticky top-0 bg-white z-10 flex items-center justify-between px-8 py-5 border-b border-vitem-100">
+                <h2 className="text-xl font-serif font-light text-vitem-900">Yeni Proje</h2>
+                <button onClick={() => setIsModalOpen(false)} className="text-vitem-400 hover:text-vitem-900 p-1"><X className="w-5 h-5" /></button>
+              </div>
+
+              <form action={handleCreate} className="px-8 py-6 space-y-6">
+                <div className="grid grid-cols-2 gap-6">
+                  <F label="Proje Adı (TR) *" name="name" required />
+                  <F label="Proje Adı (EN)" name="nameEn" />
+                </div>
+                <div className="grid grid-cols-2 gap-6">
+                  <F label="Konum *" name="location" required />
+                  <F label="Yıl *" name="year" required />
+                </div>
+                <div className="grid grid-cols-2 gap-6">
+                  <F label="Kategori (TR)" name="category" />
+                  <F label="Kategori (EN)" name="categoryEn" />
+                </div>
+                <div className="grid grid-cols-2 gap-6">
+                  <TA label="Açıklama (TR)" name="description" />
+                  <TA label="Açıklama (EN)" name="descriptionEn" />
+                </div>
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="space-y-1.5">
+                    <ImageUpload label="Öne Çıkan Görsel" value={imageVal} onChange={setImageVal} />
+                    <input type="hidden" name="featuredImage" value={imageVal} />
+                  </div>
+                  <F label="Sıra" name="sortOrder" type="number" />
+                </div>
+                <div className="space-y-1.5">
+                  <GalleryUpload label="Galeri" value={galleryVal} onChange={setGalleryVal} />
+                  <input type="hidden" name="gallery" value={JSON.stringify(galleryVal)} />
+                </div>
+
+                <div className="flex justify-end gap-3 pt-4 border-t border-vitem-100">
+                  <button type="button" onClick={() => setIsModalOpen(false)} className="px-5 py-2.5 text-sm text-vitem-500 hover:text-vitem-900">İptal</button>
+                  <button type="submit" disabled={isSubmitting} className="bg-vitem-900 text-white px-7 py-2.5 text-xs uppercase tracking-widest hover:bg-vitem-800 disabled:opacity-50">
+                    {isSubmitting ? "Kaydediliyor..." : "Kaydet"}
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
-function Field({
-  label,
-  name,
-  required,
-  type = "text",
-}: {
-  label: string;
-  name: string;
-  required?: boolean;
-  type?: string;
-}) {
+function F({ label, name, required, type = "text" }: { label: string; name: string; required?: boolean; type?: string }) {
   return (
-    <div className="space-y-1">
+    <div className="space-y-1.5">
       <label className="text-xs uppercase tracking-widest text-vitem-500">{label}</label>
-      <input
-        type={type}
-        name={name}
-        required={required}
+      <input type={type} name={name} required={required}
         className="w-full border-b border-vitem-200 py-2 text-sm text-vitem-900 focus:outline-none focus:border-vitem-900 transition-colors bg-transparent"
       />
     </div>
   );
 }
 
-function TextareaField({ label, name }: { label: string; name: string }) {
+function TA({ label, name }: { label: string; name: string }) {
   return (
-    <div className="space-y-1">
+    <div className="space-y-1.5">
       <label className="text-xs uppercase tracking-widest text-vitem-500">{label}</label>
-      <textarea
-        name={name}
-        rows={3}
+      <textarea name={name} rows={3}
         className="w-full border-b border-vitem-200 py-2 text-sm text-vitem-900 focus:outline-none focus:border-vitem-900 transition-colors bg-transparent resize-none"
       />
     </div>

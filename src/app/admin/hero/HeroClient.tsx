@@ -4,10 +4,12 @@ import { useState } from "react";
 import { Plus, Edit, Trash2, X } from "lucide-react";
 import { createHeroSlide } from "../../../../api/actions/adminActions";
 import { motion, AnimatePresence } from "framer-motion";
+import ImageUpload from "@/components/ImageUpload";
 
 export default function HeroClient({ slides }: { slides: any[] }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [imageVal, setImageVal] = useState("");
 
   async function handleSubmit(formData: FormData) {
     setIsSubmitting(true);
@@ -15,6 +17,7 @@ export default function HeroClient({ slides }: { slides: any[] }) {
     setIsSubmitting(false);
     if (result.success) {
       setIsModalOpen(false);
+      setImageVal("");
     } else {
       alert(result.error);
     }
@@ -116,8 +119,8 @@ export default function HeroClient({ slides }: { slides: any[] }) {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-widest text-vitem-500">Image URL</label>
-                  <input required name="imageUrl" className="w-full bg-vitem-50 border border-vitem-200 rounded-md py-2.5 px-4 focus:ring-1 focus:ring-vitem-900 outline-none transition-all" placeholder="High-res wallpaper link" />
+                  <ImageUpload label="Görsel (min. 1920×1080 önerilir)" value={imageVal} onChange={setImageVal} />
+                  <input type="hidden" name="imageUrl" value={imageVal} />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">

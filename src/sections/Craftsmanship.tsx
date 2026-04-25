@@ -26,7 +26,7 @@ export default function Craftsmanship() {
         className="absolute inset-0 w-full h-[140%] -top-[20%]"
       >
         <img
-          src="https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=1920&q=80"
+          src="/images/craftsmanship-bg.jpg"
           alt="Vitem Craftsmanship"
           className="w-full h-full object-cover"
           loading="lazy"

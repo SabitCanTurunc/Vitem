@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { getAllCategories } from "../../../../api/queries/products";
 import CollectionsClient from "./CollectionsClient";
 import Footer from "@/sections/Footer";

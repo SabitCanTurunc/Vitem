@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Plus, Edit, Trash2, X, Languages, Loader2 } from "lucide-react";
 import { createCategory, deleteCategory, updateCategory } from "../../../../api/actions/adminActions";
 import { motion, AnimatePresence } from "framer-motion";
+import ImageUpload from "@/components/ImageUpload";
 
 interface Category {
   id: number;
@@ -52,11 +53,12 @@ export default function CategoriesClient({ initialCategories }: { initialCategor
   const [nameEnVal, setNameEnVal] = useState("");
   const [descVal, setDescVal] = useState("");
   const [descEnVal, setDescEnVal] = useState("");
+  const [imageVal, setImageVal] = useState("");
 
   function openCreate() {
     setModalMode("create");
     setEditTarget(null);
-    setNameVal(""); setNameEnVal(""); setDescVal(""); setDescEnVal("");
+    setNameVal(""); setNameEnVal(""); setDescVal(""); setDescEnVal(""); setImageVal("");
     setIsModalOpen(true);
   }
 
@@ -67,6 +69,7 @@ export default function CategoriesClient({ initialCategories }: { initialCategor
     setNameEnVal(cat.nameEn ?? "");
     setDescVal(cat.description ?? "");
     setDescEnVal(cat.descriptionEn ?? "");
+    setImageVal(cat.imageUrl ?? "");
     setIsModalOpen(true);
   }
 
@@ -211,7 +214,10 @@ export default function CategoriesClient({ initialCategories }: { initialCategor
                   <TextareaFormField label="Açıklama (EN)" name="descriptionEn" value={descEnVal} onChange={setDescEnVal} />
                 </div>
                 <div className="grid grid-cols-2 gap-6">
-                  <FormField label="Görsel URL" name="imageUrl" defaultValue={editTarget?.imageUrl ?? ""} />
+                  <div className="space-y-1.5">
+                    <ImageUpload label="Görsel" value={imageVal} onChange={setImageVal} />
+                    <input type="hidden" name="imageUrl" value={imageVal} />
+                  </div>
                   <FormField label="Sıra" name="sortOrder" type="number" defaultValue={String(editTarget?.sortOrder ?? 0)} />
                 </div>
 

@@ -23,10 +23,10 @@ const projectsData: Record<string, {
       "İstanbul Boğazı manzaralı bu özel villa projesinde modern minimalist çizgiler ve doğal malzeme seçimleriyle benzersiz bir yaşam deneyimi yaratıldı. Açık plan mutfak ve yaşam alanı tasarımı ile aile dinamiklerine uygun, ferah ve şık bir ortam oluşturuldu.",
     scope: ["Ada mutfak tasarımı", "Özel ankastre entegrasyonu", "Banyo mobilyası", "Yaşam alanı dolapları"],
     images: [
-      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&q=80",
-      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&q=80",
-      "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1200&q=80",
-      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&q=80",
+      "/images/hero-fallback-1.jpg",
+      "/images/kitchen.jpg",
+      "/images/bathroom.jpg",
+      "/images/interior.jpg",
     ],
   },
   "aegean-retreat": {
@@ -38,9 +38,9 @@ const projectsData: Record<string, {
       "Ege kıyısında konumlanan bu tatil villasında deniz mavisi ve beyaz tonların hakim olduğu sade ve şık bir iç mekan anlayışı benimsendi. Mutfak ve banyo projelerinde su dirençli malzemeler ve deniz estetiğine uygun renk paleti kullanıldı.",
     scope: ["Sahil vilası mutfak tasarımı", "İkili banyo projesi", "Özel renk paleti danışmanlığı"],
     images: [
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80",
-      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&q=80",
-      "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1200&q=80",
+      "/images/hero-fallback-2.jpg",
+      "/images/kitchen.jpg",
+      "/images/bathroom.jpg",
     ],
   },
   "urban-minimalist": {
@@ -52,8 +52,8 @@ const projectsData: Record<string, {
       "Başkentin kalbindeki bu modern daire projesinde gri-beyaz renk paleti ve mat kapak seçimleriyle minimalist bir estetik yakalandı. Sınırlı alan içinde maksimum depolama çözümü sunan akıllı tasarım anlayışı benimsendi.",
     scope: ["Kompakt mutfak çözümü", "Gizli depolama sistemleri", "Ankastre fırın ve bulaşık makinesi entegrasyonu"],
     images: [
-      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&q=80",
-      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&q=80",
+      "/images/interior.jpg",
+      "/images/kitchen.jpg",
     ],
   },
   "heritage-estate": {
@@ -71,10 +71,10 @@ const projectsData: Record<string, {
       "Özel ahşap işçiliği",
     ],
     images: [
-      "https://images.unsplash.com/photo-1556910103-1c02745aae4f?w=1200&q=80",
-      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&q=80",
-      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&q=80",
-      "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1200&q=80",
+      "/images/magazine-2.jpg",
+      "/images/interior.jpg",
+      "/images/kitchen.jpg",
+      "/images/bathroom.jpg",
     ],
   },
 };

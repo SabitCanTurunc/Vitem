@@ -63,7 +63,7 @@ export default function FeaturedCollections({ categories }: { categories: Catego
                   className="group block relative overflow-hidden aspect-[4/5] bg-vitem-100"
                 >
                   <img
-                    src={category.imageUrl ?? "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600&q=80"}
+                    src={category.imageUrl ?? "/images/hero-fallback-1.jpg"}
                     alt={displayName}
                     className="w-full h-full object-cover transition-transform duration-[1000ms] ease-out group-hover:scale-110"
                     loading="lazy"

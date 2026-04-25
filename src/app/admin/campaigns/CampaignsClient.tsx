@@ -6,6 +6,8 @@ import { Plus, Edit, Trash2, X, Languages, Loader2, Tag, Package } from "lucide-
 import { createCampaign, deleteCampaign, updateCampaign } from "../../../../api/actions/adminActions";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Campaign } from "@db/schema";
+import ImageUpload from "@/components/ImageUpload";
+import GalleryUpload from "@/components/GalleryUpload";
 
 type ModalMode = "create" | "edit";
 
@@ -30,10 +32,13 @@ export default function CampaignsClient({ campaigns }: { campaigns: Campaign[] }
   const [titleEnVal, setTitleEnVal] = useState("");
   const [descVal, setDescVal] = useState("");
   const [descEnVal, setDescEnVal] = useState("");
+  const [imageVal, setImageVal] = useState("");
+  const [galleryVal, setGalleryVal] = useState<string[]>([]);
 
   function openCreate() {
     setModalMode("create"); setEditTarget(null);
     setTitleVal(""); setTitleEnVal(""); setDescVal(""); setDescEnVal("");
+    setImageVal(""); setGalleryVal([]);
     setIsModalOpen(true);
   }
 
@@ -41,6 +46,8 @@ export default function CampaignsClient({ campaigns }: { campaigns: Campaign[] }
     setModalMode("edit"); setEditTarget(c);
     setTitleVal(c.title); setTitleEnVal(c.titleEn ?? "");
     setDescVal(c.description ?? ""); setDescEnVal(c.descriptionEn ?? "");
+    setImageVal(c.imageUrl ?? "");
+    try { setGalleryVal(c.gallery ? JSON.parse(c.gallery) : []); } catch { setGalleryVal([]); }
     setIsModalOpen(true);
   }
 
@@ -127,7 +134,10 @@ export default function CampaignsClient({ campaigns }: { campaigns: Campaign[] }
                   <TA label="Açıklama (EN)" name="descriptionEn" value={descEnVal} onChange={setDescEnVal} />
                 </div>
                 <div className="grid grid-cols-2 gap-6">
-                  <F label="Görsel URL" name="imageUrl" defaultValue={editTarget?.imageUrl ?? ""} />
+                  <div className="space-y-1.5">
+                    <ImageUpload label="Görsel" value={imageVal} onChange={setImageVal} />
+                    <input type="hidden" name="imageUrl" value={imageVal} />
+                  </div>
                   <div className="space-y-1.5">
                     <label className="text-xs uppercase tracking-widest text-vitem-500">Tür</label>
                     <select name="type" defaultValue={editTarget?.type ?? "current"} className="w-full border-b border-vitem-200 py-2 text-sm text-vitem-900 focus:outline-none focus:border-vitem-900 bg-transparent">
@@ -154,6 +164,10 @@ export default function CampaignsClient({ campaigns }: { campaigns: Campaign[] }
                   <F label="Son Tarih" name="validUntil" defaultValue={editTarget?.validUntil ?? ""} />
                 </div>
                 <F label="Sıra" name="sortOrder" type="number" defaultValue={String(editTarget?.sortOrder ?? 0)} />
+                <div className="space-y-1.5">
+                  <GalleryUpload label="Galeri" value={galleryVal} onChange={setGalleryVal} />
+                  <input type="hidden" name="gallery" value={JSON.stringify(galleryVal)} />
+                </div>
 
                 <div className="flex justify-end gap-3 pt-4 border-t border-vitem-100">
                   <button type="button" onClick={() => setIsModalOpen(false)} className="px-5 py-2.5 text-sm text-vitem-500 hover:text-vitem-900">İptal</button>

@@ -6,10 +6,10 @@ import { ArrowRight } from "lucide-react";
 import Footer from "@/sections/Footer";
 
 const projects = [
-  { id: 1, slug: "villa-bosphorus", name: "Villa Bosphorus", location: "İstanbul", year: "2025", category: "Mutfak & Yaşam Alanları", imageUrl: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&q=80" },
-  { id: 2, slug: "aegean-retreat", name: "Aegean Retreat", location: "Bodrum", year: "2024", category: "Mutfak & Banyo", imageUrl: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80" },
-  { id: 3, slug: "urban-minimalist", name: "Urban Minimalist", location: "Ankara", year: "2024", category: "Mutfak", imageUrl: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&q=80" },
-  { id: 4, slug: "heritage-estate", name: "Heritage Estate", location: "Hatay", year: "2023", category: "Mutfak & Banyo & Yaşam", imageUrl: "https://images.unsplash.com/photo-1556910103-1c02745aae4f?w=1200&q=80" },
+  { id: 1, slug: "villa-bosphorus", name: "Villa Bosphorus", location: "İstanbul", year: "2025", category: "Mutfak & Yaşam Alanları", imageUrl: "/images/hero-fallback-1.jpg" },
+  { id: 2, slug: "aegean-retreat", name: "Aegean Retreat", location: "Bodrum", year: "2024", category: "Mutfak & Banyo", imageUrl: "/images/hero-fallback-2.jpg" },
+  { id: 3, slug: "urban-minimalist", name: "Urban Minimalist", location: "Ankara", year: "2024", category: "Mutfak", imageUrl: "/images/interior.jpg" },
+  { id: 4, slug: "heritage-estate", name: "Heritage Estate", location: "Hatay", year: "2023", category: "Mutfak & Banyo & Yaşam", imageUrl: "/images/magazine-2.jpg" },
 ];
 
 export default function Projects() {

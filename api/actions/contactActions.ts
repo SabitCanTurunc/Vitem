@@ -17,18 +17,24 @@ export async function submitContactForm(formData: FormData) {
     const data = {
       name: formData.get("name") as string,
       email: formData.get("email") as string,
-      phone: formData.get("phone") as string,
+      phone: (formData.get("phone") as string | null) || undefined,
       message: formData.get("message") as string,
-      formType: formData.get("formType") as string || "contact",
+      formType: (formData.get("formType") as string | null) || "contact",
     };
 
     const parsed = formSchema.parse(data);
 
-    await getDb().insert(contactSubmissions).values(parsed);
+    await getDb().insert(contactSubmissions).values({
+      name: parsed.name,
+      email: parsed.email,
+      phone: parsed.phone || null,
+      message: parsed.message,
+      formType: parsed.formType,
+    });
 
     return { success: true };
   } catch (error) {
     console.error("Form submission error:", error);
-    return { success: false, error: "Validation or server error" };
+    return { success: false, error: String(error) };
   }
 }

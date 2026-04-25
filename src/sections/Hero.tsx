@@ -2,44 +2,38 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ArrowRight } from "lucide-react";
-import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/routing";
-import type { HeroSlide } from "@db/schema";
 
-export default function Hero({ slides }: { slides: HeroSlide[] }) {
-  const t = useTranslations("hero_fallback");
-  const locale = useLocale();
+interface HeroSlideDisplay {
+  id: number;
+  title: string;
+  subtitle: string;
+  imageUrl: string;
+  linkText: string;
+  linkHref: string;
+}
+
+export default function Hero({ slides }: { slides: HeroSlideDisplay[] }) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const fallbackSlides = [
+  const heroSlides = slides.length > 0 ? slides : [
     {
       id: -1,
-      title: t("s1_title"),
-      subtitle: t("s1_subtitle"),
-      imageUrl: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920&q=80",
-      linkText: t("s1_link"),
+      title: "Hatay'da Üretildi. Dünya İçin Tasarlandı.",
+      subtitle: "Anadolu mirasını çağdaş lüksle harmanlayan özel iç mekan tasarımları",
+      imageUrl: "/images/hero-fallback-1.jpg",
+      linkText: "Koleksiyonu Keşfet",
       linkHref: "/collections",
     },
     {
       id: -2,
-      title: t("s2_title"),
-      subtitle: t("s2_subtitle"),
-      imageUrl: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80",
-      linkText: t("s2_link"),
+      title: "Mimari ile Yaşamın Buluştuğu Yer",
+      subtitle: "Özenle işlenmiş mutfaklar, banyolar ve yaşam alanları",
+      imageUrl: "/images/hero-fallback-2.jpg",
+      linkText: "Daha Fazla Keşfet",
       linkHref: "/collections",
     },
   ];
-
-  const heroSlides = slides.length > 0
-    ? slides.map((s) => ({
-        id: s.id,
-        title: locale === "en" && s.titleEn ? s.titleEn : s.title,
-        subtitle: locale === "en" && s.subtitleEn ? s.subtitleEn : (s.subtitle ?? ""),
-        imageUrl: s.imageUrl,
-        linkText: locale === "en" && s.linkTextEn ? s.linkTextEn : (s.linkText ?? t("s1_link")),
-        linkHref: s.linkHref ?? "/collections",
-      }))
-    : fallbackSlides;
 
   useEffect(() => {
     if (heroSlides.length <= 1) return;

@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { getActiveCampaigns } from "../../../../../api/queries/products";
 import { getTranslations } from "next-intl/server";
 import { getLocale } from "next-intl/server";

@@ -20,7 +20,7 @@ export default function Philosophy() {
             className="relative aspect-[4/5] lg:aspect-[3/4] overflow-hidden bg-vitem-100"
           >
             <img
-              src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80"
+              src="/images/philosophy-side.jpg"
               alt="Vitem craftsmanship"
               className="w-full h-full object-cover"
               loading="lazy"

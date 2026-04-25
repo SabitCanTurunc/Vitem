@@ -70,7 +70,7 @@ export default function FeaturedProducts({ products }: { products: (Product & { 
                 >
                   <div className="relative overflow-hidden aspect-[3/4] bg-vitem-100 mb-4">
                     <img
-                      src={product.featuredImage ?? "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=400&q=80"}
+                      src={product.featuredImage ?? "/images/hero-fallback-1.jpg"}
                       alt={displayName}
                       className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                       loading="lazy"

@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { Plus, Edit, Trash2, X, Languages, Loader2 } from "lucide-react";
 import { createProduct, deleteProduct, updateProduct } from "../../../../api/actions/adminActions";
 import { motion, AnimatePresence } from "framer-motion";
+import ImageUpload from "@/components/ImageUpload";
+import GalleryUpload from "@/components/GalleryUpload";
 
 interface Product {
   id: number;
@@ -48,10 +50,13 @@ export default function ProductsClient({ prods, categories }: { prods: Product[]
   const [descEnVal, setDescEnVal] = useState("");
   const [shortVal, setShortVal] = useState("");
   const [shortEnVal, setShortEnVal] = useState("");
+  const [imageVal, setImageVal] = useState("");
+  const [galleryVal, setGalleryVal] = useState<string[]>([]);
 
   function openCreate() {
     setModalMode("create"); setEditTarget(null);
     setNameVal(""); setNameEnVal(""); setDescVal(""); setDescEnVal(""); setShortVal(""); setShortEnVal("");
+    setImageVal(""); setGalleryVal([]);
     setIsModalOpen(true);
   }
 
@@ -59,6 +64,7 @@ export default function ProductsClient({ prods, categories }: { prods: Product[]
     setModalMode("edit"); setEditTarget(p);
     setNameVal(p.name); setNameEnVal(p.nameEn ?? "");
     setDescVal(""); setDescEnVal(""); setShortVal(""); setShortEnVal("");
+    setImageVal(""); setGalleryVal([]);
     setIsModalOpen(true);
   }
 
@@ -185,9 +191,13 @@ export default function ProductsClient({ prods, categories }: { prods: Product[]
                     </select>
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-xs uppercase tracking-widest text-vitem-500">Görsel URL</label>
-                    <input name="featuredImage" className="w-full border-b border-vitem-200 py-2 text-sm text-vitem-900 focus:outline-none focus:border-vitem-900 bg-transparent" />
+                    <ImageUpload label="Öne Çıkan Görsel" value={imageVal} onChange={setImageVal} />
+                    <input type="hidden" name="featuredImage" value={imageVal} />
                   </div>
+                </div>
+                <div className="space-y-1.5">
+                  <GalleryUpload label="Galeri" value={galleryVal} onChange={setGalleryVal} />
+                  <input type="hidden" name="gallery" value={JSON.stringify(galleryVal)} />
                 </div>
                 <div className="grid grid-cols-2 gap-6">
                   <div className="flex items-center gap-2 pt-4">

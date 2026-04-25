@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { getDb } from "../../../api/queries/connection";
 import { categories, products, heroSlides, contactSubmissions } from "@db/schema";
 import { count } from "drizzle-orm";

@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { getDb } from "../../../../api/queries/connection";
 import { contactSubmissions } from "@db/schema";
 import { desc } from "drizzle-orm";

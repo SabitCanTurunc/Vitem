@@ -67,7 +67,7 @@ export default function CollectionsClient({ categories }: { categories: any[] })
                 >
                   <div className={`${index === 0 ? "aspect-[21/9]" : "aspect-[16/10]"}`}>
                     <img
-                      src={category.imageUrl ?? "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80"}
+                      src={category.imageUrl ?? "/images/hero-fallback-1.jpg"}
                       alt={category.name}
                       className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                       loading="lazy"

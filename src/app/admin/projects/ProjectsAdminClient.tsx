@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Plus, Trash2, Edit, FolderOpen, MapPin, Calendar, X, Loader2 } from "lucide-react";
+import { Plus, Trash2, FolderOpen, MapPin, Calendar, X, Loader2 } from "lucide-react";
 import { createProject, deleteProject } from "../../../../api/actions/adminActions";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Project } from "@db/schema";

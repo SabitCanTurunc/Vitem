@@ -1,15 +1,13 @@
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 import { getActiveCampaigns } from "../../../../../api/queries/products";
-import { getTranslations } from "next-intl/server";
 import { getLocale } from "next-intl/server";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { Tag, Calendar, ArrowRight } from "lucide-react";
 
 export default async function GuncelKampanyalarPage() {
-  const [campaigns, t, locale] = await Promise.all([
+  const [campaigns, locale] = await Promise.all([
     getActiveCampaigns("current"),
-    getTranslations("kampanyalar"),
     getLocale(),
   ]);
 

@@ -43,7 +43,7 @@ function DropdownMenu({
   );
 }
 
-function NavItemEl({ item, activeLocale }: { item: NavItem; activeLocale: string }) {
+function NavItemEl({ item, activeLocale: _activeLocale }: { item: NavItem; activeLocale: string }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 

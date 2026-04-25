@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 
 export default function ProductDetailClient({ product, categorySlug }: { product: any, categorySlug: string }) {
   const [selectedImage, setSelectedImage] = useState(0);

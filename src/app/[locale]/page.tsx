@@ -1,4 +1,4 @@
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 import Hero from "@/sections/Hero";
 import FeaturedCollections from "@/sections/FeaturedCollections";
 import FeaturedProducts from "@/sections/FeaturedProducts";

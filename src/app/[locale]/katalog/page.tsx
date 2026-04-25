@@ -2,63 +2,37 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { Download, Eye, BookOpen, Send, CheckCircle } from "lucide-react";
+import { Download, Eye, Send, CheckCircle } from "lucide-react";
 import Footer from "@/sections/Footer";
+import { submitContactForm } from "../../../../api/actions/contactActions";
 
-const catalogs = [
-  {
-    id: 1,
-    title: "Vitem 2025 — Ana Katalog",
-    description: "Mutfak, banyo ve yaşam alanları için tüm koleksiyonlarımızı içeren kapsamlı katalog.",
-    cover: "/images/kitchen.jpg",
-    pages: 124,
-    size: "28 MB",
-    year: "2025",
-    category: "Genel",
-  },
-  {
-    id: 2,
-    title: "Vitem Mutfak Koleksiyonu 2025",
-    description: "Tüm mutfak modellerinin detaylı görsel ve teknik özelliklerini içerir.",
-    cover: "/images/kitchen.jpg",
-    pages: 68,
-    size: "18 MB",
-    year: "2025",
-    category: "Mutfak",
-  },
-  {
-    id: 3,
-    title: "Vitem Banyo Koleksiyonu 2025",
-    description: "Estetik ve fonksiyonelliği bir araya getiren banyo çözümlerimizin katalogu.",
-    cover: "/images/bathroom.jpg",
-    pages: 44,
-    size: "12 MB",
-    year: "2025",
-    category: "Banyo",
-  },
-  {
-    id: 4,
-    title: "Ankastre Ürünler 2025",
-    description: "Franke, Siemens ve Smeg iş birliğiyle sunduğumuz ankastre ürün gamı.",
-    cover: "/images/kitchen.jpg",
-    pages: 36,
-    size: "10 MB",
-    year: "2025",
-    category: "Ankastre",
-  },
-];
+const CATALOG_PDF = "https://www.vitem.com.tr/media/vitem_catalog_tr.pdf";
+
+const catalog = {
+  title: "Vitem — Ana Katalog",
+  description: "Mutfak, banyo ve yaşam alanları için tüm koleksiyonlarımızı içeren kapsamlı katalog.",
+  cover: "/images/kitchen.jpg",
+  year: "2025",
+  category: "Genel",
+};
 
 export default function KatalogPage() {
   const t = useTranslations("katalog");
-  const [requestStatus, setRequestStatus] = useState<"idle" | "submitting" | "success">("idle");
-  const [requestEmail, setRequestEmail] = useState("");
+  const [requestStatus, setRequestStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [requestName, setRequestName] = useState("");
+  const [requestEmail, setRequestEmail] = useState("");
+  const [address, setAddress] = useState("");
 
   async function handleRequest(e: React.FormEvent) {
     e.preventDefault();
     setRequestStatus("submitting");
-    await new Promise((r) => setTimeout(r, 1200));
-    setRequestStatus("success");
+    const fd = new FormData();
+    fd.append("name", requestName);
+    fd.append("email", requestEmail);
+    fd.append("message", `Katalog talebi — Posta adresi: ${address}`);
+    fd.append("formType", "catalog");
+    const res = await submitContactForm(fd);
+    setRequestStatus(res?.success ? "success" : "error");
   }
 
   return (
@@ -84,63 +58,70 @@ export default function KatalogPage() {
         </div>
       </section>
 
-      {/* Catalog Grid */}
+      {/* Catalog */}
       <section className="py-16 sm:py-20 bg-vitem-50">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {catalogs.map((catalog, index) => (
-              <motion.article
-                key={catalog.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white border border-vitem-200 group hover:shadow-lg transition-shadow duration-500"
-              >
-                {/* Cover */}
-                <div className="relative aspect-[3/4] overflow-hidden bg-vitem-100">
-                  <img
-                    src={catalog.cover}
-                    alt={catalog.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <span className="text-[10px] tracking-widest uppercase text-white/80 bg-black/30 px-2 py-1">
-                      {catalog.category}
-                    </span>
-                  </div>
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-vitem-950/80 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <button className="flex flex-col items-center gap-2 text-white hover:text-vitem-300 transition-colors">
-                      <div className="w-10 h-10 border border-white/30 flex items-center justify-center">
-                        <Eye className="w-4 h-4" />
-                      </div>
-                      <span className="text-[9px] tracking-widest uppercase">{t("view_btn")}</span>
-                    </button>
-                    <button className="flex flex-col items-center gap-2 text-white hover:text-vitem-300 transition-colors">
-                      <div className="w-10 h-10 border border-white/30 flex items-center justify-center">
-                        <Download className="w-4 h-4" />
-                      </div>
-                      <span className="text-[9px] tracking-widest uppercase">{t("download_btn")}</span>
-                    </button>
-                  </div>
+          <div className="flex justify-center">
+            <motion.article
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-white border border-vitem-200 group hover:shadow-lg transition-shadow duration-500 w-full max-w-sm"
+            >
+              {/* Cover */}
+              <div className="relative aspect-[3/4] overflow-hidden bg-vitem-100">
+                <img
+                  src={catalog.cover}
+                  alt={catalog.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4">
+                  <span className="text-[10px] tracking-widest uppercase text-white/80 bg-black/30 px-2 py-1">
+                    {catalog.category}
+                  </span>
                 </div>
-
-                {/* Info */}
-                <div className="p-5">
-                  <h3 className="text-sm font-medium text-vitem-900 mb-1 leading-tight">{catalog.title}</h3>
-                  <p className="text-xs text-vitem-500 font-light leading-relaxed mb-4">{catalog.description}</p>
-                  <div className="flex items-center justify-between text-[10px] tracking-widest uppercase text-vitem-400">
-                    <div className="flex items-center gap-1">
-                      <BookOpen className="w-3 h-3" />
-                      <span>{catalog.pages} sayfa</span>
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-vitem-950/80 flex items-center justify-center gap-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <a
+                    href={CATALOG_PDF}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-col items-center gap-2 text-white hover:text-vitem-300 transition-colors"
+                  >
+                    <div className="w-10 h-10 border border-white/30 flex items-center justify-center">
+                      <Eye className="w-4 h-4" />
                     </div>
-                    <span>{catalog.size}</span>
-                  </div>
+                    <span className="text-[9px] tracking-widest uppercase">{t("view_btn")}</span>
+                  </a>
+                  <a
+                    href={CATALOG_PDF}
+                    download
+                    className="flex flex-col items-center gap-2 text-white hover:text-vitem-300 transition-colors"
+                  >
+                    <div className="w-10 h-10 border border-white/30 flex items-center justify-center">
+                      <Download className="w-4 h-4" />
+                    </div>
+                    <span className="text-[9px] tracking-widest uppercase">{t("download_btn")}</span>
+                  </a>
                 </div>
-              </motion.article>
-            ))}
+              </div>
+
+              {/* Info */}
+              <div className="p-5">
+                <h3 className="text-sm font-medium text-vitem-900 mb-1 leading-tight">{catalog.title}</h3>
+                <p className="text-xs text-vitem-500 font-light leading-relaxed mb-4">{catalog.description}</p>
+                <a
+                  href={CATALOG_PDF}
+                  download
+                  className="flex items-center gap-2 text-xs uppercase tracking-widest text-vitem-600 hover:text-vitem-900 transition-colors border-b border-vitem-200 pb-1 w-fit"
+                >
+                  <Download className="w-3 h-3" />
+                  PDF İndir
+                </a>
+              </div>
+            </motion.article>
           </div>
         </div>
       </section>
@@ -211,9 +192,14 @@ export default function KatalogPage() {
                   <textarea
                     required
                     rows={3}
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
                     className="w-full bg-transparent border-b border-vitem-300 py-3 text-sm focus:outline-none focus:border-vitem-900 transition-colors resize-none"
                   />
                 </div>
+                {requestStatus === "error" && (
+                  <p className="text-red-500 text-xs">Bir hata oluştu. Lütfen tekrar deneyin.</p>
+                )}
                 <button
                   type="submit"
                   disabled={requestStatus === "submitting"}

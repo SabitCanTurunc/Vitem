@@ -2,8 +2,11 @@ import React from "react";
 import {NextIntlClientProvider} from 'next-intl';
 import {getMessages} from 'next-intl/server';
 import Navbar from "@/components/Navbar";
-import Footer from "@/sections/Footer";
 import "../globals.css";
+
+export function generateStaticParams() {
+  return [{ locale: "tr" }, { locale: "en" }];
+}
 
 export const metadata = {
   title: "Vitem - Lüks Mobilya ve Tasarım",

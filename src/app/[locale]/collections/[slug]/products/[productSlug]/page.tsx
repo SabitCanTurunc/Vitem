@@ -1,8 +1,13 @@
-export const dynamic = "force-dynamic";
-import { getProductBySlug } from "../../../../../../../api/queries/products";
+export const revalidate = 3600;
+import { getAllProducts, getProductBySlug } from "../../../../../../../api/queries/products";
 import ProductDetailClient from "./ProductDetailClient";
 import Footer from "@/sections/Footer";
 import { notFound } from "next/navigation";
+
+export async function generateStaticParams() {
+  const products = await getAllProducts();
+  return products.map((p) => ({ productSlug: p.slug }));
+}
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string, productSlug: string }> }) {
   const { slug, productSlug } = await params;

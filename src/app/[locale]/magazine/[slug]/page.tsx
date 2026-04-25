@@ -1,11 +1,13 @@
-export const dynamic = "force-dynamic";
-
 import { getLocale } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import Footer from "@/sections/Footer";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Clock, Tag } from "lucide-react";
 import { articles, getArticle } from "../articles";
+
+export async function generateStaticParams() {
+  return articles.map((a) => ({ slug: a.slug }));
+}
 
 export default async function ArticlePage({
   params,

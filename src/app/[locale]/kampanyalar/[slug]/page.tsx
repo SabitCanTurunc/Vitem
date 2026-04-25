@@ -1,10 +1,15 @@
-export const dynamic = "force-dynamic";
-import { getCampaignBySlug } from "../../../../../api/queries/products";
+export const revalidate = 3600;
+import { getActiveCampaigns, getCampaignBySlug } from "../../../../../api/queries/products";
 import { getLocale } from "next-intl/server";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { MapPin, Palette, Info, Truck, Tag, Calendar, ArrowLeft, ArrowRight } from "lucide-react";
+
+export async function generateStaticParams() {
+  const campaigns = await getActiveCampaigns();
+  return campaigns.map((c) => ({ slug: c.slug }));
+}
 
 type Props = { params: Promise<{ slug: string; locale: string }> };
 

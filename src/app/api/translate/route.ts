@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
+// Edge runtime: Vercel Hobby plandaki 12 Serverless Function limitine dahil edilmez
+export const runtime = "edge";
+
 // MyMemory free translation API — kayıt gerektirmez
 export async function POST(req: NextRequest) {
   try {

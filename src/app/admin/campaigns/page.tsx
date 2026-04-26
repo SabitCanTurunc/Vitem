@@ -1,4 +1,5 @@
 export const dynamic = "force-dynamic";
+export const runtime = "edge";
 import { getDb } from "../../../../api/queries/connection";
 import { campaigns } from "@db/schema";
 import CampaignsClient from "./CampaignsClient";

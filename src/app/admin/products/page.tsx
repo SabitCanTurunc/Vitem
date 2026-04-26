@@ -1,4 +1,5 @@
 export const dynamic = "force-dynamic";
+export const runtime = "edge";
 import { getDb } from "../../../../api/queries/connection";
 import { products, categories } from "@db/schema";
 import { eq, asc } from "drizzle-orm";

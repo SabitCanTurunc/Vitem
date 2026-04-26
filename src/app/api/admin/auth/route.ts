@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
+// Edge runtime: Vercel Hobby plandaki 12 Serverless Function limitine dahil edilmez
+export const runtime = "edge";
+
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? "vitem2025";
 const SESSION_COOKIE = "vitem_admin_session";
 const SESSION_VALUE = "authenticated";

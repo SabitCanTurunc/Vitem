@@ -1,7 +1,5 @@
 import ProjectDetailClient from "./ProjectDetailClient";
 
-export const revalidate = 3600;
-
 export async function generateStaticParams() {
   return [
     "villa-bosphorus",

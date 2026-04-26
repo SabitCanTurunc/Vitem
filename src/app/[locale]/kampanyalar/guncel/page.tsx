@@ -1,4 +1,3 @@
-export const revalidate = 3600;
 import { getActiveCampaigns } from "../../../../../api/queries/products";
 import { getLocale } from "next-intl/server";
 import Image from "next/image";

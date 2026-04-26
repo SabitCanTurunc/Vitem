@@ -1,4 +1,3 @@
-export const revalidate = 3600;
 import { getAllProducts, getProductBySlug } from "../../../../../../../api/queries/products";
 import ProductDetailClient from "./ProductDetailClient";
 import Footer from "@/sections/Footer";

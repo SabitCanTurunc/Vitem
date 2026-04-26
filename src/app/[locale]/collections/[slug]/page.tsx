@@ -1,4 +1,3 @@
-export const revalidate = 3600;
 import { getAllCategories, getCategoryBySlug } from "../../../../../api/queries/products";
 import CollectionDetailClient from "./CollectionDetailClient";
 import Footer from "@/sections/Footer";

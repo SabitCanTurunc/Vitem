@@ -102,7 +102,7 @@ export default function Magazine() {
                   <img
                     src={article.imageUrl}
                     alt={article.title}
-                    className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-&lsqb;1200ms&rsqb; ease-out group-hover:scale-105"
                     loading="lazy"
                   />
                 </div>

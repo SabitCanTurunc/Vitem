@@ -1,5 +1,5 @@
 export const dynamic = "force-dynamic";
-export const runtime = "edge";
+export const runtime = "nodejs"; // local file: db requires nodejs runtime, change to edge for production if using turso
 
 import { notFound } from "next/navigation";
 import { asc, desc, eq, count } from "drizzle-orm";
@@ -13,7 +13,7 @@ import {
   Clock,
 } from "lucide-react";
 
-import { getDb } from "../../../../api/queries/connection";
+import { getDb } from "@api/queries/connection";
 import {
   categories,
   products,

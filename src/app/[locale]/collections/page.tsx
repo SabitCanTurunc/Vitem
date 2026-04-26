@@ -1,4 +1,4 @@
-import { getAllCategories } from "../../../../api/queries/products";
+import { getAllCategories } from "@api/queries/products";
 import CollectionsClient from "./CollectionsClient";
 import Footer from "@/sections/Footer";
 

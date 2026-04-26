@@ -7,7 +7,7 @@ import Magazine from "@/sections/Magazine";
 import Newsletter from "@/sections/Newsletter";
 import Footer from "@/sections/Footer";
 
-import { getActiveHeroSlides, getAllCategories, getFeaturedProducts } from "../../../api/queries/products";
+import { getActiveHeroSlides, getAllCategories, getFeaturedProducts } from "@api/queries/products";
 import { getLocale, getTranslations } from "next-intl/server";
 
 export default async function Home() {

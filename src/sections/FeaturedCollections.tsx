@@ -65,7 +65,7 @@ export default function FeaturedCollections({ categories }: { categories: Catego
                   <img
                     src={category.imageUrl ?? "/images/hero-fallback-1.jpg"}
                     alt={displayName}
-                    className="w-full h-full object-cover transition-transform duration-[1000ms] ease-out group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-&lsqb;1000ms&rsqb; ease-out group-hover:scale-110"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-700" />

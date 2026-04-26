@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Download, Eye, Send, CheckCircle } from "lucide-react";
 import Footer from "@/sections/Footer";
-import { submitContactForm } from "../../../../api/actions/contactActions";
+import { submitContactForm } from "@api/actions/contactActions";
 
 const CATALOG_PDF = "https://www.vitem.com.tr/media/vitem_catalog_tr.pdf";
 

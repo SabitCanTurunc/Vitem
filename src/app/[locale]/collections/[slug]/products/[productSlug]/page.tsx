@@ -1,4 +1,4 @@
-import { getAllProducts, getProductBySlug } from "../../../../../../../api/queries/products";
+import { getAllProducts, getProductBySlug } from "@api/queries/products";
 import ProductDetailClient from "./ProductDetailClient";
 import Footer from "@/sections/Footer";
 import { notFound } from "next/navigation";

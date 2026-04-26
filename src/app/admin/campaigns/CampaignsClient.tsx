@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Plus, Edit, Trash2, X, Languages, Loader2, Tag, Package } from "lucide-react";
-import { createCampaign, deleteCampaign, updateCampaign } from "../../../../api/actions/adminActions";
-import { translateText } from "../../../../api/actions/translateActions";
+import { createCampaign, deleteCampaign, updateCampaign } from "@api/actions/adminActions";
+import { translateText } from "@api/actions/translateActions";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Campaign } from "@db/schema";
 import ImageUpload from "@/components/ImageUpload";

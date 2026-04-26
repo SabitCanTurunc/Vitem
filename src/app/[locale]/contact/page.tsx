@@ -4,7 +4,7 @@ import { MapPin, Phone, Mail, CheckCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Footer from "@/sections/Footer";
 import { useState } from "react";
-import { submitContactForm } from "../../../../api/actions/contactActions";
+import { submitContactForm } from "@api/actions/contactActions";
 
 export default function Contact() {
   const t = useTranslations("contact");

@@ -35,7 +35,7 @@ export default async function MagazinePage() {
               <img
                 src={articles[0].imageUrl}
                 alt={locale === "en" ? articles[0].titleEn : articles[0].titleTr}
-                className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-&lsqb;1200ms&rsqb; group-hover:scale-105"
               />
             </div>
             <div className="flex flex-col justify-center">
@@ -71,7 +71,7 @@ export default async function MagazinePage() {
                   <img
                     src={article.imageUrl}
                     alt={locale === "en" ? article.titleEn : article.titleTr}
-                    className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-&lsqb;1200ms&rsqb; group-hover:scale-105"
                   />
                 </div>
                 <div className="flex items-center gap-4 text-[10px] tracking-[0.2em] uppercase text-vitem-500 mb-3">

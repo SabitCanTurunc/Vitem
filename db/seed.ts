@@ -1,4 +1,4 @@
-import { getDb } from "../api/queries/connection";
+import { getDb } from "@api/queries/connection";
 import { categories, products, heroSlides, campaigns, projects } from "./schema";
 
 async function seed() {

@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Plus, Edit, Trash2, X, Languages, Loader2 } from "lucide-react";
-import { createCategory, deleteCategory, updateCategory } from "../../../../api/actions/adminActions";
-import { translateText } from "../../../../api/actions/translateActions";
+import { createCategory, deleteCategory, updateCategory } from "@api/actions/adminActions";
+import { translateText } from "@api/actions/translateActions";
 import { motion, AnimatePresence } from "framer-motion";
 import ImageUpload from "@/components/ImageUpload";
 

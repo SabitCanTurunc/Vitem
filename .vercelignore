@@ -1,0 +1,13 @@
+# Vercel deploy ederken hariç tutulacak dosya/klasörler.
+# /api klasörü Vercel tarafından legacy "Vercel Functions" olarak otomatik
+# deploy edilir. Projemizde sunucu kodu src/server/ altında olduğu için
+# kök /api klasörünün asla deploy'a girmemesi gerekiyor.
+api/
+
+# Build artefaktları
+.next/
+node_modules/
+
+# Geliştirme dosyaları
+*.log
+.DS_Store

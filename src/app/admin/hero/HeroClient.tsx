@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Plus, Edit, Trash2, X } from "lucide-react";
-import { createHeroSlide } from "../../../../api/actions/adminActions";
+import { createHeroSlide } from "@api/actions/adminActions";
 import { motion, AnimatePresence } from "framer-motion";
 import ImageUpload from "@/components/ImageUpload";
 

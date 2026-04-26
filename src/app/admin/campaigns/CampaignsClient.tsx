@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Plus, Edit, Trash2, X, Languages, Loader2, Tag, Package } from "lucide-react";
 import { createCampaign, deleteCampaign, updateCampaign } from "../../../../api/actions/adminActions";
+import { translateText } from "../../../../api/actions/translateActions";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Campaign } from "@db/schema";
 import ImageUpload from "@/components/ImageUpload";
@@ -13,10 +14,8 @@ type ModalMode = "create" | "edit";
 
 async function tr2en(text: string): Promise<string> {
   if (!text?.trim()) return "";
-  try {
-    const res = await fetch("/api/translate", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text, from: "tr", to: "en" }) });
-    return (await res.json()).translated || "";
-  } catch { return ""; }
+  const d = await translateText(text, "tr", "en");
+  return d.translated || "";
 }
 
 export default function CampaignsClient({ campaigns }: { campaigns: Campaign[] }) {

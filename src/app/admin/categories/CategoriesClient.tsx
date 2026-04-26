@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Plus, Edit, Trash2, X, Languages, Loader2 } from "lucide-react";
 import { createCategory, deleteCategory, updateCategory } from "../../../../api/actions/adminActions";
+import { translateText } from "../../../../api/actions/translateActions";
 import { motion, AnimatePresence } from "framer-motion";
 import ImageUpload from "@/components/ImageUpload";
 
@@ -24,17 +25,8 @@ async function autoTranslate(fields: { tr: string; enRef: string }[]): Promise<s
   const results: string[] = [];
   for (const f of fields) {
     if (!f.tr?.trim()) { results.push(f.enRef); continue; }
-    try {
-      const res = await fetch("/api/translate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: f.tr, from: "tr", to: "en" }),
-      });
-      const data = await res.json();
-      results.push(data.translated || f.enRef);
-    } catch {
-      results.push(f.enRef);
-    }
+    const data = await translateText(f.tr, "tr", "en");
+    results.push(data.translated || f.enRef);
   }
   return results;
 }

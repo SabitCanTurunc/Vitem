@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Plus, Edit, Trash2, X, Languages, Loader2 } from "lucide-react";
 import { createProduct, deleteProduct, updateProduct } from "../../../../api/actions/adminActions";
+import { translateText } from "../../../../api/actions/translateActions";
 import { motion, AnimatePresence } from "framer-motion";
 import ImageUpload from "@/components/ImageUpload";
 import GalleryUpload from "@/components/GalleryUpload";
@@ -24,15 +25,8 @@ type ModalMode = "create" | "edit";
 
 async function translate(text: string): Promise<string> {
   if (!text?.trim()) return "";
-  try {
-    const res = await fetch("/api/translate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, from: "tr", to: "en" }),
-    });
-    const d = await res.json();
-    return d.translated || "";
-  } catch { return ""; }
+  const d = await translateText(text, "tr", "en");
+  return d.translated || "";
 }
 
 export default function ProductsClient({ prods, categories }: { prods: Product[]; categories: Category[] }) {

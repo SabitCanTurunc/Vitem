@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Lock, Eye, EyeOff } from "lucide-react";
+import { loginAdmin } from "../../../api/actions/authActions";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -15,13 +16,9 @@ export default function AdminLoginPage() {
     setLoading(true);
     setError("");
 
-    const res = await fetch("/api/admin/auth", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
-    });
+    const res = await loginAdmin(password);
 
-    if (res.ok) {
+    if (res.success) {
       router.push("/admin");
       router.refresh();
     } else {

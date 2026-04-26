@@ -1,12 +1,13 @@
 "use client";
 import { LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { logoutAdmin } from "../../../api/actions/authActions";
 
 export default function LogoutButton({ label = "Çıkış Yap" }: { label?: string }) {
   const router = useRouter();
 
   async function handleLogout() {
-    await fetch("/api/admin/auth", { method: "DELETE" });
+    await logoutAdmin();
     router.push("/admin-login");
   }
 

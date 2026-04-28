@@ -4,63 +4,23 @@ import { useTranslations } from "next-intl";
 import { Star, Quote } from "lucide-react";
 import Footer from "@/sections/Footer";
 
-const testimonials = [
-  {
-    id: 1,
-    name: "Murat Karaoğlan",
-    location: "Gaziantep / Altunkayagrup",
-    rating: 5,
-    text: "Başından sonuna kadar tüm detaylardan memnun kaldım. En önemlisi de en ufak bir sorunumuz bile hemen çözüldü.",
-    project: "Mutfak Projesi",
-  },
-  {
-    id: 2,
-    name: "Mahmut Altunkaya",
-    location: "Gaziantep / Altunkayagrup",
-    rating: 5,
-    text: "Kaliteli malzeme kullanımı ve işçilik açısından beklentilerimizin çok üzerinde bir hizmet aldık. Kesinlikle tavsiye ederim.",
-    project: "Mutfak & Banyo",
-  },
-  {
-    id: 3,
-    name: "Ayşe Demir",
-    location: "Hatay",
-    rating: 5,
-    text: "Tasarım aşamasından teslimata kadar profesyonel bir ekipti. Mutfağımız hem çok şık hem de son derece işlevsel oldu.",
-    project: "Mutfak Projesi",
-  },
-  {
-    id: 4,
-    name: "Mehmet Yılmaz",
-    location: "İstanbul",
-    rating: 5,
-    text: "Vitem ekibi vizyonumuzu tam olarak anladı ve hayallerimizin ötesinde bir sonuç ortaya koydu. Teşekkürler!",
-    project: "Yaşam Alanları",
-  },
-  {
-    id: 5,
-    name: "Fatma Çelik",
-    location: "Adana",
-    rating: 5,
-    text: "Fiyat performans oranı mükemmel. Üstelik montaj ekibi çok titizdi, her detaya özen gösterdiler.",
-    project: "Banyo Projesi",
-  },
-  {
-    id: 6,
-    name: "Ali Kaya",
-    location: "Ankara",
-    rating: 5,
-    text: "İkinci projemiz olmasına rağmen her seferinde aynı özen ve kaliteyi görüyoruz. Vitem ailesi olduk adeta.",
-    project: "Mutfak Projesi",
-  },
-];
-
 const brandPartners = [
   "Franke", "Siemens", "Smeg", "Bosch", "Neff", "Miele",
 ];
 
 export default function ReferanslarPage() {
   const t = useTranslations("referanslar");
+  const tItems = useTranslations("referanslar.items");
+  const tTags = useTranslations("referanslar.tags");
+
+  const testimonials = [
+    { id: 1, name: "Murat Karaoğlan", locationKey: "loc_gaziantep", textKey: "1_text", projectKey: "kitchen" },
+    { id: 2, name: "Mahmut Altunkaya", locationKey: "loc_gaziantep", textKey: "2_text", projectKey: "kitchen_bath" },
+    { id: 3, name: "Ayşe Demir", locationKey: "loc_hatay", textKey: "3_text", projectKey: "kitchen" },
+    { id: 4, name: "Mehmet Yılmaz", locationKey: "loc_istanbul", textKey: "4_text", projectKey: "living" },
+    { id: 5, name: "Fatma Çelik", locationKey: "loc_adana", textKey: "5_text", projectKey: "bath" },
+    { id: 6, name: "Ali Kaya", locationKey: "loc_ankara", textKey: "6_text", projectKey: "kitchen" },
+  ];
 
   return (
     <main>
@@ -86,10 +46,10 @@ export default function ReferanslarPage() {
           {/* Stats */}
           <div className="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-8 pt-12 border-t border-vitem-100">
             {[
-              { number: "10.000+", label: "Tamamlanan Proje" },
-              { number: "%98", label: "Müşteri Memnuniyeti" },
-              { number: "25+", label: "Yıl Deneyim" },
-              { number: "5/5", label: "Ortalama Puan" },
+              { number: "10.000+", label: t("stat_projects") },
+              { number: "%98", label: t("stat_satisfaction") },
+              { number: "25+", label: t("stat_experience") },
+              { number: "5/5", label: t("stat_rating") },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -121,18 +81,18 @@ export default function ReferanslarPage() {
               >
                 <Quote className="w-8 h-8 text-vitem-200 mb-6 shrink-0" />
                 <p className="text-sm text-vitem-700 leading-relaxed font-light flex-1 mb-6">
-                  {item.text}
+                  {tItems(item.textKey)}
                 </p>
                 <div className="pt-4 border-t border-vitem-100">
                   <div className="flex items-center gap-1 mb-3">
-                    {Array.from({ length: item.rating }).map((_, i) => (
+                    {Array.from({ length: 5 }).map((_, i) => (
                       <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                     ))}
                   </div>
                   <p className="text-sm font-medium text-vitem-900">{item.name}</p>
-                  <p className="text-xs text-vitem-400 mt-0.5">{item.location}</p>
+                  <p className="text-xs text-vitem-400 mt-0.5">{tItems(item.locationKey)}</p>
                   <span className="mt-2 inline-block text-[10px] tracking-widest uppercase text-vitem-400 border border-vitem-200 px-2 py-0.5">
-                    {item.project}
+                    {tTags(item.projectKey)}
                   </span>
                 </div>
               </motion.article>
@@ -152,10 +112,10 @@ export default function ReferanslarPage() {
             className="text-center mb-12"
           >
             <span className="text-[11px] tracking-[0.25em] uppercase text-vitem-500 font-medium block mb-3">
-              İş Birliklerimiz
+              {t("partners_eyebrow")}
             </span>
             <h2 className="text-2xl font-sans font-light text-vitem-900">
-              Güvenilir Markalarla Çalışıyoruz
+              {t("partners_title")}
             </h2>
           </motion.div>
           <div className="grid grid-cols-3 sm:grid-cols-6 gap-8">

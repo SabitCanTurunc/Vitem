@@ -2,6 +2,7 @@ export const dynamic = "force-dynamic";
 export const runtime = "nodejs"; // local file: db requires nodejs runtime, change to edge for production if using turso
 
 import { notFound } from "next/navigation";
+import { cookies } from "next/headers";
 import { asc, desc, eq, count } from "drizzle-orm";
 import {
   FolderTree,
@@ -28,6 +29,7 @@ import ProductsClient from "../products/ProductsClient";
 import HeroClient from "../hero/HeroClient";
 import ProjectsAdminClient from "../projects/ProjectsAdminClient";
 import CampaignsClient from "../campaigns/CampaignsClient";
+import { getAdminLang, tAdmin } from "../i18n";
 
 // Tüm /admin/* yolları tek bir Edge Function altında toplanır
 // (/admin, /admin/categories, /admin/products, /admin/hero, /admin/inbox,
@@ -40,6 +42,8 @@ export default async function AdminCatchAll({
 }) {
   const { slug } = await params;
   const section = slug?.[0] ?? "dashboard";
+  const cookieStore = await cookies();
+  const lang = getAdminLang(cookieStore.get("admin_lang")?.value);
 
   if (slug && slug.length > 1) {
     notFound();
@@ -64,15 +68,15 @@ export default async function AdminCatchAll({
       };
 
       const cards = [
-        { name: "Total Products", value: stats.products, icon: ShoppingBag, href: "/admin/products" },
-        { name: "Categories", value: stats.categories, icon: FolderTree, href: "/admin/categories" },
-        { name: "Hero Slides", value: stats.heroSlides, icon: ImageIcon, href: "/admin/hero" },
-        { name: "Inbox Messages", value: stats.messages, icon: Inbox, href: "/admin/inbox" },
+        { name: tAdmin(lang, "total_products"), value: stats.products, icon: ShoppingBag, href: "/admin/products" },
+        { name: tAdmin(lang, "categories"), value: stats.categories, icon: FolderTree, href: "/admin/categories" },
+        { name: tAdmin(lang, "hero_slides"), value: stats.heroSlides, icon: ImageIcon, href: "/admin/hero" },
+        { name: tAdmin(lang, "inbox_messages"), value: stats.messages, icon: Inbox, href: "/admin/inbox" },
       ];
 
       return (
         <div>
-          <h1 className="text-3xl font-serif font-light mb-8">Dashboard Overview</h1>
+          <h1 className="text-3xl font-serif font-light mb-8">{tAdmin(lang, "dashboard_overview")}</h1>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {cards.map((card) => (
@@ -93,12 +97,12 @@ export default async function AdminCatchAll({
           </div>
 
           <div className="mt-12 bg-white rounded-xl border border-vitem-200 p-8 shadow-sm">
-            <h2 className="text-xl font-serif font-light mb-4">Quick Setup Guide</h2>
+            <h2 className="text-xl font-serif font-light mb-4">{tAdmin(lang, "quick_setup")}</h2>
             <ul className="space-y-3 text-sm text-vitem-600 list-disc pl-5">
-              <li>Start by populating your <strong>Categories</strong> (e.g., Kitchens, Doors, Mattresses). Ensure you provide English descriptions.</li>
-              <li>Upload your premium <strong>Products</strong> into the respective categories. You can toggle their status as <em>Featured</em>.</li>
-              <li>Customize the homepage <strong>Hero Settings</strong> to welcome visitors.</li>
-              <li>Actively monitor your <strong>Inbox</strong> for customer inquiries and project requests.</li>
+              <li>{tAdmin(lang, "setup_1")}</li>
+              <li>{tAdmin(lang, "setup_2")}</li>
+              <li>{tAdmin(lang, "setup_3")}</li>
+              <li>{tAdmin(lang, "setup_4")}</li>
             </ul>
           </div>
         </div>
@@ -121,6 +125,7 @@ export default async function AdminCatchAll({
             nameEn: products.nameEn,
             slug: products.slug,
             isFeatured: products.isFeatured,
+            categoryId: products.categoryId,
             categoryName: categories.name,
           })
           .from(products)
@@ -161,12 +166,12 @@ export default async function AdminCatchAll({
 
       return (
         <div>
-          <h1 className="text-3xl font-serif font-light mb-8">Inbox</h1>
+          <h1 className="text-3xl font-serif font-light mb-8">{tAdmin(lang, "inbox")}</h1>
 
           <div className="bg-white rounded-xl border border-vitem-200 overflow-hidden shadow-sm">
             {submissions.length === 0 ? (
               <div className="p-12 text-center text-vitem-500">
-                No submissions yet.
+                {tAdmin(lang, "no_submissions")}
               </div>
             ) : (
               <ul className="divide-y divide-vitem-100">

@@ -1,13 +1,14 @@
 import { getActiveCampaigns } from "@api/queries/products";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { Tag, Calendar, ArrowRight } from "lucide-react";
 
 export default async function GuncelKampanyalarPage() {
-  const [campaigns, locale] = await Promise.all([
+  const [campaigns, locale, t] = await Promise.all([
     getActiveCampaigns("current"),
     getLocale(),
+    getTranslations("kampanyalar"),
   ]);
 
   return (
@@ -17,16 +18,16 @@ export default async function GuncelKampanyalarPage() {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-[10px] tracking-[0.3em] uppercase text-vitem-400 mb-4">
             <Link href="/kampanyalar" className="hover:text-vitem-700 transition-colors">
-              Kampanyalar
+              {t("title")}
             </Link>
             {" / "}
-            <span className="text-vitem-700">Güncel Kampanyalar</span>
+            <span className="text-vitem-700">{t("current_title")}</span>
           </p>
           <h1 className="font-serif text-4xl sm:text-5xl font-light text-vitem-900 tracking-tight mb-6">
-            Güncel Kampanyalar
+            {t("current_title")}
           </h1>
           <p className="text-vitem-600 font-light max-w-xl leading-relaxed">
-            Vitem&apos;in özel kampanya ve indirim fırsatlarından haberdar olun. Sınırlı süreli tekliflerimizi kaçırmayın.
+            {t("current_description")}
           </p>
         </div>
       </section>
@@ -36,7 +37,7 @@ export default async function GuncelKampanyalarPage() {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           {campaigns.length === 0 ? (
             <div className="text-center py-20 text-vitem-400">
-              <p className="text-lg font-light">Şu anda aktif kampanya bulunmamaktadır.</p>
+              <p className="text-lg font-light">{t("no_campaigns")}</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -70,7 +71,7 @@ export default async function GuncelKampanyalarPage() {
                       )}
                       {campaign.discount && (
                         <span className="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded-full">
-                          %{campaign.discount}
+                          {t("discount_label", { discount: campaign.discount })}
                         </span>
                       )}
                     </div>
@@ -106,7 +107,7 @@ export default async function GuncelKampanyalarPage() {
                       {campaign.validUntil && (
                         <div className="flex items-center gap-2 text-xs text-vitem-500 mb-4">
                           <Calendar className="w-3.5 h-3.5" />
-                          <span>{campaign.validUntil} tarihine kadar geçerlidir</span>
+                          <span>{t("valid_until_date", { date: campaign.validUntil })}</span>
                         </div>
                       )}
 
@@ -114,7 +115,7 @@ export default async function GuncelKampanyalarPage() {
                         href={`/kampanyalar/${campaign.slug}` as any}
                         className="mt-auto flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase text-vitem-700 hover:text-vitem-900 transition-colors font-medium group/link"
                       >
-                        Detayları Gör
+                        {t("view_details")}
                         <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
                       </Link>
                     </div>

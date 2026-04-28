@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 
 interface HeroSlideDisplay {
@@ -15,22 +16,24 @@ interface HeroSlideDisplay {
 
 export default function Hero({ slides }: { slides: HeroSlideDisplay[] }) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const t = useTranslations("hero_fallback");
+  const tCommon = useTranslations("common");
 
   const heroSlides = slides.length > 0 ? slides : [
     {
       id: -1,
-      title: "Hatay'da Üretildi. Dünya İçin Tasarlandı.",
-      subtitle: "Anadolu mirasını çağdaş lüksle harmanlayan özel iç mekan tasarımları",
+      title: t("s1_title"),
+      subtitle: t("s1_subtitle"),
       imageUrl: "/images/hero-fallback-1.jpg",
-      linkText: "Koleksiyonu Keşfet",
+      linkText: t("s1_link"),
       linkHref: "/collections",
     },
     {
       id: -2,
-      title: "Mimari ile Yaşamın Buluştuğu Yer",
-      subtitle: "Özenle işlenmiş mutfaklar, banyolar ve yaşam alanları",
+      title: t("s2_title"),
+      subtitle: t("s2_subtitle"),
       imageUrl: "/images/hero-fallback-2.jpg",
-      linkText: "Daha Fazla Keşfet",
+      linkText: t("s2_link"),
       linkHref: "/collections",
     },
   ];
@@ -130,7 +133,7 @@ export default function Hero({ slides }: { slides: HeroSlideDisplay[] }) {
                 className={`h-0.5 transition-all duration-500 ${
                   i === currentSlide ? "w-8 bg-white" : "w-4 bg-white/40 hover:bg-white/60"
                 }`}
-                aria-label={`Slide ${i + 1}`}
+                aria-label={tCommon("slide_n", { n: i + 1 })}
               />
             ))}
           </div>
@@ -144,7 +147,7 @@ export default function Hero({ slides }: { slides: HeroSlideDisplay[] }) {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.2, duration: 0.8 }}
-        aria-label="Scroll down"
+        aria-label={tCommon("scroll_down")}
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}

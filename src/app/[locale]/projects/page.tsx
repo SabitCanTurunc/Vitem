@@ -5,15 +5,27 @@ import { Link } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
 import Footer from "@/sections/Footer";
 
-const projects = [
-  { id: 1, slug: "villa-bosphorus", name: "Villa Bosphorus", location: "İstanbul", year: "2025", category: "Mutfak & Yaşam Alanları", imageUrl: "/images/hero-fallback-1.jpg" },
-  { id: 2, slug: "aegean-retreat", name: "Aegean Retreat", location: "Bodrum", year: "2024", category: "Mutfak & Banyo", imageUrl: "/images/hero-fallback-2.jpg" },
-  { id: 3, slug: "urban-minimalist", name: "Urban Minimalist", location: "Ankara", year: "2024", category: "Mutfak", imageUrl: "/images/interior.jpg" },
-  { id: 4, slug: "heritage-estate", name: "Heritage Estate", location: "Hatay", year: "2023", category: "Mutfak & Banyo & Yaşam", imageUrl: "/images/magazine-2.jpg" },
-];
+const projectSlugs = ["villa-bosphorus", "aegean-retreat", "urban-minimalist", "heritage-estate"] as const;
+const projectImages: Record<string, string> = {
+  "villa-bosphorus": "/images/hero-fallback-1.jpg",
+  "aegean-retreat": "/images/hero-fallback-2.jpg",
+  "urban-minimalist": "/images/interior.jpg",
+  "heritage-estate": "/images/magazine-2.jpg",
+};
 
 export default function Projects() {
   const t = useTranslations("projects");
+  const tItems = useTranslations("projects.items");
+
+  const projects = projectSlugs.map((slug, idx) => ({
+    id: idx + 1,
+    slug,
+    name: tItems(`${slug}.name`),
+    location: tItems(`${slug}.location`),
+    year: tItems(`${slug}.year`),
+    category: tItems(`${slug}.category`),
+    imageUrl: projectImages[slug],
+  }));
 
   return (
     <main>

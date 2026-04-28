@@ -21,7 +21,7 @@ export default function Philosophy() {
           >
             <img
               src="/images/philosophy-side.jpg"
-              alt="Vitem craftsmanship"
+              alt={t("alt_image")}
               className="w-full h-full object-cover"
               loading="lazy"
             />

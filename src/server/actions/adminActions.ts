@@ -5,6 +5,38 @@ import { categories, products, heroSlides, campaigns, projects } from "@db/schem
 import { revalidatePath } from "next/cache";
 import { eq } from "drizzle-orm";
 
+const tableColumnsCache = new Map<string, Set<string>>();
+
+const camelToSnake = (value: string) =>
+  value.replace(/[A-Z]/g, (char) => `_${char.toLowerCase()}`);
+
+async function getTableColumns(tableName: string) {
+  const cached = tableColumnsCache.get(tableName);
+  if (cached) return cached;
+
+  const db = getDb() as any;
+  const result = await db.$client.execute(`PRAGMA table_info(${tableName});`);
+  const rows = Array.isArray(result?.rows) ? result.rows : [];
+  const columns = new Set<string>(
+    rows
+      .map((row: any) => row?.name)
+      .filter((name: unknown): name is string => typeof name === "string"),
+  );
+
+  tableColumnsCache.set(tableName, columns);
+  return columns;
+}
+
+async function filterValuesForTable<T extends Record<string, unknown>>(tableName: string, values: T): Promise<Partial<T>> {
+  const columns = await getTableColumns(tableName);
+  return Object.fromEntries(
+    Object.entries(values).filter(([key, val]) => {
+      if (typeof val === "undefined") return false;
+      return columns.has(camelToSnake(key));
+    }),
+  ) as Partial<T>;
+}
+
 const slugify = (text: string) => {
   const trMap: Record<string, string> = {
     'ç': 'c', 'ğ': 'g', 'ı': 'i', 'ö': 'o', 'ş': 's', 'ü': 'u',
@@ -60,7 +92,7 @@ export async function createProduct(formData: FormData) {
   const sortOrder = parseInt(formData.get("sortOrder") as string) || 0;
 
   try {
-    await getDb().insert(products).values({
+    const insertValues = await filterValuesForTable("products", {
       name,
       nameEn,
       slug: slugify(name),
@@ -73,6 +105,7 @@ export async function createProduct(formData: FormData) {
       isFeatured,
       sortOrder,
     });
+    await getDb().insert(products).values(insertValues as any);
     revalidatePath("/admin/products");
     revalidatePath("/[locale]/collections", "layout");
     return { success: true };
@@ -209,6 +242,7 @@ export async function deleteProduct(id: number) {
 export async function updateProduct(id: number, formData: FormData) {
   const name = formData.get("name") as string;
   const nameEn = formData.get("nameEn") as string;
+  const categoryId = parseInt(formData.get("categoryId") as string);
   const description = formData.get("description") as string;
   const descriptionEn = formData.get("descriptionEn") as string;
   const shortDescription = formData.get("shortDescription") as string;
@@ -217,7 +251,19 @@ export async function updateProduct(id: number, formData: FormData) {
   const isFeatured = formData.get("isFeatured") === "on";
   const sortOrder = parseInt(formData.get("sortOrder") as string) || 0;
   try {
-    await getDb().update(products).set({ name, nameEn, description, descriptionEn, shortDescription, shortDescriptionEn, featuredImage, isFeatured, sortOrder }).where(eq(products.id, id));
+    const updateValues = await filterValuesForTable("products", {
+      name,
+      nameEn,
+      categoryId,
+      description,
+      descriptionEn,
+      shortDescription,
+      shortDescriptionEn,
+      featuredImage,
+      isFeatured,
+      sortOrder,
+    });
+    await getDb().update(products).set(updateValues as any).where(eq(products.id, id));
     revalidatePath("/admin/products");
     revalidatePath("/[locale]/collections", "layout");
     return { success: true };
@@ -282,7 +328,19 @@ export async function updateHeroSlide(id: number, formData: FormData) {
   const sortOrder = parseInt(formData.get("sortOrder") as string) || 0;
   const isActive = formData.get("isActive") === "on";
   try {
-    await getDb().update(heroSlides).set({ title, titleEn, subtitle, subtitleEn, imageUrl, linkText, linkTextEn, linkHref, sortOrder, isActive }).where(eq(heroSlides.id, id));
+    const updateValues = await filterValuesForTable("hero_slides", {
+      title,
+      titleEn,
+      subtitle,
+      subtitleEn,
+      imageUrl,
+      linkText,
+      linkTextEn,
+      linkHref,
+      sortOrder,
+      isActive,
+    });
+    await getDb().update(heroSlides).set(updateValues as any).where(eq(heroSlides.id, id));
     revalidatePath("/admin/hero");
     revalidatePath("/[locale]", "layout");
     return { success: true };
@@ -305,7 +363,7 @@ export async function createHeroSlide(formData: FormData) {
   const isActive = formData.get("isActive") === "on";
 
   try {
-    await getDb().insert(heroSlides).values({
+    const insertValues = await filterValuesForTable("hero_slides", {
       title,
       titleEn,
       subtitle,
@@ -317,6 +375,7 @@ export async function createHeroSlide(formData: FormData) {
       sortOrder,
       isActive,
     });
+    await getDb().insert(heroSlides).values(insertValues as any);
     revalidatePath("/admin/hero");
     revalidatePath("/[locale]", "layout");
     return { success: true };

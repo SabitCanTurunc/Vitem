@@ -1,69 +1,68 @@
 "use client";
 import { motion } from "framer-motion";
 import { ArrowLeft, MapPin, Calendar, Tag } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import Footer from "@/sections/Footer";
 
-const projectsData: Record<string, {
-  name: string;
-  location: string;
-  year: string;
-  category: string;
-  description: string;
-  scope: string[];
-  images: string[];
-}> = {
-  "villa-bosphorus": {
-    name: "Villa Bosphorus",
-    location: "İstanbul",
-    year: "2025",
-    category: "Mutfak & Yaşam Alanları",
-    description: "İstanbul Boğazı manzaralı bu özel villa projesinde modern minimalist çizgiler ve doğal malzeme seçimleriyle benzersiz bir yaşam deneyimi yaratıldı. Açık plan mutfak ve yaşam alanı tasarımı ile aile dinamiklerine uygun, ferah ve şık bir ortam oluşturuldu.",
-    scope: ["Ada mutfak tasarımı", "Özel ankastre entegrasyonu", "Banyo mobilyası", "Yaşam alanı dolapları"],
-    images: ["/images/hero-fallback-1.jpg", "/images/kitchen.jpg", "/images/bathroom.jpg", "/images/interior.jpg"],
-  },
-  "aegean-retreat": {
-    name: "Aegean Retreat",
-    location: "Bodrum",
-    year: "2024",
-    category: "Mutfak & Banyo",
-    description: "Ege kıyısında konumlanan bu tatil villasında deniz mavisi ve beyaz tonların hakim olduğu sade ve şık bir iç mekan anlayışı benimsendi. Mutfak ve banyo projelerinde su dirençli malzemeler ve deniz estetiğine uygun renk paleti kullanıldı.",
-    scope: ["Sahil vilası mutfak tasarımı", "İkili banyo projesi", "Özel renk paleti danışmanlığı"],
-    images: ["/images/hero-fallback-2.jpg", "/images/kitchen.jpg", "/images/bathroom.jpg"],
-  },
-  "urban-minimalist": {
-    name: "Urban Minimalist",
-    location: "Ankara",
-    year: "2024",
-    category: "Mutfak",
-    description: "Başkentin kalbindeki bu modern daire projesinde gri-beyaz renk paleti ve mat kapak seçimleriyle minimalist bir estetik yakalandı. Sınırlı alan içinde maksimum depolama çözümü sunan akıllı tasarım anlayışı benimsendi.",
-    scope: ["Kompakt mutfak çözümü", "Gizli depolama sistemleri", "Ankastre fırın ve bulaşık makinesi entegrasyonu"],
-    images: ["/images/interior.jpg", "/images/kitchen.jpg"],
-  },
-  "heritage-estate": {
-    name: "Heritage Estate",
-    location: "Hatay",
-    year: "2023",
-    category: "Mutfak & Banyo & Yaşam Alanları",
-    description: "Hatay'ın tarihi dokusuna uygun olarak tasarlanan bu köşk projesinde Anadolu mimari motiflerinden ilham alınan sıcak tonlar ve ahşap dokular kullanıldı. Geniş aile yaşamına uygun, misafirperver ve işlevsel bir iç mekan planlaması yapıldı.",
-    scope: ["Geniş aile mutfağı", "4 adet banyo projesi", "Misafir odası mobilyası", "Yaşam alanı duvar panelleri", "Özel ahşap işçiliği"],
-    images: ["/images/magazine-2.jpg", "/images/interior.jpg", "/images/kitchen.jpg", "/images/bathroom.jpg"],
-  },
+const projectImages: Record<string, string[]> = {
+  "villa-bosphorus": [
+    "/images/hero-fallback-1.jpg",
+    "/images/kitchen.jpg",
+    "/images/bathroom.jpg",
+    "/images/interior.jpg",
+  ],
+  "aegean-retreat": [
+    "/images/hero-fallback-2.jpg",
+    "/images/kitchen.jpg",
+    "/images/bathroom.jpg",
+  ],
+  "urban-minimalist": [
+    "/images/interior.jpg",
+    "/images/kitchen.jpg",
+  ],
+  "heritage-estate": [
+    "/images/magazine-2.jpg",
+    "/images/interior.jpg",
+    "/images/kitchen.jpg",
+    "/images/bathroom.jpg",
+  ],
+};
+
+const projectScopes: Record<string, number> = {
+  "villa-bosphorus": 4,
+  "aegean-retreat": 3,
+  "urban-minimalist": 3,
+  "heritage-estate": 5,
 };
 
 export default function ProjectDetailClient({ slug }: { slug: string }) {
-  const project = projectsData[slug];
+  const t = useTranslations("projects");
+  const tItems = useTranslations("projects.items");
 
-  if (!project) {
+  const images = projectImages[slug];
+  const scopeCount = projectScopes[slug];
+
+  if (!images || !scopeCount) {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center">
-        <p className="text-vitem-600">Proje bulunamadı.</p>
+        <p className="text-vitem-600">{t("not_found")}</p>
         <Link href="/projects" className="mt-4 text-xs uppercase tracking-widest border-b border-vitem-300 pb-1">
-          Projelere Dön
+          {t("back_to_projects")}
         </Link>
       </main>
     );
   }
+
+  const project = {
+    name: tItems(`${slug}.name`),
+    location: tItems(`${slug}.location`),
+    year: tItems(`${slug}.year`),
+    category: tItems(`${slug}.category`),
+    description: tItems(`${slug}.description`),
+    scope: Array.from({ length: scopeCount }, (_, i) => tItems(`${slug}.scope_${i + 1}`)),
+    images,
+  };
 
   const [hero, ...rest] = project.images;
 
@@ -78,7 +77,7 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
           <div className="max-w-[1400px] mx-auto">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}>
               <Link href="/projects" className="flex items-center gap-2 text-white/80 hover:text-white text-xs uppercase tracking-widest mb-6 transition-colors w-fit">
-                <ArrowLeft className="w-3.5 h-3.5" /> Tüm Projeler
+                <ArrowLeft className="w-3.5 h-3.5" /> {t("all_projects")}
               </Link>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-sans font-light text-white tracking-tight">{project.name}</h1>
             </motion.div>
@@ -96,7 +95,7 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
                 <div className="flex items-center gap-3 text-vitem-600"><Tag className="w-4 h-4 text-vitem-400 shrink-0" /><span>{project.category}</span></div>
               </div>
               <div>
-                <h3 className="text-xs uppercase tracking-[0.2em] text-vitem-500 mb-4">Proje Kapsamı</h3>
+                <h3 className="text-xs uppercase tracking-[0.2em] text-vitem-500 mb-4">{t("scope_title")}</h3>
                 <ul className="space-y-2">
                   {project.scope.map((item) => (
                     <li key={item} className="flex items-start gap-2 text-sm text-vitem-700 font-light">
@@ -117,7 +116,7 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
         <section className="py-16 sm:py-20 bg-vitem-50">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-10">
-              <span className="text-[11px] tracking-[0.25em] uppercase text-vitem-500 font-medium">Galeri</span>
+              <span className="text-[11px] tracking-[0.25em] uppercase text-vitem-500 font-medium">{t("gallery")}</span>
             </motion.div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {rest.map((img, index) => (
@@ -133,9 +132,9 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
       <section className="py-16 sm:py-20 bg-vitem-950">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <h2 className="text-2xl sm:text-3xl font-sans font-light text-white mb-6">Benzer bir proje mi planlıyorsunuz?</h2>
-            <p className="text-sm text-vitem-400 font-light mb-8 max-w-xl mx-auto leading-relaxed">Ekibimizle iletişime geçin, vizyonunuzu birlikte hayata geçirelim.</p>
-            <Link href="/contact" className="inline-block bg-white text-vitem-900 px-8 py-4 text-xs uppercase tracking-[0.2em] hover:bg-vitem-100 transition-colors">Bize Ulaşın</Link>
+            <h2 className="text-2xl sm:text-3xl font-sans font-light text-white mb-6">{t("cta_title")}</h2>
+            <p className="text-sm text-vitem-400 font-light mb-8 max-w-xl mx-auto leading-relaxed">{t("cta_desc")}</p>
+            <Link href="/contact" className="inline-block bg-white text-vitem-900 px-8 py-4 text-xs uppercase tracking-[0.2em] hover:bg-vitem-100 transition-colors">{t("cta_button")}</Link>
           </motion.div>
         </div>
       </section>

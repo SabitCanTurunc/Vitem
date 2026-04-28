@@ -16,7 +16,40 @@
     "cat_ankastre": "Ankastre",
     "cat_yasam": "Yaşam Alanları",
     "guncel_kampanyalar": "Güncel Kampanyalar",
-    "teshir_urunleri": "Teşhir Ürünleri"
+    "teshir_urunleri": "Teşhir Ürünleri",
+    "toggle_menu": "Menüyü Aç/Kapat",
+    "close_menu": "Menüyü Kapat",
+    "lang_tr": "Türkçe",
+    "lang_en": "İngilizce"
+  },
+  "common": {
+    "home": "Ana Sayfa",
+    "loading": "Yükleniyor...",
+    "back": "Geri Dön",
+    "address": "Ürgen Paşa Mah. 75. Yıl Bulvarı, Antakya / Hatay",
+    "address_line1": "Ürgen Paşa Mah. 75. Yıl Bulvarı",
+    "address_line2": "Antakya / Hatay",
+    "phone": "+90 326 221 88 01",
+    "email": "info@vitem.com.tr",
+    "scroll_down": "Aşağı kaydır",
+    "subscribe": "Abone Ol",
+    "slide_n": "Slayt {n}",
+    "image_alt": "Görsel",
+    "social_facebook": "Facebook",
+    "social_instagram": "Instagram",
+    "social_twitter": "Twitter",
+    "social_youtube": "YouTube",
+    "social_linkedin": "LinkedIn",
+    "save": "Kaydet",
+    "saving": "Kaydediliyor...",
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "cancel": "İptal",
+    "close": "Kapat",
+    "yes": "Evet",
+    "no": "Hayır",
+    "error_occurred": "Bir hata oluştu.",
+    "loading_data": "Veriler yükleniyor..."
   },
   "about": {
     "eyebrow": "Hakkımızda",
@@ -30,7 +63,8 @@
     "stat_years": "Yıllık Deneyim",
     "stat_projects": "Tamamlanan Proje",
     "stat_team": "Uzman Ekip",
-    "stat_collections": "Temel Koleksiyon"
+    "stat_collections": "Temel Koleksiyon",
+    "alt_workshop": "Vitem atölyesi"
   },
   "contact": {
     "eyebrow": "Bize Ulaşın",
@@ -54,10 +88,80 @@
     "send_another": "Başka mesaj gönder",
     "error": "Bir hata oluştu. Lütfen daha sonra tekrar deneyin."
   },
+  "collections": {
+    "eyebrow": "Koleksiyonlar",
+    "title": "Koleksiyonlarımız",
+    "description": "Özel olarak tasarlanan mutfaklar, mimari kapılar ve özel yapım gardırop koleksiyonlarımızı keşfedin — her biri yaşam alanlarınızı dönüştürmek için tasarlandı.",
+    "explore": "Koleksiyonu Keşfet",
+    "breadcrumb": "Koleksiyon",
+    "products_in": "{name} Ürünleri",
+    "product_count_one": "{count} ürün",
+    "product_count_other": "{count} ürün",
+    "discover_more": "Detayları Gör",
+    "no_products": "Bu koleksiyonda henüz ürün bulunmamaktadır."
+  },
+  "product_detail": {
+    "specifications": "Teknik Özellikler",
+    "request_info": "Bilgi Talep Et",
+    "collection_fallback": "Koleksiyon"
+  },
   "projects": {
     "eyebrow": "Portföy",
     "title": "Projelerimiz",
-    "view_project": "Projeyi Görüntüle"
+    "view_project": "Projeyi Görüntüle",
+    "all_projects": "Tüm Projeler",
+    "back_to_projects": "Projelere Dön",
+    "not_found": "Proje bulunamadı.",
+    "scope_title": "Proje Kapsamı",
+    "gallery": "Galeri",
+    "cta_title": "Benzer bir proje mi planlıyorsunuz?",
+    "cta_desc": "Ekibimizle iletişime geçin, vizyonunuzu birlikte hayata geçirelim.",
+    "cta_button": "Bize Ulaşın",
+    "items": {
+      "villa-bosphorus": {
+        "name": "Villa Bosphorus",
+        "location": "İstanbul",
+        "year": "2025",
+        "category": "Mutfak & Yaşam Alanları",
+        "description": "İstanbul Boğazı manzaralı bu özel villa projesinde modern minimalist çizgiler ve doğal malzeme seçimleriyle benzersiz bir yaşam deneyimi yaratıldı. Açık plan mutfak ve yaşam alanı tasarımı ile aile dinamiklerine uygun, ferah ve şık bir ortam oluşturuldu.",
+        "scope_1": "Ada mutfak tasarımı",
+        "scope_2": "Özel ankastre entegrasyonu",
+        "scope_3": "Banyo mobilyası",
+        "scope_4": "Yaşam alanı dolapları"
+      },
+      "aegean-retreat": {
+        "name": "Aegean Retreat",
+        "location": "Bodrum",
+        "year": "2024",
+        "category": "Mutfak & Banyo",
+        "description": "Ege kıyısında konumlanan bu tatil villasında deniz mavisi ve beyaz tonların hakim olduğu sade ve şık bir iç mekan anlayışı benimsendi. Mutfak ve banyo projelerinde su dirençli malzemeler ve deniz estetiğine uygun renk paleti kullanıldı.",
+        "scope_1": "Sahil vilası mutfak tasarımı",
+        "scope_2": "İkili banyo projesi",
+        "scope_3": "Özel renk paleti danışmanlığı"
+      },
+      "urban-minimalist": {
+        "name": "Urban Minimalist",
+        "location": "Ankara",
+        "year": "2024",
+        "category": "Mutfak",
+        "description": "Başkentin kalbindeki bu modern daire projesinde gri-beyaz renk paleti ve mat kapak seçimleriyle minimalist bir estetik yakalandı. Sınırlı alan içinde maksimum depolama çözümü sunan akıllı tasarım anlayışı benimsendi.",
+        "scope_1": "Kompakt mutfak çözümü",
+        "scope_2": "Gizli depolama sistemleri",
+        "scope_3": "Ankastre fırın ve bulaşık makinesi entegrasyonu"
+      },
+      "heritage-estate": {
+        "name": "Heritage Estate",
+        "location": "Hatay",
+        "year": "2023",
+        "category": "Mutfak & Banyo & Yaşam Alanları",
+        "description": "Hatay'ın tarihi dokusuna uygun olarak tasarlanan bu köşk projesinde Anadolu mimari motiflerinden ilham alınan sıcak tonlar ve ahşap dokular kullanıldı. Geniş aile yaşamına uygun, misafirperver ve işlevsel bir iç mekan planlaması yapıldı.",
+        "scope_1": "Geniş aile mutfağı",
+        "scope_2": "4 adet banyo projesi",
+        "scope_3": "Misafir odası mobilyası",
+        "scope_4": "Yaşam alanı duvar panelleri",
+        "scope_5": "Özel ahşap işçiliği"
+      }
+    }
   },
   "farkimiz": {
     "eyebrow": "Neden Vitem?",
@@ -74,7 +178,21 @@
     "service_title": "Satış Sonrası Hizmet",
     "service_desc": "Montaj sonrası teknik servis ile ürünlerinizin uzun yıllar sorunsuz kullanılmasını güvence altına alıyoruz.",
     "experience_title": "20+ Yıl Deneyim",
-    "experience_desc": "1997'den bu yana 10.000'den fazla projeyi başarıyla tamamlayarak kazandığımız deneyimi her ürüne yansıtıyoruz."
+    "experience_desc": "1997'den bu yana 10.000'den fazla projeyi başarıyla tamamlayarak kazandığımız deneyimi her ürüne yansıtıyoruz.",
+    "stat_founded": "Kuruluş Yılı",
+    "stat_facility": "Üretim Tesisi",
+    "stat_team": "Uzman Ekip",
+    "stat_projects": "Tamamlanan Proje",
+    "process_eyebrow": "Sürecimiz",
+    "process_title": "Projeden Teslimata Kusursuz Yolculuk",
+    "step1_title": "Keşif & Ölçüm",
+    "step1_desc": "Mekanınızı yerinde ziyaret ederek ihtiyaçlarınızı ve ölçülerinizi belirliyoruz.",
+    "step2_title": "Tasarım & Sunum",
+    "step2_desc": "3D görselleştirme ile projenizi teslimattan önce gözünüzde canlandırın.",
+    "step3_title": "Üretim",
+    "step3_desc": "3.500 m²'lik tesisimizde CNC makineleriyle hassas üretim gerçekleştiriyoruz.",
+    "step4_title": "Montaj & Teslimat",
+    "step4_desc": "Uzman ekibimiz kurulumu tamamlayıp satış sonrası destek için yanınızda."
   },
   "kampanyalar": {
     "eyebrow": "Fırsatlar",
@@ -83,14 +201,67 @@
     "current_tab": "Güncel Kampanyalar",
     "exhibition_tab": "Teşhir Ürünleri",
     "no_campaigns": "Şu anda aktif kampanya bulunmamaktadır.",
+    "no_exhibition": "Şu anda listelenmiş teşhir ürünü bulunmamaktadır.",
     "valid_until": "Son geçerlilik:",
+    "valid_until_date": "{date} tarihine kadar geçerlidir",
     "learn_more": "Detaylı Bilgi",
-    "exhibition_desc": "Teşhir ürünlerinde büyük indirim fırsatlarını kaçırmayın."
+    "exhibition_desc": "Teşhir ürünlerinde büyük indirim fırsatlarını kaçırmayın.",
+    "page_description": "Güncel indirim kampanyalarımızı ve özel fiyatlı teşhir ürünlerimizi keşfedin.",
+    "active_count_one": "{count} aktif kampanya",
+    "active_count_other": "{count} aktif kampanya",
+    "current_card_desc": "Mutfak, banyo ve yaşam alanı ürünlerinde sezonluk indirimler ve sınırlı süreli özel fırsatlar.",
+    "exhibition_count_one": "{count} ürün listelendi",
+    "exhibition_count_other": "{count} ürün listelendi",
+    "exhibition_card_desc": "Mağazalarımızdan kaldırılan teşhir ürünleri, ücretsiz nakliye ve montaj dahil özel fiyatlarla satışa sunulmaktadır.",
+    "view_all": "Tümünü Gör",
+    "current_title": "Güncel Kampanyalar",
+    "current_description": "Vitem'in özel kampanya ve indirim fırsatlarından haberdar olun. Sınırlı süreli tekliflerimizi kaçırmayın.",
+    "exhibition_title": "Teşhir Ürünleri",
+    "exhibition_page_desc": "Mağazalarımızdan kaldırılan teşhir ürünlerimizi özel fiyatlarla satın alabilirsiniz. Nakliye ve montaj dahildir.",
+    "exhibition_badge": "Teşhir",
+    "view_details": "Detayları Gör",
+    "request_info": "Bilgi Al",
+    "detail_page": "Detay Sayfası",
+    "request_or_order": "Bilgi Al / Sipariş Ver",
+    "back_to": "{label}'ne Dön",
+    "field_branch": "Şube",
+    "field_model_color": "Model / Renk",
+    "field_details": "Detaylar",
+    "field_shipping": "Nakliye ve Montaj",
+    "field_price": "Fiyat",
+    "field_discounted_price": "İndirimli Fiyat",
+    "field_valid_until": "Son Geçerlilik",
+    "discount_label": "%{discount} indirim"
   },
   "referanslar": {
     "eyebrow": "Müşteri Yorumları",
     "title": "Referanslarımız",
-    "description": "Binlerce mutlu müşterimizin deneyimlerini keşfedin."
+    "description": "Binlerce mutlu müşterimizin deneyimlerini keşfedin.",
+    "stat_projects": "Tamamlanan Proje",
+    "stat_satisfaction": "Müşteri Memnuniyeti",
+    "stat_experience": "Yıl Deneyim",
+    "stat_rating": "Ortalama Puan",
+    "partners_eyebrow": "İş Birliklerimiz",
+    "partners_title": "Güvenilir Markalarla Çalışıyoruz",
+    "tags": {
+      "kitchen": "Mutfak Projesi",
+      "kitchen_bath": "Mutfak & Banyo",
+      "living": "Yaşam Alanları",
+      "bath": "Banyo Projesi"
+    },
+    "items": {
+      "1_text": "Başından sonuna kadar tüm detaylardan memnun kaldım. En önemlisi de en ufak bir sorunumuz bile hemen çözüldü.",
+      "2_text": "Kaliteli malzeme kullanımı ve işçilik açısından beklentilerimizin çok üzerinde bir hizmet aldık. Kesinlikle tavsiye ederim.",
+      "3_text": "Tasarım aşamasından teslimata kadar profesyonel bir ekipti. Mutfağımız hem çok şık hem de son derece işlevsel oldu.",
+      "4_text": "Vitem ekibi vizyonumuzu tam olarak anladı ve hayallerimizin ötesinde bir sonuç ortaya koydu. Teşekkürler!",
+      "5_text": "Fiyat performans oranı mükemmel. Üstelik montaj ekibi çok titizdi, her detaya özen gösterdiler.",
+      "6_text": "İkinci projemiz olmasına rağmen her seferinde aynı özen ve kaliteyi görüyoruz. Vitem ailesi olduk adeta.",
+      "loc_gaziantep": "Gaziantep / Altunkayagrup",
+      "loc_hatay": "Hatay",
+      "loc_istanbul": "İstanbul",
+      "loc_adana": "Adana",
+      "loc_ankara": "Ankara"
+    }
   },
   "katalog": {
     "eyebrow": "Dijital Katalog",
@@ -99,7 +270,62 @@
     "download_btn": "PDF İndir",
     "view_btn": "Görüntüle",
     "request_btn": "Basılı Katalog Talep Et",
-    "request_desc": "Basılı kataloğumuzu ücretsiz olarak adresinize gönderelim."
+    "request_desc": "Basılı kataloğumuzu ücretsiz olarak adresinize gönderelim.",
+    "catalog_title": "Vitem — Ana Katalog",
+    "catalog_desc": "Mutfak, banyo ve yaşam alanları için tüm koleksiyonlarımızı içeren kapsamlı katalog.",
+    "catalog_category": "Genel",
+    "free_eyebrow": "Ücretsiz",
+    "request_message": "Katalog talebi — Posta adresi: {address}",
+    "label_name": "Ad Soyad",
+    "label_email": "E-Posta",
+    "label_address": "Posta Adresi",
+    "submit": "Katalog Talep Et",
+    "submitting": "Gönderiliyor...",
+    "request_received_title": "Talebiniz Alındı",
+    "request_received_desc": "Basılı kataloğumuz en kısa sürede adresinize gönderilecektir.",
+    "error": "Bir hata oluştu. Lütfen tekrar deneyin."
+  },
+  "magazine": {
+    "eyebrow": "Dergi",
+    "title": "Vitem Dergisi",
+    "cta": "Tüm Yazıları Görüntüle",
+    "a1_title": "En Kaliteli Ahşapları Seçmenin Sanatı",
+    "a1_category": "Malzemeler",
+    "a2_title": "Modern Mutfak Tasarımında Minimalizm",
+    "a2_category": "Trendler",
+    "a3_title": "Global Fuarlar: Vitem Milano'da",
+    "a3_category": "Etkinlikler",
+    "a1_date": "12 Ekim 2025",
+    "a2_date": "28 Eylül 2025",
+    "a3_date": "15 Eylül 2025",
+    "read_article": "Makaleyi Oku",
+    "all_articles": "Tüm Makaleler",
+    "more_articles": "Diğer Makaleler"
+  },
+  "newsletter": {
+    "title": "İletişimde Kalın",
+    "desc": "Yeni koleksiyonlar, tasarım trendleri ve özel etkinlikler hakkında güncel kalmak için bültenimize abone olun.",
+    "placeholder": "E-posta adresinizi girin",
+    "done": "Tamam",
+    "privacy": "Abone olarak Gizlilik Politikamızı kabul etmiş ve pazarlama iletişimi almayı onaylamış olursunuz."
+  },
+  "featured_collections": {
+    "eyebrow": "Koleksiyonlar",
+    "title": "Koleksiyonlarımızı Keşfedin",
+    "discover": "Keşfet"
+  },
+  "featured_products": {
+    "eyebrow": "Öne Çıkanlar",
+    "title": "Özel Parçalar",
+    "view": "Detayları Gör"
+  },
+  "hero_fallback": {
+    "s1_title": "Hatay'da Üretildi. Dünya İçin Tasarlandı.",
+    "s1_subtitle": "Anadolu mirasını çağdaş lüksle harmanlayan özel iç mekan tasarımları",
+    "s1_link": "Koleksiyonu Keşfet",
+    "s2_title": "Mimarinin Yaşamla Buluştuğu Yer",
+    "s2_subtitle": "Titiz bir özenle üretilen premium mutfak, banyo ve gardırop sistemleri",
+    "s2_link": "Daha Fazlası"
   },
   "not_found": {
     "title": "Sayfa Bulunamadı",
@@ -127,48 +353,14 @@
     "title": "Anadolu Mirasının Çağdaş Tasarımla Buluştuğu Yer",
     "p1": "Hatay'ın kalbinde kurulan Vitem, lüks iç mimari ve mobilya üretiminde yeni bir standart belirliyor. Yüzyıllık Anadolu ustalığını çağdaş tasarımla harmanlayarak hem zamansız hem de modern mekanlar yaratıyoruz.",
     "p2": "Atölyemizden çıkan her ürün, premium malzeme seçiminden son el işçiliğine kadar titiz bir özenin izini taşır. Gerçek lüksün form ile işlevselliğin uyumunda yattığına inanıyoruz.",
-    "cta": "Hikayemiz"
+    "cta": "Hikayemiz",
+    "alt_image": "Vitem ustalığı"
   },
   "craftsmanship": {
     "eyebrow": "Süreç",
     "title": "Her Detayda Ustalık",
     "desc": "Mükemmelliğe olan bağlılığımız, son ürün ortaya çıkmadan çok önce başlar. Yalnızca en kaliteli hammaddeleri seçiyor; Hatay'ın nesiller boyu aktarılan usta işçiliğini son teknoloji hassasiyetiyle birleştiriyoruz. Her eğri, bağlantı ve yüzey mutlak mükemmelliği sağlamak için titizlikle inceleniyor.",
-    "cta": "Fabrikamızı Keşfedin"
-  },
-  "magazine": {
-    "eyebrow": "Dergi",
-    "title": "Vitem Dergisi",
-    "cta": "Tüm Yazıları Görüntüle",
-    "a1_title": "En Kaliteli Ahşapları Seçmenin Sanatı",
-    "a1_category": "Malzemeler",
-    "a2_title": "Modern Mutfak Tasarımında Minimalizm",
-    "a2_category": "Trendler",
-    "a3_title": "Global Fuarlar: Vitem Milano'da",
-    "a3_category": "Etkinlikler"
-  },
-  "newsletter": {
-    "title": "İletişimde Kalın",
-    "desc": "Yeni koleksiyonlar, tasarım trendleri ve özel etkinlikler hakkında güncel kalmak için bültenimize abone olun.",
-    "placeholder": "E-posta adresinizi girin",
-    "done": "Tamam",
-    "privacy": "Abone olarak Gizlilik Politikamızı kabul etmiş ve pazarlama iletişimi almayı onaylamış olursunuz."
-  },
-  "featured_collections": {
-    "eyebrow": "Koleksiyonlar",
-    "title": "Koleksiyonlarımızı Keşfedin",
-    "discover": "Keşfet"
-  },
-  "featured_products": {
-    "eyebrow": "Öne Çıkanlar",
-    "title": "Özel Parçalar",
-    "view": "Detayları Gör"
-  },
-  "hero_fallback": {
-    "s1_title": "Hatay'da Üretildi. Dünya İçin Tasarlandı.",
-    "s1_subtitle": "Anadolu mirasını çağdaş lüksle harmanlayan özel iç mekan tasarımları",
-    "s1_link": "Koleksiyonu Keşfet",
-    "s2_title": "Mimarinin Yaşamla Buluştuğu Yer",
-    "s2_subtitle": "Titiz bir özenle üretilen premium mutfak, banyo ve gardırop sistemleri",
-    "s2_link": "Daha Fazlası"
+    "cta": "Fabrikamızı Keşfedin",
+    "alt_image": "Vitem ustalığı"
   }
 }

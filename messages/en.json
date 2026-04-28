@@ -16,7 +16,40 @@
     "cat_ankastre": "Built-in Appliances",
     "cat_yasam": "Living Spaces",
     "guncel_kampanyalar": "Current Campaigns",
-    "teshir_urunleri": "Exhibition Products"
+    "teshir_urunleri": "Exhibition Products",
+    "toggle_menu": "Toggle menu",
+    "close_menu": "Close menu",
+    "lang_tr": "Turkish",
+    "lang_en": "English"
+  },
+  "common": {
+    "home": "Home",
+    "loading": "Loading...",
+    "back": "Back",
+    "address": "Ürgen Paşa Mah. 75. Yıl Bulvarı, Antakya / Hatay",
+    "address_line1": "Ürgen Paşa Mah. 75. Yıl Bulvarı",
+    "address_line2": "Antakya / Hatay",
+    "phone": "+90 326 221 88 01",
+    "email": "info@vitem.com.tr",
+    "scroll_down": "Scroll down",
+    "subscribe": "Subscribe",
+    "slide_n": "Slide {n}",
+    "image_alt": "Image",
+    "social_facebook": "Facebook",
+    "social_instagram": "Instagram",
+    "social_twitter": "Twitter",
+    "social_youtube": "YouTube",
+    "social_linkedin": "LinkedIn",
+    "save": "Save",
+    "saving": "Saving...",
+    "delete": "Delete",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No",
+    "error_occurred": "An error occurred.",
+    "loading_data": "Loading data..."
   },
   "about": {
     "eyebrow": "About Us",
@@ -30,7 +63,8 @@
     "stat_years": "Years of Experience",
     "stat_projects": "Projects Completed",
     "stat_team": "Expert Team",
-    "stat_collections": "Core Collections"
+    "stat_collections": "Core Collections",
+    "alt_workshop": "Vitem workshop"
   },
   "contact": {
     "eyebrow": "Get in Touch",
@@ -54,10 +88,80 @@
     "send_another": "Send another message",
     "error": "Something went wrong. Please try again later."
   },
+  "collections": {
+    "eyebrow": "Collections",
+    "title": "Our Collections",
+    "description": "Explore our curated collections of bespoke kitchens, architectural doors, and custom wardrobes — each designed to transform your living spaces.",
+    "explore": "Explore collection",
+    "breadcrumb": "Collection",
+    "products_in": "Products in {name}",
+    "product_count_one": "{count} product",
+    "product_count_other": "{count} products",
+    "discover_more": "Discover more",
+    "no_products": "No products available in this collection yet."
+  },
+  "product_detail": {
+    "specifications": "Specifications",
+    "request_info": "Request Information",
+    "collection_fallback": "Collection"
+  },
   "projects": {
     "eyebrow": "Portfolio",
     "title": "Our Projects",
-    "view_project": "View Project"
+    "view_project": "View Project",
+    "all_projects": "All Projects",
+    "back_to_projects": "Back to Projects",
+    "not_found": "Project not found.",
+    "scope_title": "Project Scope",
+    "gallery": "Gallery",
+    "cta_title": "Are you planning a similar project?",
+    "cta_desc": "Get in touch with our team and let us bring your vision to life together.",
+    "cta_button": "Contact Us",
+    "items": {
+      "villa-bosphorus": {
+        "name": "Villa Bosphorus",
+        "location": "Istanbul",
+        "year": "2025",
+        "category": "Kitchen & Living Spaces",
+        "description": "In this exclusive villa project overlooking the Istanbul Bosphorus, a unique living experience was created with modern minimalist lines and natural material choices. The open-plan kitchen and living space design provided a spacious, elegant environment suited to family dynamics.",
+        "scope_1": "Island kitchen design",
+        "scope_2": "Custom built-in integration",
+        "scope_3": "Bathroom furniture",
+        "scope_4": "Living area cabinetry"
+      },
+      "aegean-retreat": {
+        "name": "Aegean Retreat",
+        "location": "Bodrum",
+        "year": "2024",
+        "category": "Kitchen & Bathroom",
+        "description": "In this holiday villa located on the Aegean coast, a clean, elegant interior approach dominated by sea-blue and white tones was adopted. Water-resistant materials and a color palette suited to maritime aesthetics were used in the kitchen and bathroom projects.",
+        "scope_1": "Coastal villa kitchen design",
+        "scope_2": "Dual bathroom project",
+        "scope_3": "Custom color palette consultation"
+      },
+      "urban-minimalist": {
+        "name": "Urban Minimalist",
+        "location": "Ankara",
+        "year": "2024",
+        "category": "Kitchen",
+        "description": "In this modern apartment project at the heart of the capital, a minimalist aesthetic was achieved with a grey-white color palette and matte cabinet selections. An intelligent design philosophy that delivers maximum storage within limited space was adopted.",
+        "scope_1": "Compact kitchen solution",
+        "scope_2": "Hidden storage systems",
+        "scope_3": "Built-in oven & dishwasher integration"
+      },
+      "heritage-estate": {
+        "name": "Heritage Estate",
+        "location": "Hatay",
+        "year": "2023",
+        "category": "Kitchen & Bathroom & Living",
+        "description": "Designed in harmony with Hatay's historical fabric, this estate project features warm tones and wooden textures inspired by Anatolian architectural motifs. A welcoming and functional interior plan suitable for extended family living was crafted.",
+        "scope_1": "Large family kitchen",
+        "scope_2": "4 bathroom projects",
+        "scope_3": "Guest room furniture",
+        "scope_4": "Living area wall panels",
+        "scope_5": "Custom woodwork"
+      }
+    }
   },
   "farkimiz": {
     "eyebrow": "Why Vitem?",
@@ -74,7 +178,21 @@
     "service_title": "After-Sales Service",
     "service_desc": "Our post-installation technical service ensures your products can be used without issues for many years.",
     "experience_title": "20+ Years Experience",
-    "experience_desc": "Since 1997, we have successfully completed over 10,000 projects, reflecting our accumulated experience in every product."
+    "experience_desc": "Since 1997, we have successfully completed over 10,000 projects, reflecting our accumulated experience in every product.",
+    "stat_founded": "Founded",
+    "stat_facility": "Production Facility",
+    "stat_team": "Expert Team",
+    "stat_projects": "Projects Completed",
+    "process_eyebrow": "Our Process",
+    "process_title": "A Seamless Journey from Project to Delivery",
+    "step1_title": "Discovery & Measurement",
+    "step1_desc": "We visit your space on-site to identify your needs and take precise measurements.",
+    "step2_title": "Design & Presentation",
+    "step2_desc": "Visualize your project with 3D rendering before delivery.",
+    "step3_title": "Production",
+    "step3_desc": "We carry out precision manufacturing in our 3,500 m² facility with CNC machines.",
+    "step4_title": "Installation & Delivery",
+    "step4_desc": "Our expert team completes installation and stays by your side for after-sales support."
   },
   "kampanyalar": {
     "eyebrow": "Special Offers",
@@ -83,14 +201,67 @@
     "current_tab": "Current Campaigns",
     "exhibition_tab": "Exhibition Products",
     "no_campaigns": "No active campaigns at the moment.",
+    "no_exhibition": "No exhibition products listed at the moment.",
     "valid_until": "Valid until:",
+    "valid_until_date": "Valid until {date}",
     "learn_more": "Learn More",
-    "exhibition_desc": "Don't miss the great discount opportunities on exhibition products."
+    "exhibition_desc": "Don't miss the great discount opportunities on exhibition products.",
+    "page_description": "Explore our current discount campaigns and exhibition products with special prices.",
+    "active_count_one": "{count} active campaign",
+    "active_count_other": "{count} active campaigns",
+    "current_card_desc": "Seasonal discounts and limited-time special offers on kitchen, bathroom and living space products.",
+    "exhibition_count_one": "{count} product listed",
+    "exhibition_count_other": "{count} products listed",
+    "exhibition_card_desc": "Showroom display products removed from stock, available at special prices with free delivery and installation.",
+    "view_all": "View All",
+    "current_title": "Current Campaigns",
+    "current_description": "Stay informed about Vitem's special campaigns and discount opportunities. Don't miss our limited-time offers.",
+    "exhibition_title": "Exhibition Products",
+    "exhibition_page_desc": "You can purchase our showroom display products at special prices. Delivery and installation included.",
+    "exhibition_badge": "Display",
+    "view_details": "View Details",
+    "request_info": "Request Info",
+    "detail_page": "Detail Page",
+    "request_or_order": "Request Info / Order",
+    "back_to": "Back to {label}",
+    "field_branch": "Branch",
+    "field_model_color": "Model / Color",
+    "field_details": "Details",
+    "field_shipping": "Delivery & Installation",
+    "field_price": "Price",
+    "field_discounted_price": "Discounted Price",
+    "field_valid_until": "Valid Until",
+    "discount_label": "{discount}% off"
   },
   "referanslar": {
     "eyebrow": "Client Reviews",
     "title": "References",
-    "description": "Discover the experiences of thousands of our satisfied clients."
+    "description": "Discover the experiences of thousands of our satisfied clients.",
+    "stat_projects": "Projects Completed",
+    "stat_satisfaction": "Customer Satisfaction",
+    "stat_experience": "Years of Experience",
+    "stat_rating": "Average Rating",
+    "partners_eyebrow": "Our Partners",
+    "partners_title": "We Work with Trusted Brands",
+    "tags": {
+      "kitchen": "Kitchen Project",
+      "kitchen_bath": "Kitchen & Bath",
+      "living": "Living Spaces",
+      "bath": "Bathroom Project"
+    },
+    "items": {
+      "1_text": "I was satisfied with every detail from start to finish. Most importantly, even the smallest issue we had was resolved immediately.",
+      "2_text": "We received service far above our expectations in terms of quality material use and craftsmanship. I would definitely recommend it.",
+      "3_text": "From design to delivery, they were a professional team. Our kitchen turned out both very stylish and extremely functional.",
+      "4_text": "The Vitem team fully understood our vision and delivered a result beyond our dreams. Thank you!",
+      "5_text": "Excellent value for money. Moreover, the installation team was very meticulous and paid attention to every detail.",
+      "6_text": "Even though it was our second project, we see the same care and quality every time. We have practically become part of the Vitem family.",
+      "loc_gaziantep": "Gaziantep / Altunkayagrup",
+      "loc_hatay": "Hatay",
+      "loc_istanbul": "Istanbul",
+      "loc_adana": "Adana",
+      "loc_ankara": "Ankara"
+    }
   },
   "katalog": {
     "eyebrow": "Digital Catalogue",
@@ -99,7 +270,62 @@
     "download_btn": "Download PDF",
     "view_btn": "View Online",
     "request_btn": "Request Print Catalogue",
-    "request_desc": "Let us send you our printed catalogue free of charge to your address."
+    "request_desc": "Let us send you our printed catalogue free of charge to your address.",
+    "catalog_title": "Vitem — Main Catalogue",
+    "catalog_desc": "Comprehensive catalogue featuring all our collections for kitchens, bathrooms and living spaces.",
+    "catalog_category": "General",
+    "free_eyebrow": "Free",
+    "request_message": "Catalogue request — Postal address: {address}",
+    "label_name": "Full Name",
+    "label_email": "Email",
+    "label_address": "Postal Address",
+    "submit": "Request Catalogue",
+    "submitting": "Sending...",
+    "request_received_title": "Your Request Has Been Received",
+    "request_received_desc": "Our printed catalogue will be sent to your address as soon as possible.",
+    "error": "Something went wrong. Please try again."
+  },
+  "magazine": {
+    "eyebrow": "Journal",
+    "title": "The Vitem Magazine",
+    "cta": "View All Articles",
+    "a1_title": "The Art of Selecting Fine Woods",
+    "a1_category": "Materials",
+    "a2_title": "Minimalism in Modern Kitchen Design",
+    "a2_category": "Trends",
+    "a3_title": "Global Exhibitions: Vitem in Milan",
+    "a3_category": "Events",
+    "a1_date": "12 October 2025",
+    "a2_date": "28 September 2025",
+    "a3_date": "15 September 2025",
+    "read_article": "Read Article",
+    "all_articles": "All Articles",
+    "more_articles": "More Articles"
+  },
+  "newsletter": {
+    "title": "Stay in Touch",
+    "desc": "Subscribe to our newsletter to receive the latest updates on new collections, design trends, and exclusive events.",
+    "placeholder": "Enter your email address",
+    "done": "Done",
+    "privacy": "By subscribing, you agree to our Privacy Policy and consent to receive marketing communications."
+  },
+  "featured_collections": {
+    "eyebrow": "Collections",
+    "title": "Discover Our Collections",
+    "discover": "Discover more"
+  },
+  "featured_products": {
+    "eyebrow": "Featured",
+    "title": "Signature Pieces",
+    "view": "View details"
+  },
+  "hero_fallback": {
+    "s1_title": "Crafted in Hatay. Designed for the World.",
+    "s1_subtitle": "Bespoke interiors that blend Anatolian heritage with contemporary luxury",
+    "s1_link": "Explore Collection",
+    "s2_title": "Where Architecture Meets Living",
+    "s2_subtitle": "Premium kitchens, bathrooms and wardrobes crafted with meticulous attention",
+    "s2_link": "Discover More"
   },
   "not_found": {
     "title": "Page Not Found",
@@ -127,48 +353,14 @@
     "title": "Where Anatolian Heritage Meets Contemporary Design",
     "p1": "Founded in the heart of Hatay, Vitem represents a new standard in luxury interior design and furniture manufacturing. We blend centuries of Anatolian craftsmanship with cutting-edge contemporary design to create spaces that are both timeless and modern.",
     "p2": "Every piece that leaves our workshop carries the imprint of meticulous attention to detail, from the selection of premium materials to the final hand-finished touches. We believe that true luxury lies in the harmony between form and function.",
-    "cta": "Our Story"
+    "cta": "Our Story",
+    "alt_image": "Vitem craftsmanship"
   },
   "craftsmanship": {
     "eyebrow": "The Process",
     "title": "Mastery in Every Detail",
     "desc": "Our commitment to excellence begins long before the final piece is assembled. We source only the finest raw materials, blending cutting-edge precision technology with generations of artisanal expertise from Hatay. Every curve, joint, and surface is meticulously inspected to ensure absolute perfection.",
-    "cta": "Explore Our Factory"
-  },
-  "magazine": {
-    "eyebrow": "Journal",
-    "title": "The Vitem Magazine",
-    "cta": "View All Articles",
-    "a1_title": "The Art of Selecting Fine Woods",
-    "a1_category": "Materials",
-    "a2_title": "Minimalism in Modern Kitchen Design",
-    "a2_category": "Trends",
-    "a3_title": "Global Exhibitions: Vitem in Milan",
-    "a3_category": "Events"
-  },
-  "newsletter": {
-    "title": "Stay in Touch",
-    "desc": "Subscribe to our newsletter to receive the latest updates on new collections, design trends, and exclusive events.",
-    "placeholder": "Enter your email address",
-    "done": "Done",
-    "privacy": "By subscribing, you agree to our Privacy Policy and consent to receive marketing communications."
-  },
-  "featured_collections": {
-    "eyebrow": "Collections",
-    "title": "Discover Our Collections",
-    "discover": "Discover more"
-  },
-  "featured_products": {
-    "eyebrow": "Featured",
-    "title": "Signature Pieces",
-    "view": "View details"
-  },
-  "hero_fallback": {
-    "s1_title": "Crafted in Hatay. Designed for the World.",
-    "s1_subtitle": "Bespoke interiors that blend Anatolian heritage with contemporary luxury",
-    "s1_link": "Explore Collection",
-    "s2_title": "Where Architecture Meets Living",
-    "s2_subtitle": "Premium kitchens, bathrooms and wardrobes crafted with meticulous attention",
-    "s2_link": "Discover More"
+    "cta": "Explore Our Factory",
+    "alt_image": "Vitem craftsmanship"
   }
 }

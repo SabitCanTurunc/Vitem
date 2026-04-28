@@ -1,13 +1,14 @@
 import { getActiveCampaigns } from "@api/queries/products";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { ArrowRight, MapPin, Palette, Info, Truck, Tag } from "lucide-react";
 
 export default async function TeshirUrunleriPage() {
-  const [campaigns, locale] = await Promise.all([
+  const [campaigns, locale, t] = await Promise.all([
     getActiveCampaigns("exhibition"),
     getLocale(),
+    getTranslations("kampanyalar"),
   ]);
 
   return (
@@ -17,17 +18,16 @@ export default async function TeshirUrunleriPage() {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-[10px] tracking-[0.3em] uppercase text-vitem-400 mb-4">
             <Link href="/kampanyalar" className="hover:text-vitem-700 transition-colors">
-              Kampanyalar
+              {t("title")}
             </Link>
             {" / "}
-            <span className="text-vitem-700">Teşhir Ürünleri</span>
+            <span className="text-vitem-700">{t("exhibition_title")}</span>
           </p>
           <h1 className="font-serif text-4xl sm:text-5xl font-light text-vitem-900 tracking-tight mb-6">
-            Teşhir Ürünleri
+            {t("exhibition_title")}
           </h1>
           <p className="text-vitem-600 font-light max-w-xl leading-relaxed">
-            Mağazalarımızdan kaldırılan teşhir ürünlerimizi özel fiyatlarla satın alabilirsiniz.
-            Nakliye ve montaj dahildir.
+            {t("exhibition_page_desc")}
           </p>
         </div>
       </section>
@@ -37,7 +37,7 @@ export default async function TeshirUrunleriPage() {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           {campaigns.length === 0 ? (
             <div className="text-center py-20 text-vitem-400">
-              <p className="text-lg font-light">Şu anda listelenmiş teşhir ürünü bulunmamaktadır.</p>
+              <p className="text-lg font-light">{t("no_exhibition")}</p>
             </div>
           ) : (
             <div className="space-y-12">
@@ -54,7 +54,6 @@ export default async function TeshirUrunleriPage() {
                   >
                     {/* Gallery */}
                     <div className="relative">
-                      {/* Main image */}
                       <div className="relative aspect-[4/3] bg-vitem-100 overflow-hidden">
                         {mainImage ? (
                           <Image
@@ -69,11 +68,10 @@ export default async function TeshirUrunleriPage() {
                           </div>
                         )}
                         <span className="absolute top-4 left-4 bg-vitem-900 text-white text-[10px] tracking-[0.2em] uppercase px-3 py-1.5">
-                          Teşhir
+                          {t("exhibition_badge")}
                         </span>
                       </div>
 
-                      {/* Thumbnail strip */}
                       {gallery.length > 1 && (
                         <div className="flex gap-1 p-1 bg-vitem-50">
                           {gallery.slice(0, 4).map((img, i) => (
@@ -102,7 +100,7 @@ export default async function TeshirUrunleriPage() {
                             <li className="flex items-start gap-3 text-sm">
                               <span className="flex items-center gap-1.5 text-vitem-500 min-w-[130px]">
                                 <MapPin className="w-3.5 h-3.5" />
-                                Şube
+                                {t("field_branch")}
                               </span>
                               <span className="text-vitem-800 font-medium">{campaign.branch}</span>
                             </li>
@@ -111,7 +109,7 @@ export default async function TeshirUrunleriPage() {
                             <li className="flex items-start gap-3 text-sm">
                               <span className="flex items-center gap-1.5 text-vitem-500 min-w-[130px]">
                                 <Palette className="w-3.5 h-3.5" />
-                                Model / Renk
+                                {t("field_model_color")}
                               </span>
                               <span className="text-vitem-800">{campaign.modelColor}</span>
                             </li>
@@ -120,7 +118,7 @@ export default async function TeshirUrunleriPage() {
                             <li className="flex items-start gap-3 text-sm">
                               <span className="flex items-center gap-1.5 text-vitem-500 min-w-[130px]">
                                 <Info className="w-3.5 h-3.5" />
-                                Detaylar
+                                {t("field_details")}
                               </span>
                               <span className="text-vitem-800">{campaign.details}</span>
                             </li>
@@ -129,7 +127,7 @@ export default async function TeshirUrunleriPage() {
                             <li className="flex items-start gap-3 text-sm">
                               <span className="flex items-center gap-1.5 text-vitem-500 min-w-[130px]">
                                 <Truck className="w-3.5 h-3.5" />
-                                Nakliye ve Montaj
+                                {t("field_shipping")}
                               </span>
                               <span className="text-vitem-800">{campaign.shippingInfo}</span>
                             </li>
@@ -138,7 +136,7 @@ export default async function TeshirUrunleriPage() {
                             <li className="flex items-start gap-3 text-sm">
                               <span className="flex items-center gap-1.5 text-vitem-500 min-w-[130px]">
                                 <Tag className="w-3.5 h-3.5" />
-                                Fiyat
+                                {t("field_price")}
                               </span>
                               <span className="text-vitem-800">{campaign.originalPrice}</span>
                             </li>
@@ -147,7 +145,7 @@ export default async function TeshirUrunleriPage() {
                             <li className="flex items-start gap-3 text-sm">
                               <span className="flex items-center gap-1.5 text-vitem-500 min-w-[130px]">
                                 <Tag className="w-3.5 h-3.5 text-red-500" />
-                                İndirimli Fiyat
+                                {t("field_discounted_price")}
                               </span>
                               <span className="text-vitem-800">{campaign.discountedPrice}</span>
                             </li>
@@ -166,14 +164,14 @@ export default async function TeshirUrunleriPage() {
                           href="/contact"
                           className="inline-flex items-center gap-2 bg-vitem-900 text-white text-[10px] tracking-[0.25em] uppercase px-6 py-3 hover:bg-vitem-700 transition-colors"
                         >
-                          Bilgi Al
+                          {t("request_info")}
                           <ArrowRight className="w-3.5 h-3.5" />
                         </Link>
                         <Link
                           href={`/kampanyalar/${campaign.slug}` as any}
                           className="text-[10px] tracking-[0.25em] uppercase text-vitem-600 hover:text-vitem-900 transition-colors"
                         >
-                          Detay Sayfası
+                          {t("detail_page")}
                         </Link>
                       </div>
                     </div>

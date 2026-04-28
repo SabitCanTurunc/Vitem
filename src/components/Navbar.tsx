@@ -96,6 +96,7 @@ export default function Navbar() {
 
   const pathname = usePathname();
   const t = useTranslations("nav");
+  const tCommon = useTranslations("common");
   const activeLocale = useLocale();
 
   const leftNavItems: NavItem[] = [
@@ -168,7 +169,7 @@ export default function Navbar() {
                 className="flex items-center gap-1.5 hover:text-white transition-colors"
               >
                 <Phone className="w-3 h-3" />
-                +90 326 221 88 01
+                {tCommon("phone")}
               </a>
             </div>
             <a
@@ -176,7 +177,7 @@ export default function Navbar() {
               className="hidden sm:flex items-center gap-1.5 hover:text-white transition-colors"
             >
               <Mail className="w-3 h-3" />
-              info@vitem.com.tr
+              {tCommon("email")}
             </a>
           </div>
         </div>
@@ -204,7 +205,7 @@ export default function Navbar() {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="lg:hidden p-2 -ml-2 text-vitem-800 hover:text-vitem-950 transition-colors"
-              aria-label="Toggle menu"
+              aria-label={t("toggle_menu")}
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -291,7 +292,7 @@ export default function Navbar() {
                 <button
                   onClick={() => setMobileMenuOpen(false)}
                   className="p-2 text-vitem-800"
-                  aria-label="Close menu"
+                  aria-label={t("close_menu")}
                 >
                   <X className="w-6 h-6" />
                 </button>
@@ -365,7 +366,7 @@ export default function Navbar() {
                       activeLocale === "tr" ? "text-vitem-900 pointer-events-none" : "hover:text-vitem-900"
                     }`}
                   >
-                    Türkçe
+                    {t("lang_tr")}
                   </Link>
                   <span className="text-vitem-300">/</span>
                   <Link
@@ -375,7 +376,7 @@ export default function Navbar() {
                       activeLocale === "en" ? "text-vitem-900 pointer-events-none" : "hover:text-vitem-900"
                     }`}
                   >
-                    English
+                    {t("lang_en")}
                   </Link>
                 </div>
                 <div className="text-sm text-vitem-400 space-y-1.5">
@@ -383,10 +384,10 @@ export default function Navbar() {
                     <MapPin className="w-3.5 h-3.5" /> {t("hatay_turkey")}
                   </p>
                   <p className="flex items-center gap-2">
-                    <Phone className="w-3.5 h-3.5" /> +90 326 221 88 01
+                    <Phone className="w-3.5 h-3.5" /> {tCommon("phone")}
                   </p>
                   <p className="flex items-center gap-2">
-                    <Mail className="w-3.5 h-3.5" /> info@vitem.com.tr
+                    <Mail className="w-3.5 h-3.5" /> {tCommon("email")}
                   </p>
                 </div>
               </div>

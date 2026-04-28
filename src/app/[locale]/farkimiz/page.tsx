@@ -75,10 +75,10 @@ export default function FarkimizPage() {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { number: "1997", label: "Kuruluş Yılı" },
-              { number: "3.500 m²", label: "Üretim Tesisi" },
-              { number: "80+", label: "Uzman Ekip" },
-              { number: "10.000+", label: "Tamamlanan Proje" },
+              { number: "1997", label: t("stat_founded") },
+              { number: "3.500 m²", label: t("stat_facility") },
+              { number: "80+", label: t("stat_team") },
+              { number: "10.000+", label: t("stat_projects") },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -111,19 +111,19 @@ export default function FarkimizPage() {
             className="max-w-3xl mx-auto text-center mb-16"
           >
             <span className="text-[11px] tracking-[0.25em] uppercase text-vitem-500 font-medium block mb-4">
-              Sürecimiz
+              {t("process_eyebrow")}
             </span>
             <h2 className="text-3xl sm:text-4xl font-sans font-light text-vitem-900 tracking-tight">
-              Projeden Teslimata Kusursuz Yolculuk
+              {t("process_title")}
             </h2>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {[
-              { step: "01", title: "Keşif & Ölçüm", desc: "Mekanınızı yerinde ziyaret ederek ihtiyaçlarınızı ve ölçülerinizi belirliyoruz." },
-              { step: "02", title: "Tasarım & Sunum", desc: "3D görselleştirme ile projenizi teslimattan önce gözünüzde canlandırın." },
-              { step: "03", title: "Üretim", desc: "3.500 m²'lik tesisimizde CNC makineleriyle hassas üretim gerçekleştiriyoruz." },
-              { step: "04", title: "Montaj & Teslimat", desc: "Uzman ekibimiz kurulumu tamamlayıp satış sonrası destek için yanınızda." },
+              { step: "01", title: t("step1_title"), desc: t("step1_desc") },
+              { step: "02", title: t("step2_title"), desc: t("step2_desc") },
+              { step: "03", title: t("step3_title"), desc: t("step3_desc") },
+              { step: "04", title: t("step4_title"), desc: t("step4_desc") },
             ].map((item, index) => (
               <motion.div
                 key={item.step}

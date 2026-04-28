@@ -1,11 +1,16 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
+import { Link } from "@/i18n/routing";
 
 export default function ProductDetailClient({ product, categorySlug }: { product: any, categorySlug: string }) {
   const [selectedImage, setSelectedImage] = useState(0);
+  const t = useTranslations("product_detail");
+  const tCommon = useTranslations("common");
+  const tNav = useTranslations("nav");
+  const locale = useLocale();
 
   const gallery: string[] = product.gallery
     ? JSON.parse(product.gallery)
@@ -14,6 +19,12 @@ export default function ProductDetailClient({ product, categorySlug }: { product
   const details: Record<string, string> = product.details
     ? JSON.parse(product.details)
     : {};
+
+  const productName = locale === "en" && product.nameEn ? product.nameEn : product.name;
+  const productDesc = locale === "en" && product.descriptionEn ? product.descriptionEn : product.description;
+  const categoryName = locale === "en" && product.category?.nameEn
+    ? product.category.nameEn
+    : (product.category?.name ?? t("collection_fallback"));
 
   return (
     <>
@@ -26,15 +37,15 @@ export default function ProductDetailClient({ product, categorySlug }: { product
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="flex items-center gap-3 mb-8 text-sm text-vitem-500 flex-wrap">
-              <Link href="/" className="hover:text-vitem-900 transition-colors">Home</Link>
+              <Link href="/" className="hover:text-vitem-900 transition-colors">{tCommon("home")}</Link>
               <span>/</span>
-              <Link href="/collections" className="hover:text-vitem-900 transition-colors">Collections</Link>
+              <Link href="/collections" className="hover:text-vitem-900 transition-colors">{tNav("collections")}</Link>
               <span>/</span>
-              <Link href={`/collections/${categorySlug}`} className="hover:text-vitem-900 transition-colors">
-                {product.category?.name ?? "Collection"}
+              <Link href={`/collections/${categorySlug}` as any} className="hover:text-vitem-900 transition-colors">
+                {categoryName}
               </Link>
               <span>/</span>
-              <span className="text-vitem-900">{product.name}</span>
+              <span className="text-vitem-900">{productName}</span>
             </div>
           </motion.div>
         </div>
@@ -53,7 +64,7 @@ export default function ProductDetailClient({ product, categorySlug }: { product
               <div className="relative aspect-[4/5] bg-vitem-100 overflow-hidden mb-4">
                 <img
                   src={gallery[selectedImage] ?? product.featuredImage}
-                  alt={product.name}
+                  alt={productName}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -70,7 +81,7 @@ export default function ProductDetailClient({ product, categorySlug }: { product
                           : "opacity-60 hover:opacity-100"
                       }`}
                     >
-                      <img src={img} alt={`${product.name} ${i + 1}`} className="w-full h-full object-cover" />
+                      <img src={img} alt={`${productName} ${i + 1}`} className="w-full h-full object-cover" />
                     </button>
                   ))}
                 </div>
@@ -84,21 +95,21 @@ export default function ProductDetailClient({ product, categorySlug }: { product
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
               <span className="text-[11px] tracking-[0.25em] uppercase text-vitem-500 font-medium block mb-3">
-                {product.category?.name}
+                {categoryName}
               </span>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-sans font-light text-vitem-900 tracking-tight">
-                {product.name}
+                {productName}
               </h1>
 
               <div className="mt-6 sm:mt-8 space-y-4 text-vitem-600 leading-relaxed">
-                <p className="text-base sm:text-lg">{product.description}</p>
+                <p className="text-base sm:text-lg">{productDesc}</p>
               </div>
 
               {/* Details */}
               {Object.keys(details).length > 0 && (
                 <div className="mt-8 sm:mt-10">
                   <h3 className="text-xs tracking-[0.2em] uppercase text-vitem-900 font-medium mb-4">
-                    Specifications
+                    {t("specifications")}
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {Object.entries(details).map(([key, value]) => (
@@ -120,7 +131,7 @@ export default function ProductDetailClient({ product, categorySlug }: { product
                   href="/contact"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-vitem-900 text-white text-sm tracking-[0.15em] uppercase font-medium hover:bg-vitem-800 transition-colors"
                 >
-                  Request Information
+                  {t("request_info")}
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>

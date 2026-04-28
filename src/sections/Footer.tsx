@@ -5,6 +5,7 @@ import { Link } from "@/i18n/routing";
 
 export default function Footer() {
   const t = useTranslations("footer");
+  const tCommon = useTranslations("common");
 
   return (
     <footer className="bg-vitem-950 text-vitem-300">
@@ -25,7 +26,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-vitem-400 hover:text-white transition-colors"
-                aria-label="Instagram"
+                aria-label={tCommon("social_instagram")}
               >
                 <Instagram className="w-5 h-5" />
               </a>
@@ -34,7 +35,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-vitem-400 hover:text-white transition-colors"
-                aria-label="LinkedIn"
+                aria-label={tCommon("social_linkedin")}
               >
                 <Linkedin className="w-5 h-5" />
               </a>
@@ -107,18 +108,18 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-2.5 text-sm text-vitem-400">
                 <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-                <span>Ürgen Paşa Mah. 75. Yıl Bulvarı<br />Antakya / Hatay</span>
+                <span>{tCommon("address_line1")}<br />{tCommon("address_line2")}</span>
               </li>
               <li className="flex items-center gap-2.5 text-sm text-vitem-400">
                 <Phone className="w-4 h-4 shrink-0" />
                 <a href="tel:+903262218801" className="hover:text-white transition-colors">
-                  +90 326 221 88 01
+                  {tCommon("phone")}
                 </a>
               </li>
               <li className="flex items-center gap-2.5 text-sm text-vitem-400">
                 <Mail className="w-4 h-4 shrink-0" />
                 <a href="mailto:info@vitem.com.tr" className="hover:text-white transition-colors">
-                  info@vitem.com.tr
+                  {tCommon("email")}
                 </a>
               </li>
             </ul>

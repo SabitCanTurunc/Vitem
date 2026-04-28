@@ -42,9 +42,9 @@ export default async function MagazinePage() {
               <div className="flex items-center gap-4 text-[10px] tracking-[0.2em] uppercase text-vitem-500 mb-4">
                 <span>{locale === "en" ? articles[0].categoryEn : articles[0].categoryTr}</span>
                 <span className="w-4 h-[1px] bg-vitem-300" />
-                <span>{articles[0].date}</span>
+                <span>{locale === "en" ? articles[0].dateEn : articles[0].dateTr}</span>
                 <span className="w-4 h-[1px] bg-vitem-300" />
-                <span>{articles[0].readTime}</span>
+                <span>{locale === "en" ? articles[0].readTimeEn : articles[0].readTimeTr}</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-serif font-light text-vitem-900 leading-snug mb-6 group-hover:text-vitem-500 transition-colors">
                 {locale === "en" ? articles[0].titleEn : articles[0].titleTr}
@@ -53,7 +53,7 @@ export default async function MagazinePage() {
                 {locale === "en" ? articles[0].excerptEn : articles[0].excerptTr}
               </p>
               <span className="inline-flex items-center gap-2 text-xs tracking-[0.15em] uppercase text-vitem-900 font-medium group-hover:gap-3 transition-all">
-                {locale === "en" ? "Read Article" : "Makaleyi Oku"}
+                {t("read_article")}
                 <ArrowRight className="w-3.5 h-3.5" />
               </span>
             </div>
@@ -77,7 +77,7 @@ export default async function MagazinePage() {
                 <div className="flex items-center gap-4 text-[10px] tracking-[0.2em] uppercase text-vitem-500 mb-3">
                   <span>{locale === "en" ? article.categoryEn : article.categoryTr}</span>
                   <span className="w-4 h-[1px] bg-vitem-300" />
-                  <span>{article.date}</span>
+                  <span>{locale === "en" ? article.dateEn : article.dateTr}</span>
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-serif font-light text-vitem-900 leading-snug mb-4 group-hover:text-vitem-500 transition-colors">
                   {locale === "en" ? article.titleEn : article.titleTr}

@@ -3,9 +3,11 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Lock, Eye, EyeOff } from "lucide-react";
 import { loginAdmin } from "@api/actions/authActions";
+import { getAdminLang, tAdmin } from "../admin/i18n";
 
 export default function AdminLoginPage() {
   const router = useRouter();
+  const lang = getAdminLang(typeof document !== "undefined" ? document.cookie.split("admin_lang=")[1]?.split(";")[0] : null);
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
@@ -22,7 +24,7 @@ export default function AdminLoginPage() {
       router.push("/admin");
       router.refresh();
     } else {
-      setError("Hatalı şifre. Lütfen tekrar deneyin.");
+      setError(tAdmin(lang, "wrong_password"));
       setLoading(false);
     }
   }
@@ -33,7 +35,7 @@ export default function AdminLoginPage() {
         <div className="bg-white border border-vitem-200 p-10">
           <div className="text-center mb-10">
             <span className="font-serif text-3xl tracking-[0.25em] font-light text-vitem-900">VITEM</span>
-            <span className="block text-[9px] tracking-widest text-vitem-400 mt-2 uppercase">Yönetim Paneli</span>
+            <span className="block text-[9px] tracking-widest text-vitem-400 mt-2 uppercase">{tAdmin(lang, "login_title")}</span>
           </div>
 
           <div className="flex justify-center mb-8">
@@ -44,7 +46,7 @@ export default function AdminLoginPage() {
 
           <form onSubmit={handleLogin} className="space-y-6">
             <div className="space-y-2">
-              <label className="text-xs uppercase tracking-widest text-vitem-500">Şifre</label>
+              <label className="text-xs uppercase tracking-widest text-vitem-500">{tAdmin(lang, "password")}</label>
               <div className="relative">
                 <input
                   type={showPass ? "text" : "password"}
@@ -70,7 +72,7 @@ export default function AdminLoginPage() {
               disabled={loading}
               className="w-full bg-vitem-900 text-white py-3.5 text-xs uppercase tracking-[0.2em] hover:bg-vitem-800 transition-colors disabled:opacity-50"
             >
-              {loading ? "Giriş yapılıyor..." : "Giriş Yap"}
+              {loading ? tAdmin(lang, "logging_in") : tAdmin(lang, "login")}
             </button>
           </form>
         </div>

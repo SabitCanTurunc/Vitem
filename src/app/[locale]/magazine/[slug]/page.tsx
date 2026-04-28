@@ -1,4 +1,4 @@
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import Footer from "@/sections/Footer";
 import { notFound } from "next/navigation";
@@ -16,6 +16,7 @@ export default async function ArticlePage({
 }) {
   const { slug } = await params;
   const locale = await getLocale();
+  const t = await getTranslations("magazine");
   const article = getArticle(slug);
 
   if (!article) notFound();
@@ -36,7 +37,7 @@ export default async function ArticlePage({
           className="inline-flex items-center gap-2 text-xs tracking-[0.15em] uppercase text-vitem-500 hover:text-vitem-900 transition-colors"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
-          {locale === "en" ? "All Articles" : "Tüm Makaleler"}
+          {t("all_articles")}
         </Link>
       </div>
 
@@ -45,9 +46,9 @@ export default async function ArticlePage({
         <div className="flex items-center gap-4 text-[10px] tracking-[0.2em] uppercase text-vitem-500 mb-6">
           <span className="flex items-center gap-1.5"><Tag className="w-3 h-3" />{category}</span>
           <span className="w-4 h-[1px] bg-vitem-300" />
-          <span>{article.date}</span>
+          <span>{locale === "en" ? article.dateEn : article.dateTr}</span>
           <span className="w-4 h-[1px] bg-vitem-300" />
-          <span className="flex items-center gap-1.5"><Clock className="w-3 h-3" />{article.readTime}</span>
+          <span className="flex items-center gap-1.5"><Clock className="w-3 h-3" />{locale === "en" ? article.readTimeEn : article.readTimeTr}</span>
         </div>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-serif font-light text-vitem-900 tracking-tight leading-tight max-w-4xl mb-8">
           {title}
@@ -84,7 +85,7 @@ export default async function ArticlePage({
         <section className="border-t border-vitem-100 py-16 sm:py-20">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-xs tracking-[0.3em] uppercase text-vitem-500 font-medium mb-10">
-              {locale === "en" ? "More Articles" : "Diğer Makaleler"}
+              {t("more_articles")}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
               {otherArticles.map((a) => (

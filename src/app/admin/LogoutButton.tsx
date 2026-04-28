@@ -3,7 +3,7 @@ import { LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { logoutAdmin } from "@api/actions/authActions";
 
-export default function LogoutButton({ label = "Çıkış Yap" }: { label?: string }) {
+export default function LogoutButton({ label = "Cikis Yap" }: { label?: string }) {
   const router = useRouter();
 
   async function handleLogout() {

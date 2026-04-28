@@ -1,5 +1,5 @@
 import { getActiveCampaigns, getCampaignBySlug } from "@api/queries/products";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { notFound } from "next/navigation";
@@ -14,9 +14,10 @@ type Props = { params: Promise<{ slug: string; locale: string }> };
 
 export default async function KampanyaDetayPage({ params }: Props) {
   const { slug } = await params;
-  const [campaign, locale] = await Promise.all([
+  const [campaign, locale, t] = await Promise.all([
     getCampaignBySlug(slug),
     getLocale(),
+    getTranslations("kampanyalar"),
   ]);
 
   if (!campaign) notFound();
@@ -27,7 +28,7 @@ export default async function KampanyaDetayPage({ params }: Props) {
   const mainImage = gallery[0] ?? campaign.imageUrl;
 
   const backHref = campaign.type === "exhibition" ? "/kampanyalar/teshir" : "/kampanyalar/guncel";
-  const backLabel = campaign.type === "exhibition" ? "Teşhir Ürünleri" : "Güncel Kampanyalar";
+  const backLabel = campaign.type === "exhibition" ? t("exhibition_title") : t("current_title");
 
   return (
     <main className="min-h-screen bg-white">
@@ -35,7 +36,7 @@ export default async function KampanyaDetayPage({ params }: Props) {
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-[10px] tracking-[0.25em] uppercase text-vitem-400 mb-12">
           <Link href="/kampanyalar" className="hover:text-vitem-700 transition-colors">
-            Kampanyalar
+            {t("title")}
           </Link>
           <span>/</span>
           <Link href={backHref as any} className="hover:text-vitem-700 transition-colors">
@@ -48,7 +49,6 @@ export default async function KampanyaDetayPage({ params }: Props) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-16">
           {/* Left — Gallery */}
           <div>
-            {/* Main image */}
             {mainImage && (
               <div className="relative aspect-[4/3] overflow-hidden bg-vitem-100 mb-3">
                 <Image
@@ -66,7 +66,6 @@ export default async function KampanyaDetayPage({ params }: Props) {
               </div>
             )}
 
-            {/* Thumbnail strip */}
             {gallery.length > 1 && (
               <div className="grid grid-cols-4 gap-2">
                 {gallery.map((img, i) => (
@@ -89,13 +88,12 @@ export default async function KampanyaDetayPage({ params }: Props) {
               {title}
             </h1>
 
-            {/* Details table */}
             <div className="border border-vitem-100 divide-y divide-vitem-100 mb-8">
               {campaign.branch && (
                 <div className="flex items-start gap-4 px-5 py-4">
                   <span className="flex items-center gap-1.5 text-xs text-vitem-500 min-w-[140px] pt-0.5">
                     <MapPin className="w-3.5 h-3.5" />
-                    Şube
+                    {t("field_branch")}
                   </span>
                   <span className="text-sm text-vitem-900">{campaign.branch}</span>
                 </div>
@@ -104,7 +102,7 @@ export default async function KampanyaDetayPage({ params }: Props) {
                 <div className="flex items-start gap-4 px-5 py-4">
                   <span className="flex items-center gap-1.5 text-xs text-vitem-500 min-w-[140px] pt-0.5">
                     <Palette className="w-3.5 h-3.5" />
-                    Model / Renk
+                    {t("field_model_color")}
                   </span>
                   <span className="text-sm text-vitem-900">{campaign.modelColor}</span>
                 </div>
@@ -113,7 +111,7 @@ export default async function KampanyaDetayPage({ params }: Props) {
                 <div className="flex items-start gap-4 px-5 py-4">
                   <span className="flex items-center gap-1.5 text-xs text-vitem-500 min-w-[140px] pt-0.5">
                     <Info className="w-3.5 h-3.5" />
-                    Detaylar
+                    {t("field_details")}
                   </span>
                   <span className="text-sm text-vitem-900">{campaign.details}</span>
                 </div>
@@ -122,7 +120,7 @@ export default async function KampanyaDetayPage({ params }: Props) {
                 <div className="flex items-start gap-4 px-5 py-4">
                   <span className="flex items-center gap-1.5 text-xs text-vitem-500 min-w-[140px] pt-0.5">
                     <Truck className="w-3.5 h-3.5" />
-                    Nakliye ve Montaj
+                    {t("field_shipping")}
                   </span>
                   <span className="text-sm text-vitem-900">{campaign.shippingInfo}</span>
                 </div>
@@ -131,7 +129,7 @@ export default async function KampanyaDetayPage({ params }: Props) {
                 <div className="flex items-start gap-4 px-5 py-4">
                   <span className="flex items-center gap-1.5 text-xs text-vitem-500 min-w-[140px] pt-0.5">
                     <Tag className="w-3.5 h-3.5" />
-                    Fiyat
+                    {t("field_price")}
                   </span>
                   <span className="text-sm text-vitem-900">{campaign.originalPrice}</span>
                 </div>
@@ -140,7 +138,7 @@ export default async function KampanyaDetayPage({ params }: Props) {
                 <div className="flex items-start gap-4 px-5 py-4 bg-vitem-50">
                   <span className="flex items-center gap-1.5 text-xs text-red-600 min-w-[140px] pt-0.5 font-medium">
                     <Tag className="w-3.5 h-3.5" />
-                    İndirimli Fiyat
+                    {t("field_discounted_price")}
                   </span>
                   <span className="text-sm text-red-600 font-medium">{campaign.discountedPrice}</span>
                 </div>
@@ -149,7 +147,7 @@ export default async function KampanyaDetayPage({ params }: Props) {
                 <div className="flex items-start gap-4 px-5 py-4">
                   <span className="flex items-center gap-1.5 text-xs text-vitem-500 min-w-[140px] pt-0.5">
                     <Calendar className="w-3.5 h-3.5" />
-                    Son Geçerlilik
+                    {t("field_valid_until")}
                   </span>
                   <span className="text-sm text-vitem-900">{campaign.validUntil}</span>
                 </div>
@@ -168,7 +166,7 @@ export default async function KampanyaDetayPage({ params }: Props) {
                 href="/contact"
                 className="inline-flex items-center gap-2 bg-vitem-900 text-white text-[10px] tracking-[0.25em] uppercase px-7 py-3.5 hover:bg-vitem-700 transition-colors"
               >
-                Bilgi Al / Sipariş Ver
+                {t("request_or_order")}
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
               <Link
@@ -176,7 +174,7 @@ export default async function KampanyaDetayPage({ params }: Props) {
                 className="inline-flex items-center gap-2 text-[10px] tracking-[0.25em] uppercase text-vitem-600 hover:text-vitem-900 transition-colors"
               >
                 <ArrowLeft className="w-3.5 h-3.5" />
-                {backLabel}&apos;ne Dön
+                {t("back_to", { label: backLabel })}
               </Link>
             </div>
           </div>

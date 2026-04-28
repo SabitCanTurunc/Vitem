@@ -4,7 +4,6 @@ import FeaturedProducts from "@/sections/FeaturedProducts";
 import Philosophy from "@/sections/Philosophy";
 import Craftsmanship from "@/sections/Craftsmanship";
 import Magazine from "@/sections/Magazine";
-import Newsletter from "@/sections/Newsletter";
 import Footer from "@/sections/Footer";
 
 import { getActiveHeroSlides, getAllCategories, getFeaturedProducts } from "@api/queries/products";
@@ -36,7 +35,6 @@ export default async function Home() {
       <Craftsmanship />
       <FeaturedProducts products={featuredProducts} />
       <Magazine />
-      <Newsletter />
       <Footer />
     </main>
   );

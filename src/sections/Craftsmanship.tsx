@@ -27,7 +27,7 @@ export default function Craftsmanship() {
       >
         <img
           src="/images/craftsmanship-bg.jpg"
-          alt="Vitem Craftsmanship"
+          alt={t("alt_image")}
           className="w-full h-full object-cover"
           loading="lazy"
         />

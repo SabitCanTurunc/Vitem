@@ -9,25 +9,12 @@ import {
 } from "lucide-react";
 import LogoutButton from "./LogoutButton";
 import { motion, AnimatePresence } from "framer-motion";
+import { ADMIN_LANG_COOKIE, getAdminLang, tAdmin, type AdminLang } from "./i18n";
 
 // ── Dil bağlamı ───────────────────────────────────────────────────
-type Lang = "tr" | "en";
+type Lang = AdminLang;
 const LangCtx = createContext<{ lang: Lang; setLang: (l: Lang) => void }>({ lang: "tr", setLang: () => {} });
 export function useLang() { return useContext(LangCtx); }
-
-// ── Çeviriler ─────────────────────────────────────────────────────
-const labels: Record<string, Record<Lang, string>> = {
-  dashboard:   { tr: "Gösterge Paneli", en: "Dashboard" },
-  categories:  { tr: "Kategoriler",     en: "Categories" },
-  products:    { tr: "Ürünler",         en: "Products" },
-  hero:        { tr: "Hero Slaytları",  en: "Hero Slides" },
-  campaigns:   { tr: "Kampanyalar",     en: "Campaigns" },
-  projects:    { tr: "Projeler",        en: "Projects" },
-  inbox:       { tr: "Gelen Kutusu",    en: "Inbox" },
-  visit_site:  { tr: "Siteye Git",      en: "Visit Site" },
-  logout:      { tr: "Çıkış Yap",       en: "Sign Out" },
-  panel:       { tr: "Yönetim Paneli",  en: "Management Panel" },
-};
 
 const navigation = [
   { key: "dashboard",  href: "/admin",            icon: LayoutDashboard },
@@ -52,7 +39,7 @@ function SidebarContent({ lang, setLang, onClose }: { lang: Lang; setLang: (l: L
           <button
             onClick={onClose}
             className="p-1.5 text-vitem-400 hover:text-vitem-900 transition-colors shrink-0"
-            aria-label="Kapat"
+            aria-label={tAdmin(lang, "close")}
           >
             <X className="w-5 h-5" />
           </button>
@@ -63,7 +50,7 @@ function SidebarContent({ lang, setLang, onClose }: { lang: Lang; setLang: (l: L
         {/* Logo — ortada */}
         <div className="flex-1 text-center">
           <span className="font-serif text-xl tracking-[0.2em] font-light text-vitem-900">VITEM</span>
-          <span className="block text-[8px] tracking-widest text-vitem-500 mt-0.5 uppercase">{labels.panel[lang]}</span>
+          <span className="block text-[8px] tracking-widest text-vitem-500 mt-0.5 uppercase">{tAdmin(lang, "panel")}</span>
         </div>
 
         {/* Sağda boşluk eşitleme */}
@@ -86,7 +73,7 @@ function SidebarContent({ lang, setLang, onClose }: { lang: Lang; setLang: (l: L
               }`}
             >
               <item.icon className="w-4 h-4 shrink-0" />
-              {labels[item.key][lang]}
+              {tAdmin(lang, item.key as "dashboard" | "categories" | "products" | "hero" | "campaigns" | "projects" | "inbox")}
             </Link>
           );
         })}
@@ -97,7 +84,7 @@ function SidebarContent({ lang, setLang, onClose }: { lang: Lang; setLang: (l: L
         {/* TR / EN dil seçici */}
         <div className="flex items-center gap-1.5 px-3 py-2.5 text-sm text-vitem-500">
           <Globe className="w-4 h-4 shrink-0" />
-          <span className="text-xs mr-1">{lang === "tr" ? "Dil" : "Language"}</span>
+          <span className="text-xs mr-1">{tAdmin(lang, "language")}</span>
           <button
             onClick={() => setLang("tr")}
             className={`text-xs font-medium px-1.5 py-0.5 rounded transition-colors ${lang === "tr" ? "bg-vitem-900 text-white" : "hover:bg-vitem-100 text-vitem-500"}`}
@@ -115,9 +102,9 @@ function SidebarContent({ lang, setLang, onClose }: { lang: Lang; setLang: (l: L
           className="flex items-center gap-3 px-3 py-2.5 text-sm text-vitem-600 hover:text-vitem-900 hover:bg-vitem-50 transition-colors rounded-sm"
         >
           <ExternalLink className="w-4 h-4 shrink-0" />
-          {labels.visit_site[lang]}
+          {tAdmin(lang, "visit_site")}
         </Link>
-        <LogoutButton label={labels.logout[lang]} />
+        <LogoutButton label={tAdmin(lang, "logout")} />
       </div>
     </div>
   );
@@ -130,13 +117,14 @@ export default function AdminSidebar() {
 
   // Dil tercihini localStorage'da sakla
   useEffect(() => {
-    const saved = localStorage.getItem("admin_lang") as Lang | null;
-    if (saved === "tr" || saved === "en") setLang(saved);
+    const saved = localStorage.getItem(ADMIN_LANG_COOKIE);
+    setLang(getAdminLang(saved));
   }, []);
 
   function handleSetLang(l: Lang) {
     setLang(l);
-    localStorage.setItem("admin_lang", l);
+    localStorage.setItem(ADMIN_LANG_COOKIE, l);
+    document.cookie = `${ADMIN_LANG_COOKIE}=${l}; path=/; max-age=31536000; samesite=lax`;
   }
 
   return (
@@ -152,7 +140,7 @@ export default function AdminSidebar() {
         <button
           onClick={() => setMobileOpen(true)}
           className="p-2 -ml-2 text-vitem-700 hover:text-vitem-900 transition-colors shrink-0"
-          aria-label="Menüyü Aç"
+          aria-label={tAdmin(lang, "open_menu")}
         >
           <Menu className="w-5 h-5" />
         </button>

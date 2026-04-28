@@ -28,7 +28,7 @@ export default function Magazine() {
     {
       id: 1,
       title: t("a1_title"),
-      date: "12 Ekim 2025",
+      date: t("a1_date"),
       category: t("a1_category"),
       imageUrl: "/images/magazine-1.jpg",
       slug: "selecting-fine-woods",
@@ -36,7 +36,7 @@ export default function Magazine() {
     {
       id: 2,
       title: t("a2_title"),
-      date: "28 Eylül 2025",
+      date: t("a2_date"),
       category: t("a2_category"),
       imageUrl: "/images/magazine-2.jpg",
       slug: "minimalism-kitchen-design",
@@ -44,7 +44,7 @@ export default function Magazine() {
     {
       id: 3,
       title: t("a3_title"),
-      date: "15 Eylül 2025",
+      date: t("a3_date"),
       category: t("a3_category"),
       imageUrl: "/images/magazine-3.jpg",
       slug: "vitem-in-milan",

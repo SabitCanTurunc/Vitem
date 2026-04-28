@@ -1,6 +1,8 @@
 import React from "react";
 import AdminSidebar from "./AdminSidebar";
 import "../globals.css";
+import { cookies } from "next/headers";
+import { getAdminLang } from "./i18n";
 
 export const metadata = {
   title: "Vitem Admin",
@@ -10,9 +12,11 @@ export const metadata = {
   },
 };
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  const cookieStore = await cookies();
+  const lang = getAdminLang(cookieStore.get("admin_lang")?.value);
   return (
-    <html lang="tr">
+    <html lang={lang}>
       <body className="bg-vitem-50 min-h-screen text-vitem-900 font-sans">
         <div className="flex h-screen overflow-hidden">
           <AdminSidebar />

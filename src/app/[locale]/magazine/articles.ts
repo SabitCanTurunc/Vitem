@@ -4,9 +4,11 @@ export interface Article {
   titleEn: string;
   categoryTr: string;
   categoryEn: string;
-  date: string;
+  dateTr: string;
+  dateEn: string;
   imageUrl: string;
-  readTime: string;
+  readTimeTr: string;
+  readTimeEn: string;
   excerptTr: string;
   excerptEn: string;
   bodyTr: string[];
@@ -20,9 +22,11 @@ export const articles: Article[] = [
     titleEn: "The Art of Selecting Fine Woods",
     categoryTr: "Malzemeler",
     categoryEn: "Materials",
-    date: "12 Ekim 2025",
+    dateTr: "12 Ekim 2025",
+    dateEn: "12 October 2025",
     imageUrl: "/images/magazine-1.jpg",
-    readTime: "5 dk",
+    readTimeTr: "5 dk",
+    readTimeEn: "5 min",
     excerptTr: "Mobilya üretiminde ahşap seçimi, bir ürünün hem estetiğini hem de ömrünü doğrudan belirler. Doğru ahşabı seçmek bir bilim olduğu kadar bir sanattır.",
     excerptEn: "In furniture production, wood selection directly determines both the aesthetics and longevity of a piece. Choosing the right wood is as much a science as it is an art.",
     bodyTr: [
@@ -46,9 +50,11 @@ export const articles: Article[] = [
     titleEn: "Minimalism in Modern Kitchen Design",
     categoryTr: "Trendler",
     categoryEn: "Trends",
-    date: "28 Eylül 2025",
+    dateTr: "28 Eylül 2025",
+    dateEn: "28 September 2025",
     imageUrl: "/images/magazine-2.jpg",
-    readTime: "4 dk",
+    readTimeTr: "4 dk",
+    readTimeEn: "4 min",
     excerptTr: "Minimalist mutfak tasarımı yalnızca estetik bir tercih değil; işlevselliği, temizliği ve zihinsel huzuru ön plana çıkaran bir yaşam felsefesidir.",
     excerptEn: "Minimalist kitchen design is not merely an aesthetic choice; it is a philosophy of living that prioritizes functionality, cleanliness, and mental clarity.",
     bodyTr: [
@@ -70,9 +76,11 @@ export const articles: Article[] = [
     titleEn: "Global Exhibitions: Vitem in Milan",
     categoryTr: "Etkinlikler",
     categoryEn: "Events",
-    date: "15 Eylül 2025",
+    dateTr: "15 Eylül 2025",
+    dateEn: "15 September 2025",
     imageUrl: "/images/magazine-3.jpg",
-    readTime: "3 dk",
+    readTimeTr: "3 dk",
+    readTimeEn: "3 min",
     excerptTr: "Eurocucina 2025'te Vitem, Anadolu'nun zanaatkarlık mirasını uluslararası tasarım dünyasına taşıdı.",
     excerptEn: "At Eurocucina 2025, Vitem brought Anatolia's craftsmanship heritage to the international design world.",
     bodyTr: [

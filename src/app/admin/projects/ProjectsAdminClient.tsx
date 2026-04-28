@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Plus, Trash2, FolderOpen, MapPin, Calendar, X, Loader2 } from "lucide-react";
 import { createProject, deleteProject } from "@api/actions/adminActions";
@@ -7,9 +7,37 @@ import { motion, AnimatePresence } from "framer-motion";
 import type { Project } from "@db/schema";
 import ImageUpload from "@/components/ImageUpload";
 import GalleryUpload from "@/components/GalleryUpload";
+import { type AdminLang, getAdminLangFromBrowser } from "../i18n";
 
 export default function ProjectsAdminClient({ projects }: { projects: Project[] }) {
   const router = useRouter();
+  const [lang, setLang] = useState<AdminLang>("tr");
+  useEffect(() => {
+    setLang(getAdminLangFromBrowser());
+  }, []);
+  const t = {
+    title: lang === "en" ? "Projects" : "Projeler",
+    total: lang === "en" ? "total projects" : "toplam proje",
+    newProject: lang === "en" ? "New Project" : "Yeni Proje",
+    error: lang === "en" ? "An error occurred." : "Hata oluştu.",
+    confirmDelete: lang === "en" ? "Are you sure you want to delete this project?" : "Bu projeyi silmek istediğinize emin misiniz?",
+    empty: lang === "en" ? "No projects added yet." : "Henüz proje eklenmedi.",
+    modalTitle: lang === "en" ? "New Project" : "Yeni Proje",
+    nameTr: lang === "en" ? "Project Name (TR) *" : "Proje Adı (TR) *",
+    nameEn: lang === "en" ? "Project Name (EN)" : "Proje Adı (EN)",
+    location: lang === "en" ? "Location *" : "Konum *",
+    year: lang === "en" ? "Year *" : "Yıl *",
+    categoryTr: lang === "en" ? "Category (TR)" : "Kategori (TR)",
+    categoryEn: lang === "en" ? "Category (EN)" : "Kategori (EN)",
+    descriptionTr: lang === "en" ? "Description (TR)" : "Açıklama (TR)",
+    descriptionEn: lang === "en" ? "Description (EN)" : "Açıklama (EN)",
+    featuredImage: lang === "en" ? "Featured Image" : "Öne Çıkan Görsel",
+    order: lang === "en" ? "Order" : "Sıra",
+    gallery: lang === "en" ? "Gallery" : "Galeri",
+    cancel: lang === "en" ? "Cancel" : "İptal",
+    save: lang === "en" ? "Save" : "Kaydet",
+    saving: lang === "en" ? "Saving..." : "Kaydediliyor...",
+  };
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [deletingId, setDeletingId] = useState<number | null>(null);
@@ -29,12 +57,12 @@ export default function ProjectsAdminClient({ projects }: { projects: Project[] 
       setIsModalOpen(false);
       router.refresh();
     } else {
-      alert("Hata oluştu.");
+      alert(t.error);
     }
   }
 
   async function handleDelete(id: number) {
-    if (!confirm("Bu projeyi silmek istediğinize emin misiniz?")) return;
+    if (!confirm(t.confirmDelete)) return;
     setDeletingId(id);
     await deleteProject(id);
     setDeletingId(null);
@@ -45,15 +73,15 @@ export default function ProjectsAdminClient({ projects }: { projects: Project[] 
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-serif font-light text-vitem-900">Projeler</h1>
-          <p className="text-sm text-vitem-500 mt-1">{projects.length} toplam proje</p>
+          <h1 className="text-2xl font-serif font-light text-vitem-900">{t.title}</h1>
+          <p className="text-sm text-vitem-500 mt-1">{projects.length} {t.total}</p>
         </div>
         <button
           onClick={openCreate}
           className="flex items-center gap-2 bg-vitem-900 text-white px-5 py-2.5 text-xs uppercase tracking-widest hover:bg-vitem-800 transition-colors"
         >
           <Plus className="w-3.5 h-3.5" />
-          Yeni Proje
+          {t.newProject}
         </button>
       </div>
 
@@ -101,7 +129,7 @@ export default function ProjectsAdminClient({ projects }: { projects: Project[] 
       ) : (
         <div className="text-center py-20 text-vitem-400">
           <FolderOpen className="w-10 h-10 mx-auto mb-4 opacity-40" />
-          <p className="text-sm">Henüz proje eklenmedi.</p>
+          <p className="text-sm">{t.empty}</p>
         </div>
       )}
 
@@ -114,43 +142,43 @@ export default function ProjectsAdminClient({ projects }: { projects: Project[] 
               className="relative bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-xl"
             >
               <div className="sticky top-0 bg-white z-10 flex items-center justify-between px-8 py-5 border-b border-vitem-100">
-                <h2 className="text-xl font-serif font-light text-vitem-900">Yeni Proje</h2>
+                <h2 className="text-xl font-serif font-light text-vitem-900">{t.modalTitle}</h2>
                 <button onClick={() => setIsModalOpen(false)} className="text-vitem-400 hover:text-vitem-900 p-1"><X className="w-5 h-5" /></button>
               </div>
 
               <form action={handleCreate} className="px-8 py-6 space-y-6">
                 <div className="grid grid-cols-2 gap-6">
-                  <F label="Proje Adı (TR) *" name="name" required />
-                  <F label="Proje Adı (EN)" name="nameEn" />
+                  <F label={t.nameTr} name="name" required />
+                  <F label={t.nameEn} name="nameEn" />
                 </div>
                 <div className="grid grid-cols-2 gap-6">
-                  <F label="Konum *" name="location" required />
-                  <F label="Yıl *" name="year" required />
+                  <F label={t.location} name="location" required />
+                  <F label={t.year} name="year" required />
                 </div>
                 <div className="grid grid-cols-2 gap-6">
-                  <F label="Kategori (TR)" name="category" />
-                  <F label="Kategori (EN)" name="categoryEn" />
+                  <F label={t.categoryTr} name="category" />
+                  <F label={t.categoryEn} name="categoryEn" />
                 </div>
                 <div className="grid grid-cols-2 gap-6">
-                  <TA label="Açıklama (TR)" name="description" />
-                  <TA label="Açıklama (EN)" name="descriptionEn" />
+                  <TA label={t.descriptionTr} name="description" />
+                  <TA label={t.descriptionEn} name="descriptionEn" />
                 </div>
                 <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-1.5">
-                    <ImageUpload label="Öne Çıkan Görsel" value={imageVal} onChange={setImageVal} />
+                    <ImageUpload label={t.featuredImage} value={imageVal} onChange={setImageVal} />
                     <input type="hidden" name="featuredImage" value={imageVal} />
                   </div>
-                  <F label="Sıra" name="sortOrder" type="number" />
+                  <F label={t.order} name="sortOrder" type="number" />
                 </div>
                 <div className="space-y-1.5">
-                  <GalleryUpload label="Galeri" value={galleryVal} onChange={setGalleryVal} />
+                  <GalleryUpload label={t.gallery} value={galleryVal} onChange={setGalleryVal} />
                   <input type="hidden" name="gallery" value={JSON.stringify(galleryVal)} />
                 </div>
 
                 <div className="flex justify-end gap-3 pt-4 border-t border-vitem-100">
-                  <button type="button" onClick={() => setIsModalOpen(false)} className="px-5 py-2.5 text-sm text-vitem-500 hover:text-vitem-900">İptal</button>
+                  <button type="button" onClick={() => setIsModalOpen(false)} className="px-5 py-2.5 text-sm text-vitem-500 hover:text-vitem-900">{t.cancel}</button>
                   <button type="submit" disabled={isSubmitting} className="bg-vitem-900 text-white px-7 py-2.5 text-xs uppercase tracking-widest hover:bg-vitem-800 disabled:opacity-50">
-                    {isSubmitting ? "Kaydediliyor..." : "Kaydet"}
+                    {isSubmitting ? t.saving : t.save}
                   </button>
                 </div>
               </form>

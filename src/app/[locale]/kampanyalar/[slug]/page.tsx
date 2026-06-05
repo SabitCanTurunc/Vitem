@@ -1,9 +1,18 @@
+import type { Metadata } from "next";
 import { getActiveCampaigns, getCampaignBySlug } from "@api/queries/products";
 import { getLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { MapPin, Palette, Info, Truck, Tag, Calendar, ArrowLeft, ArrowRight } from "lucide-react";
+import JsonLd from "@/components/JsonLd";
+import {
+  buildLocalizedUrl,
+  buildLanguageAlternates,
+  DEFAULT_OG_IMAGE,
+  type Locale,
+} from "@/lib/seo";
+import { breadcrumbSchema } from "@/lib/jsonld";
 
 export async function generateStaticParams() {
   const campaigns = await getActiveCampaigns();
@@ -12,18 +21,54 @@ export async function generateStaticParams() {
 
 type Props = { params: Promise<{ slug: string; locale: string }> };
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug, locale } = await params;
+  const campaign = await getCampaignBySlug(slug);
+  if (!campaign) return {};
+
+  const typedLocale = locale as Locale;
+  const title = locale === "en" && campaign.titleEn ? campaign.titleEn : campaign.title;
+  const description =
+    (locale === "en" && campaign.descriptionEn ? campaign.descriptionEn : campaign.description) ?? "";
+  const url = buildLocalizedUrl(typedLocale, `/kampanyalar/${slug}`);
+  const image = campaign.imageUrl ?? DEFAULT_OG_IMAGE.url;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      languages: buildLanguageAlternates(`/kampanyalar/${slug}`),
+    },
+    openGraph: {
+      title: `${title} | Vitem`,
+      description,
+      url,
+      images: [image],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | Vitem`,
+      description,
+      images: [image],
+    },
+  };
+}
+
 export default async function KampanyaDetayPage({ params }: Props) {
-  const { slug } = await params;
-  const [campaign, locale, t] = await Promise.all([
+  const { slug, locale } = await params;
+  const [campaign, currentLocale, t, tCommon] = await Promise.all([
     getCampaignBySlug(slug),
     getLocale(),
     getTranslations("kampanyalar"),
+    getTranslations("common"),
   ]);
 
   if (!campaign) notFound();
 
-  const title = locale === "en" && campaign.titleEn ? campaign.titleEn : campaign.title;
-  const description = locale === "en" && campaign.descriptionEn ? campaign.descriptionEn : campaign.description;
+  const typedLocale = (locale as Locale) ?? (currentLocale as Locale);
+  const title = currentLocale === "en" && campaign.titleEn ? campaign.titleEn : campaign.title;
+  const description = currentLocale === "en" && campaign.descriptionEn ? campaign.descriptionEn : campaign.description;
   const gallery: string[] = campaign.gallery ? JSON.parse(campaign.gallery) : [];
   const mainImage = gallery[0] ?? campaign.imageUrl;
 
@@ -32,6 +77,14 @@ export default async function KampanyaDetayPage({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-white">
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: tCommon("home"), url: buildLocalizedUrl(typedLocale, "/") },
+          { name: t("title"), url: buildLocalizedUrl(typedLocale, "/kampanyalar") },
+          { name: backLabel, url: buildLocalizedUrl(typedLocale, backHref) },
+          { name: title, url: buildLocalizedUrl(typedLocale, `/kampanyalar/${slug}`) },
+        ])}
+      />
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-[10px] tracking-[0.25em] uppercase text-vitem-400 mb-12">

@@ -128,3 +128,22 @@ export const projects = sqliteTable("projects", {
 
 export type Project = typeof projects.$inferSelect;
 export type InsertProject = typeof projects.$inferInsert;
+
+// Catalogs (PDF / link)
+export const catalogs = sqliteTable("catalogs", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  title: text("title").notNull(),
+  titleEn: text("title_en"),
+  description: text("description"),
+  descriptionEn: text("description_en"),
+  coverImage: text("cover_image"),          // Cloudinary kapak görseli
+  fileUrl: text("file_url"),                // Cloudinary PDF URL
+  externalLink: text("external_link"),      // veya harici link
+  fileType: text("file_type").default("pdf"), // pdf | link
+  isActive: integer("is_active", { mode: "boolean" }).default(true),
+  sortOrder: integer("sort_order").default(0),
+  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
+});
+
+export type Catalog = typeof catalogs.$inferSelect;
+export type InsertCatalog = typeof catalogs.$inferInsert;

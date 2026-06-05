@@ -3,18 +3,60 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin();
 
+/**
+ * Vitem — Next.js konfigürasyonu
+ *
+ * - Performans: response sıkıştırma + modern AVIF/WebP görseller
+ * - Güvenlik: standart başlıklar (HSTS, frame-options, vb.)
+ * - SEO: poweredByHeader kapalı, manifest doğrudan üretilir
+ */
 const nextConfig: NextConfig = {
+  reactStrictMode: true,
+  poweredByHeader: false,
+  compress: true,
+
   images: {
+    formats: ["image/avif", "image/webp"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1400, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 gün
     remotePatterns: [
+      { protocol: "https", hostname: "res.cloudinary.com" },
+      { protocol: "https", hostname: "images.unsplash.com" },
+    ],
+  },
+
+  async headers() {
+    return [
       {
-        protocol: 'https',
-        hostname: 'res.cloudinary.com',
+        source: "/:path*",
+        headers: [
+          { key: "X-DNS-Prefetch-Control", value: "on" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
+        ],
       },
       {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-      }
-    ],
+        source: "/sitemap.xml",
+        headers: [
+          { key: "Content-Type", value: "application/xml" },
+          { key: "Cache-Control", value: "public, max-age=3600, must-revalidate" },
+        ],
+      },
+      {
+        source: "/robots.txt",
+        headers: [
+          { key: "Content-Type", value: "text/plain" },
+          { key: "Cache-Control", value: "public, max-age=86400, must-revalidate" },
+        ],
+      },
+    ];
   },
 };
 

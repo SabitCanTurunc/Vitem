@@ -1,16 +1,76 @@
-import { getLocale } from "next-intl/server";
-import { getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import Footer from "@/sections/Footer";
 import { ArrowRight } from "lucide-react";
 import { articles } from "./articles";
+import JsonLd from "@/components/JsonLd";
+import {
+  buildLocalizedUrl,
+  buildLanguageAlternates,
+  DEFAULT_OG_IMAGE,
+  SITE_URL,
+  type Locale,
+} from "@/lib/seo";
+import { breadcrumbSchema, itemListSchema } from "@/lib/jsonld";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "seo" });
+  const url = buildLocalizedUrl(locale as Locale, "/magazine");
+
+  return {
+    title: t("magazine_title"),
+    description: t("magazine_description"),
+    alternates: {
+      canonical: url,
+      languages: buildLanguageAlternates("/magazine"),
+    },
+    openGraph: {
+      title: t("magazine_title"),
+      description: t("magazine_description"),
+      url,
+      images: [DEFAULT_OG_IMAGE.url],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("magazine_title"),
+      description: t("magazine_description"),
+      images: [DEFAULT_OG_IMAGE.url],
+    },
+  };
+}
 
 export default async function MagazinePage() {
   const locale = await getLocale();
   const t = await getTranslations("magazine");
+  const tCommon = await getTranslations("common");
+  const typedLocale = locale as Locale;
+
+  const list = itemListSchema(
+    locale === "en" ? "Magazine" : "Dergi",
+    articles.map((a) => ({
+      name: locale === "en" ? a.titleEn : a.titleTr,
+      url: buildLocalizedUrl(typedLocale, `/magazine/${a.slug}`),
+      image: a.imageUrl.startsWith("http") ? a.imageUrl : `${SITE_URL}${a.imageUrl}`,
+    })),
+  );
 
   return (
     <main className="min-h-screen bg-white">
+      <JsonLd
+        data={[
+          breadcrumbSchema([
+            { name: tCommon("home"), url: buildLocalizedUrl(typedLocale, "/") },
+            { name: t("title"), url: buildLocalizedUrl(typedLocale, "/magazine") },
+          ]),
+          list,
+        ]}
+      />
       {/* Header */}
       <section className="pt-32 sm:pt-40 pb-16 sm:pb-20 bg-white border-b border-vitem-100">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">

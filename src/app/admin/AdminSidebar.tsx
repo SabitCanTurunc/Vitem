@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, ShoppingBag, FolderTree, Image as ImageIcon,
-  Inbox, Megaphone, FolderOpen, Menu, X, ExternalLink, Globe,
+  Inbox, Megaphone, FolderOpen, Menu, X, ExternalLink, Globe, BookOpen,
 } from "lucide-react";
 import LogoutButton from "./LogoutButton";
 import { motion, AnimatePresence } from "framer-motion";
@@ -23,6 +23,7 @@ const navigation = [
   { key: "hero",       href: "/admin/hero",        icon: ImageIcon },
   { key: "campaigns",  href: "/admin/campaigns",  icon: Megaphone },
   { key: "projects",   href: "/admin/projects",   icon: FolderOpen },
+  { key: "catalogs",   href: "/admin/catalogs",   icon: BookOpen },
   { key: "inbox",      href: "/admin/inbox",      icon: Inbox },
 ];
 
@@ -73,7 +74,7 @@ function SidebarContent({ lang, setLang, onClose }: { lang: Lang; setLang: (l: L
               }`}
             >
               <item.icon className="w-4 h-4 shrink-0" />
-              {tAdmin(lang, item.key as "dashboard" | "categories" | "products" | "hero" | "campaigns" | "projects" | "inbox")}
+              {tAdmin(lang, item.key as "dashboard" | "categories" | "products" | "hero" | "campaigns" | "projects" | "catalogs" | "inbox")}
             </Link>
           );
         })}

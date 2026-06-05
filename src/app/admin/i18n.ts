@@ -5,11 +5,12 @@ export const ADMIN_LANG_COOKIE = "admin_lang";
 export const adminLabels = {
   panel: { tr: "Yonetim Paneli", en: "Management Panel" },
   dashboard: { tr: "Gosterge Paneli", en: "Dashboard" },
-  categories: { tr: "Kategoriler", en: "Categories" },
+  categories: { tr: "Ürün Kategorileri", en: "Product Categories" },
   products: { tr: "Urunler", en: "Products" },
   hero: { tr: "Hero Slaytlari", en: "Hero Slides" },
   campaigns: { tr: "Kampanyalar", en: "Campaigns" },
   projects: { tr: "Projeler", en: "Projects" },
+  catalogs: { tr: "Kataloglar", en: "Catalogues" },
   inbox: { tr: "Gelen Kutusu", en: "Inbox" },
   visit_site: { tr: "Siteye Git", en: "Visit Site" },
   logout: { tr: "Cikis Yap", en: "Sign Out" },

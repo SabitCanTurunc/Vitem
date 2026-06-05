@@ -1,9 +1,10 @@
 "use server";
 
 import { getDb } from "../queries/connection";
-import { categories, products, heroSlides, campaigns, projects } from "@db/schema";
+import { categories, products, heroSlides, campaigns, projects, catalogs } from "@db/schema";
 import { revalidatePath } from "next/cache";
 import { eq } from "drizzle-orm";
+import { verifyAdminSession } from "./authActions";
 
 const tableColumnsCache = new Map<string, Set<string>>();
 
@@ -53,6 +54,7 @@ const slugify = (text: string) => {
 };
 
 export async function createCategory(formData: FormData) {
+  await verifyAdminSession();
   const name = formData.get("name") as string;
   const nameEn = formData.get("nameEn") as string;
   const description = formData.get("description") as string;
@@ -80,6 +82,7 @@ export async function createCategory(formData: FormData) {
 }
 
 export async function createProduct(formData: FormData) {
+  await verifyAdminSession();
   const name = formData.get("name") as string;
   const nameEn = formData.get("nameEn") as string;
   const categoryId = parseInt(formData.get("categoryId") as string);
@@ -116,6 +119,7 @@ export async function createProduct(formData: FormData) {
 }
 
 export async function createCampaign(formData: FormData) {
+  await verifyAdminSession();
   const title = formData.get("title") as string;
   const titleEn = formData.get("titleEn") as string;
   const description = formData.get("description") as string;
@@ -146,6 +150,7 @@ export async function createCampaign(formData: FormData) {
 }
 
 export async function deleteCampaign(id: number) {
+  await verifyAdminSession();
   try {
     await getDb().delete(campaigns).where(eq(campaigns.id, id));
     revalidatePath("/admin/campaigns");
@@ -158,6 +163,7 @@ export async function deleteCampaign(id: number) {
 }
 
 export async function createProject(formData: FormData) {
+  await verifyAdminSession();
   const name = formData.get("name") as string;
   const nameEn = formData.get("nameEn") as string;
   const location = formData.get("location") as string;
@@ -186,6 +192,7 @@ export async function createProject(formData: FormData) {
 }
 
 export async function deleteProject(id: number) {
+  await verifyAdminSession();
   try {
     await getDb().delete(projects).where(eq(projects.id, id));
     revalidatePath("/admin/projects");
@@ -198,6 +205,7 @@ export async function deleteProject(id: number) {
 }
 
 export async function deleteCategory(id: number) {
+  await verifyAdminSession();
   try {
     await getDb().delete(categories).where(eq(categories.id, id));
     revalidatePath("/admin/categories");
@@ -210,6 +218,7 @@ export async function deleteCategory(id: number) {
 }
 
 export async function updateCategory(id: number, formData: FormData) {
+  await verifyAdminSession();
   const name = formData.get("name") as string;
   const nameEn = formData.get("nameEn") as string;
   const description = formData.get("description") as string;
@@ -228,6 +237,7 @@ export async function updateCategory(id: number, formData: FormData) {
 }
 
 export async function deleteProduct(id: number) {
+  await verifyAdminSession();
   try {
     await getDb().delete(products).where(eq(products.id, id));
     revalidatePath("/admin/products");
@@ -240,6 +250,7 @@ export async function deleteProduct(id: number) {
 }
 
 export async function updateProduct(id: number, formData: FormData) {
+  await verifyAdminSession();
   const name = formData.get("name") as string;
   const nameEn = formData.get("nameEn") as string;
   const categoryId = parseInt(formData.get("categoryId") as string);
@@ -274,6 +285,7 @@ export async function updateProduct(id: number, formData: FormData) {
 }
 
 export async function updateCampaign(id: number, formData: FormData) {
+  await verifyAdminSession();
   const title = formData.get("title") as string;
   const titleEn = formData.get("titleEn") as string;
   const description = formData.get("description") as string;
@@ -305,6 +317,7 @@ export async function updateCampaign(id: number, formData: FormData) {
 }
 
 export async function deleteHeroSlide(id: number) {
+  await verifyAdminSession();
   try {
     await getDb().delete(heroSlides).where(eq(heroSlides.id, id));
     revalidatePath("/admin/hero");
@@ -317,6 +330,7 @@ export async function deleteHeroSlide(id: number) {
 }
 
 export async function updateHeroSlide(id: number, formData: FormData) {
+  await verifyAdminSession();
   const title = formData.get("title") as string;
   const titleEn = formData.get("titleEn") as string;
   const subtitle = formData.get("subtitle") as string;
@@ -351,6 +365,7 @@ export async function updateHeroSlide(id: number, formData: FormData) {
 }
 
 export async function createHeroSlide(formData: FormData) {
+  await verifyAdminSession();
   const title = formData.get("title") as string;
   const titleEn = formData.get("titleEn") as string;
   const subtitle = formData.get("subtitle") as string;
@@ -382,5 +397,70 @@ export async function createHeroSlide(formData: FormData) {
   } catch (error) {
     console.error(error);
     return { success: false, error: "Kaydedilemedi." };
+  }
+}
+
+export async function createCatalog(formData: FormData) {
+  await verifyAdminSession();
+  const title = formData.get("title") as string;
+  const titleEn = formData.get("titleEn") as string;
+  const description = formData.get("description") as string;
+  const descriptionEn = formData.get("descriptionEn") as string;
+  const coverImage = formData.get("coverImage") as string;
+  const fileUrl = formData.get("fileUrl") as string;
+  const externalLink = formData.get("externalLink") as string;
+  const fileType = (formData.get("fileType") as string) || "pdf";
+  const sortOrder = parseInt(formData.get("sortOrder") as string) || 0;
+  const isActive = formData.get("isActive") !== "off";
+  try {
+    await getDb().insert(catalogs).values({
+      title, titleEn, description, descriptionEn,
+      coverImage, fileUrl, externalLink, fileType, sortOrder, isActive,
+    });
+    revalidatePath("/admin/catalogs");
+    revalidatePath("/[locale]/katalog", "layout");
+    return { success: true };
+  } catch (error) {
+    console.error(error);
+    return { success: false, error: "Kaydedilemedi." };
+  }
+}
+
+export async function updateCatalog(id: number, formData: FormData) {
+  await verifyAdminSession();
+  const title = formData.get("title") as string;
+  const titleEn = formData.get("titleEn") as string;
+  const description = formData.get("description") as string;
+  const descriptionEn = formData.get("descriptionEn") as string;
+  const coverImage = formData.get("coverImage") as string;
+  const fileUrl = formData.get("fileUrl") as string;
+  const externalLink = formData.get("externalLink") as string;
+  const fileType = (formData.get("fileType") as string) || "pdf";
+  const sortOrder = parseInt(formData.get("sortOrder") as string) || 0;
+  const isActive = formData.get("isActive") !== "off";
+  try {
+    await getDb().update(catalogs).set({
+      title, titleEn, description, descriptionEn,
+      coverImage, fileUrl, externalLink, fileType, sortOrder, isActive,
+    }).where(eq(catalogs.id, id));
+    revalidatePath("/admin/catalogs");
+    revalidatePath("/[locale]/katalog", "layout");
+    return { success: true };
+  } catch (error) {
+    console.error(error);
+    return { success: false, error: "Güncellenemedi." };
+  }
+}
+
+export async function deleteCatalog(id: number) {
+  await verifyAdminSession();
+  try {
+    await getDb().delete(catalogs).where(eq(catalogs.id, id));
+    revalidatePath("/admin/catalogs");
+    revalidatePath("/[locale]/katalog", "layout");
+    return { success: true };
+  } catch (error) {
+    console.error(error);
+    return { success: false };
   }
 }

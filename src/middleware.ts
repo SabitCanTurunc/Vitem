@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 const intlMiddleware = createIntlMiddleware(routing);
 
 const SESSION_COOKIE = "vitem_admin_session";
-const SESSION_VALUE = "authenticated";
+const SESSION_VALUE = process.env.APP_SECRET ?? "vitem_fallback_secret_123";
 
 export default function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;

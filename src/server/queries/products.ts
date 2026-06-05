@@ -1,12 +1,14 @@
 import { getDb } from "./connection";
 import { categories, products, heroSlides, campaigns } from "@db/schema";
-import { eq, asc } from "drizzle-orm";
+import { eq, asc, gte } from "drizzle-orm";
 
 // Categories
 export async function getAllCategories() {
-  return getDb().query.categories.findMany({
-    orderBy: [asc(categories.sortOrder)],
-  });
+  return getDb()
+    .select()
+    .from(categories)
+    .where(gte(categories.sortOrder, 0))
+    .orderBy(asc(categories.sortOrder));
 }
 
 export async function getCategoryBySlug(slug: string) {

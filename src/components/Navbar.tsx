@@ -92,7 +92,6 @@ function NavItemEl({ item, activeLocale: _activeLocale }: { item: NavItem; activ
 }
 
 export default function Navbar({ categories = [] }: { categories?: Category[] }) {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
 
@@ -130,18 +129,13 @@ export default function Navbar({ categories = [] }: { categories?: Category[] })
     { label: t("contact"), href: "/contact" },
   ];
 
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+
 
   useEffect(() => {
     setMobileMenuOpen(false);
     setMobileExpanded(null);
   }, [pathname]);
 
-  const isHome = pathname === "/";
   const navBg = "bg-white shadow-sm border-b border-vitem-200/50";
 
   const allMobileItems = [...leftNavItems, ...rightNavItems];

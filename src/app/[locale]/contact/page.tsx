@@ -45,6 +45,19 @@ export default function Contact() {
         </div>
       </section>
 
+      {/* Map Section */}
+      <section className="pt-16 sm:pt-20 bg-white">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <LocationMap />
+          </motion.div>
+        </div>
+      </section>
+
       {/* Main Content */}
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -217,20 +230,6 @@ export default function Contact() {
             </motion.div>
 
           </div>
-        </div>
-      </section>
-
-      {/* Map Section */}
-      <section className="pb-20 sm:pb-28 bg-white">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <LocationMap />
-          </motion.div>
         </div>
       </section>
 

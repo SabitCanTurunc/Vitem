@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, CheckCircle, Printer } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Footer from "@/sections/Footer";
+import LocationMap from "@/components/LocationMap";
 import { useState } from "react";
 import { submitContactForm } from "@api/actions/contactActions";
 
@@ -216,6 +217,20 @@ export default function Contact() {
             </motion.div>
 
           </div>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="pb-20 sm:pb-28 bg-white">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <LocationMap />
+          </motion.div>
         </div>
       </section>
 

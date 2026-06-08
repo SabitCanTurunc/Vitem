@@ -105,24 +105,51 @@ export default function Footer() {
             <h4 className="text-xs tracking-[0.2em] uppercase text-white font-medium mb-5">
               {t("contact_title")}
             </h4>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-2.5 text-sm text-vitem-400">
-                <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-                <span>{tCommon("address_line1")}<br />{tCommon("address_line2")}</span>
-              </li>
-              <li className="flex items-center gap-2.5 text-sm text-vitem-400">
-                <Phone className="w-4 h-4 shrink-0" />
-                <a href="tel:+903262218801" className="hover:text-white transition-colors">
-                  {tCommon("phone")}
-                </a>
-              </li>
-              <li className="flex items-center gap-2.5 text-sm text-vitem-400">
-                <Mail className="w-4 h-4 shrink-0" />
-                <a href="mailto:info@vitem.com.tr" className="hover:text-white transition-colors">
-                  {tCommon("email")}
-                </a>
-              </li>
-            </ul>
+            <div className="space-y-6">
+              {/* Store */}
+              <div>
+                <h5 className="text-white text-sm font-medium mb-2">{tCommon("store_title")}</h5>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-2.5 text-sm text-vitem-400">
+                    <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
+                    <span>{tCommon("address_store_line1")}<br />{tCommon("address_store_line2")}</span>
+                  </li>
+                  <li className="flex items-center gap-2.5 text-sm text-vitem-400">
+                    <Phone className="w-4 h-4 shrink-0" />
+                    <a href="tel:+903266131336" className="hover:text-white transition-colors">
+                      {tCommon("phone_store")}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Factory */}
+              <div>
+                <h5 className="text-white text-sm font-medium mb-2">{tCommon("factory_title")}</h5>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-2.5 text-sm text-vitem-400">
+                    <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
+                    <span>{tCommon("address_factory_line1")}<br />{tCommon("address_factory_line2")}</span>
+                  </li>
+                  <li className="flex items-center gap-2.5 text-sm text-vitem-400">
+                    <Phone className="w-4 h-4 shrink-0" />
+                    <a href="tel:+903262214672" className="hover:text-white transition-colors">
+                      {tCommon("phone_factory")}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Email */}
+              <ul className="space-y-2 pt-2 border-t border-vitem-800">
+                <li className="flex items-center gap-2.5 text-sm text-vitem-400">
+                  <Mail className="w-4 h-4 shrink-0" />
+                  <a href={`mailto:${tCommon("email")}`} className="hover:text-white transition-colors">
+                    {tCommon("email")}
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

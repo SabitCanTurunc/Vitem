@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail, CheckCircle } from "lucide-react";
+import { MapPin, Phone, Mail, CheckCircle, Printer } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Footer from "@/sections/Footer";
 import { useState } from "react";
@@ -8,6 +8,7 @@ import { submitContactForm } from "@api/actions/contactActions";
 
 export default function Contact() {
   const t = useTranslations("contact");
+  const tCommon = useTranslations("common");
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   async function handleAction(formData: FormData) {
@@ -58,20 +59,44 @@ export default function Contact() {
             >
               <div>
                 <h3 className="text-xl font-sans font-light text-vitem-900 mb-6 border-b border-vitem-200 pb-4">
-                  {t("hq_title")}
+                  {tCommon("store_title")}
                 </h3>
                 <div className="space-y-4 text-sm text-vitem-600">
                   <p className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 shrink-0 text-vitem-400" />
-                    <span>Ürgen Paşa Mah. 75. Yıl Bulvarı<br />Antakya / Hatay</span>
+                    <span>{tCommon("address_store_line1")}<br />{tCommon("address_store_line2")}</span>
                   </p>
                   <p className="flex items-center gap-3">
                     <Phone className="w-5 h-5 shrink-0 text-vitem-400" />
-                    <a href="tel:+903262218801" className="hover:text-vitem-900 transition-colors">+90 326 221 88 01</a>
+                    <a href="tel:+903266131336" className="hover:text-vitem-900 transition-colors">{tCommon("phone_store")}</a>
+                  </p>
+                  <p className="flex items-center gap-3">
+                    <Printer className="w-5 h-5 shrink-0 text-vitem-400" />
+                    <a href="tel:+903266131337" className="hover:text-vitem-900 transition-colors">{tCommon("fax_store")}</a>
                   </p>
                   <p className="flex items-center gap-3">
                     <Mail className="w-5 h-5 shrink-0 text-vitem-400" />
-                    <a href="mailto:info@vitem.com.tr" className="hover:text-vitem-900 transition-colors">info@vitem.com.tr</a>
+                    <a href={`mailto:${tCommon("email")}`} className="hover:text-vitem-900 transition-colors">{tCommon("email")}</a>
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-sans font-light text-vitem-900 mb-6 border-b border-vitem-200 pb-4">
+                  {tCommon("factory_title")}
+                </h3>
+                <div className="space-y-4 text-sm text-vitem-600">
+                  <p className="flex items-start gap-3">
+                    <MapPin className="w-5 h-5 shrink-0 text-vitem-400" />
+                    <span>{tCommon("address_factory_line1")}<br />{tCommon("address_factory_line2")}</span>
+                  </p>
+                  <p className="flex items-center gap-3">
+                    <Phone className="w-5 h-5 shrink-0 text-vitem-400" />
+                    <a href="tel:+903262214672" className="hover:text-vitem-900 transition-colors">{tCommon("phone_factory")}</a>
+                  </p>
+                  <p className="flex items-center gap-3">
+                    <Mail className="w-5 h-5 shrink-0 text-vitem-400" />
+                    <a href={`mailto:${tCommon("email")}`} className="hover:text-vitem-900 transition-colors">{tCommon("email")}</a>
                   </p>
                 </div>
               </div>

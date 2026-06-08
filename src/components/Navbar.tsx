@@ -334,7 +334,7 @@ export default function Navbar({ categories = [] }: { categories?: Category[] })
                     <MapPin className="w-3.5 h-3.5" /> {t("hatay_turkey")}
                   </p>
                   <p className="flex items-center gap-2">
-                    <Phone className="w-3.5 h-3.5" /> {tCommon("phone")}
+                    <Phone className="w-3.5 h-3.5" /> {tCommon("phone_store")}
                   </p>
                   <p className="flex items-center gap-2">
                     <Mail className="w-3.5 h-3.5" /> {tCommon("email")}

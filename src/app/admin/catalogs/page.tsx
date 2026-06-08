@@ -8,11 +8,16 @@ export const metadata = {
 };
 
 export default async function CatalogsPage() {
-  const db = getDb();
-  const allCatalogs = await db
-    .select()
-    .from(catalogs)
-    .orderBy(desc(catalogs.sortOrder));
+  let allCatalogs: any[] = [];
+  try {
+    const db = getDb();
+    allCatalogs = await db
+      .select()
+      .from(catalogs)
+      .orderBy(desc(catalogs.sortOrder));
+  } catch (error) {
+    console.warn("Katalog tablosu okunamadi (muhtemelen DB'de henuz yok).", error);
+  }
 
   return <CatalogsClient catalogs={allCatalogs} />;
 }

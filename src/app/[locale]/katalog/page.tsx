@@ -10,12 +10,17 @@ export default async function KatalogPage({
 }) {
   const { locale } = await params;
 
-  const db = getDb();
-  const allCatalogs = await db
-    .select()
-    .from(catalogs)
-    .where(eq(catalogs.isActive, true))
-    .orderBy(desc(catalogs.sortOrder));
+  let allCatalogs: any[] = [];
+  try {
+    const db = getDb();
+    allCatalogs = await db
+      .select()
+      .from(catalogs)
+      .where(eq(catalogs.isActive, true))
+      .orderBy(desc(catalogs.sortOrder));
+  } catch (error) {
+    console.warn("Katalog tablosu okunamadi (muhtemelen DB'de henuz yok).", error);
+  }
 
   return <KatalogClient catalogs={allCatalogs} locale={locale} />;
 }

@@ -1,5 +1,5 @@
 "use client";
-import { Instagram, Linkedin, MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 
@@ -20,26 +20,6 @@ export default function Footer() {
             <p className="mt-4 text-sm text-vitem-400 leading-relaxed max-w-xs">
               {t("brand_desc")}
             </p>
-            <div className="flex gap-4 mt-6">
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-vitem-400 hover:text-white transition-colors"
-                aria-label={tCommon("social_instagram")}
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-vitem-400 hover:text-white transition-colors"
-                aria-label={tCommon("social_linkedin")}
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-            </div>
           </div>
 
           {/* Collections */}

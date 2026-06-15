@@ -128,7 +128,8 @@ export default function CatalogsClient({ catalogs }: { catalogs: Catalog[] }) {
       setFileUrlVal(data.secure_url);
       setPdfUploadDone(true);
     } else {
-      alert(t.err);
+      console.error("Cloudinary upload error:", data);
+      alert(data.error?.message ? `Cloudinary hatası: ${data.error.message}` : t.err);
     }
     setPdfUploading(false);
   }

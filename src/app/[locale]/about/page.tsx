@@ -173,6 +173,49 @@ export default function About() {
         </div>
       </section>
 
+      {/* ── Üretim ve Tesis Görselleri ─────────────────────────── */}
+      <section className="pb-20 sm:pb-28 bg-white">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="aspect-[16/9] md:aspect-[4/3] overflow-hidden bg-vitem-100 group relative"
+            >
+              <img
+                src="/images/uretimbandi.png"
+                alt="Üretim Bandı"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 sm:p-8">
+                <span className="text-white text-lg sm:text-xl tracking-wide font-light">Modern Üretim Bandı</span>
+              </div>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="aspect-[16/9] md:aspect-[4/3] overflow-hidden bg-vitem-100 group relative"
+            >
+              <img
+                src="/images/gunespanel.png"
+                alt="Güneş Paneli"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 sm:p-8">
+                <span className="text-white text-lg sm:text-xl tracking-wide font-light">Sürdürülebilir Enerji</span>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* ── Farkımız: Stats Band ──────────────────────────────── */}
       <section className="py-20 bg-vitem-950">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">

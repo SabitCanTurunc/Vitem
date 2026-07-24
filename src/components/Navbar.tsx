@@ -165,11 +165,11 @@ export default function Navbar({ categories = [] }: { categories?: Category[] })
                 href="/"
                 className="flex flex-col items-center group"
               >
-                <span className="font-serif text-2xl sm:text-3xl tracking-[0.25em] uppercase font-light text-vitem-900 leading-none group-hover:text-vitem-600 transition-colors duration-500">
+                <span className="relative font-serif text-2xl sm:text-3xl tracking-[0.25em] uppercase font-light text-vitem-900 leading-none group-hover:text-vitem-600 transition-colors duration-500 pr-2.5">
                   Vitem
-                </span>
-                <span className="text-[8px] tracking-[0.4em] uppercase text-vitem-400 mt-1.5 hidden sm:block">
-                  MUTFAK & BANYO
+                  <sup className="absolute top-0 -right-0.5 sm:-right-1 text-xs sm:text-sm tracking-normal font-sans opacity-75">
+                    &reg;
+                  </sup>
                 </span>
               </Link>
             </div>
